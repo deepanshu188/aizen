@@ -6,8 +6,7 @@
       <option>Local</option>
       <option>Subscribed</option>
     </select>
-    <NormalPostCard :data='data' />
-    <span v-if='loading' class="loading loading-ring loading-lg"></span>
+    <NormalPostCard :data='data' :loading='loading' />
   </section>
 </template>
 

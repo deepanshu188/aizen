@@ -1,3 +1,5 @@
 <template>
-  <Login />
+  <section>
+    <Posts />
+  </section>
 </template>
