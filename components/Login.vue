@@ -45,7 +45,7 @@ const login = async () => {
     const res = await userLogin(user.value)
     if (res) {
       token.value = res
-      router.push('/dashboard')
+      router.push('/')
     }
   }
   catch (err) {

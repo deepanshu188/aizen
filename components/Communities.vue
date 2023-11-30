@@ -14,6 +14,10 @@
 <script setup>
 import { userDetails } from '../services/user';
 const subscriptions = ref()
-const res = await userDetails()
-subscriptions.value = res.my_user.follows
+const token = useCookie('token')
+
+if (token.value) {
+  const res = await userDetails()
+  subscriptions.value = res.my_user.follows
+}
 </script>
