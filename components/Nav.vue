@@ -7,13 +7,13 @@
       <div class="form-control">
         <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
       </div>
-      <div class="dropdown dropdown-end" v-if="user.data">
+      <div class="dropdown dropdown-end" v-if="userInfo">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
           <div class="w-10 rounded-full">
-            <img v-if='user.data.person_view.person.avatar' :src="user.data.person_view.person.avatar" alt='avatar' />
+            <img v-if='userInfo.avatar' :src="userInfo.avatar" alt='avatar' />
             <div class="avatar placeholder" v-else>
               <div class="bg-neutral text-neutral-content rounded-full w-8">
-                <span class="text-xs">{{ capitalFirst(user.data.person_view.person.display_name) }}</span>
+                <span class="text-xs">{{ capitalFirst(userInfo.display_name) }}</span>
               </div>
             </div>
           </div>
@@ -71,13 +71,15 @@ import { userDetails, getPersonInfo } from '../services/user';
 import { useUserStore } from '@/stores/user';
 
 const token = useCookie('token')
-const user = useUserStore()
+const userInfo = ref<any>(undefined)
+const user: any = useUserStore()
 if (token.value) {
   const res = await userDetails()
   const person_id = res?.my_user?.local_user_view?.person.id
   const response = await getPersonInfo({ person_id })
   user.setUserDetails(res)
   user.setPersonInfo(response)
+  userInfo.value = user.data?.person_view?.person
 }
 
 const logout = () => {

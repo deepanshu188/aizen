@@ -4,6 +4,9 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@pinia/nuxt',
   ],
+  routeRules: {
+    '/*': { ssr: false }
+  },
   image: {
     quality: 100,
   },

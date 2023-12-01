@@ -64,10 +64,6 @@ const fetchData = async () => {
   }
 }
 
-onUpdated(() => {
-  console.log(posts.value, 'update')
-})
-
 watchEffect(() => {
   fetchData()
 })
