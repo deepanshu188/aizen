@@ -1,12 +1,10 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  ssr: false,
   modules: [
     '@nuxt/image',
     '@pinia/nuxt',
   ],
-  routeRules: {
-    '/*': { ssr: false }
-  },
   image: {
     quality: 100,
   },
