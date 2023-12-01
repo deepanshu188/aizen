@@ -1,8 +1,9 @@
 <template>
   <section>
-    <ul>
+    <ul v-if="subscriptions">
       <li v-for="c in subscriptions" :key='c.id' class="card bg-base-100 shadow-md m-2 p-2">
-        <div class='flex gap-2 items-center'>
+        <div class='flex gap-2 items-center cursor-pointer'
+          @click='router.push(`c/${c.community.name}?id=${c.community.id}`)'>
           <Avatar :name='c.community.title' :url='c.community.icon' alt='icon' />
           <p>{{ c.community.title }}</p>
         </div>
@@ -11,13 +12,10 @@
   </section>
 </template>
 
-<script setup>
-import { userDetails } from '../services/user';
-const subscriptions = ref()
-const token = useCookie('token')
+<script setup lang="ts">
+const router = useRouter()
 
-if (token.value) {
-  const res = await userDetails()
-  subscriptions.value = res.my_user.follows
-}
+import { useUserStore } from '@/stores/user';
+const data = useUserStore()
+const subscriptions = data?.user?.my_user?.follows
 </script>

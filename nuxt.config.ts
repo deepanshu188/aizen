@@ -2,6 +2,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     '@nuxt/image',
+    '@pinia/nuxt',
   ],
   image: {
     quality: 100,

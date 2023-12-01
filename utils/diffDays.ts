@@ -4,6 +4,6 @@ export const diffDays = (date: string) => {
 
   const diff = dayjs().diff(dayjs(date), 'day')
   if (diff !== 0) {
-    return `${diff} d`
+    return `${diff}d`
   } else return 'today'
 }

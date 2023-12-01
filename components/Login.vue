@@ -1,6 +1,6 @@
 <template>
   <Toast v-if="error" type='error'>Incorrect login</Toast>
-  <div class="hero min-h-screen bg-base-400">
+  <div class="hero min-h-screen">
     <div class="hero-content flex-col lg:flex-row min-w-full justify-evenly">
       <div class="text-center lg:text-left">
         <h1 class="text-5xl text-center font-bold">Aizen</h1>
@@ -32,7 +32,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { userLogin } from '../services/auth'
 const user = ref({ username_or_email: '', password: '' })
 const error = ref(false)

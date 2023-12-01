@@ -7,13 +7,13 @@
       <div class="form-control">
         <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
       </div>
-      <div class="dropdown dropdown-end">
+      <div class="dropdown dropdown-end" v-if="user.data">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
           <div class="w-10 rounded-full">
-            <img v-if='user.person_view.person.avatar' :src="user.person_view.person.avatar" alt='avatar' />
+            <img v-if='user.data.person_view.person.avatar' :src="user.data.person_view.person.avatar" alt='avatar' />
             <div class="avatar placeholder" v-else>
               <div class="bg-neutral text-neutral-content rounded-full w-8">
-                <span class="text-xs">{{ capitalFirst(user.person_view.person.display_name) }}</span>
+                <span class="text-xs">{{ capitalFirst(user.data.person_view.person.display_name) }}</span>
               </div>
             </div>
           </div>
@@ -66,15 +66,19 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { userDetails, getPersonInfo } from '../services/user';
-const user = ref()
-const res = await userDetails()
-const person_id = res.my_user.local_user_view.person.id
-const response = await getPersonInfo({ person_id })
-user.value = response
+import { useUserStore } from '@/stores/user';
 
 const token = useCookie('token')
+const user = useUserStore()
+if (token.value) {
+  const res = await userDetails()
+  const person_id = res?.my_user?.local_user_view?.person.id
+  const response = await getPersonInfo({ person_id })
+  user.setUserDetails(res)
+  user.setPersonInfo(response)
+}
 
 const logout = () => {
   token.value = ''

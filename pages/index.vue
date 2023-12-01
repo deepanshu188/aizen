@@ -1,5 +1,5 @@
 <template>
   <section>
-    <Posts />
+    <Posts :filters='true' />
   </section>
 </template>
