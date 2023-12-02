@@ -17,5 +17,5 @@ const router = useRouter()
 
 import { useUserStore } from '@/stores/user';
 const data = useUserStore()
-const subscriptions = data?.user?.my_user?.follows
+const subscriptions = computed(() => data?.user?.my_user?.follows) 
 </script>

@@ -1,9 +1,13 @@
 <template>
   <div>
-    <NuxtImg v-if='url' :src='url' :alt='name || alt' class="rounded-full" :class="`w-${size || 8} h-${size || 8}`" />
-    <div class="avatar placeholder" v-else>
-      <div class="bg-neutral text-neutral-content rounded-full" :class="`w-${size || 8}`">
-        <span :class="{ 'text-4xl': size, 'text-md': !size }">{{ capitalFirst(name) }}</span>
+    <div v-if='loading' class="skeleton rounded-full shrink-0" :class="`h-${size} w-${size}`"></div>
+    <div v-else>
+      <NuxtImg v-if='url' :src='url' :alt='name || alt' class="rounded-full object-cover"
+        :class="`h-${size} w-${size}`" />
+      <div class="avatar placeholder" v-else>
+        <div class="bg-neutral text-neutral-content rounded-full" :class="`w-${size}`">
+          <span :class="{ 'text-4xl': size !== 8, 'text-md': size === 8 }">{{ capitalFirst(name) }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -14,6 +18,10 @@ defineProps({
   name: String,
   url: String,
   alt: String,
-  size: Number
+  loading: Boolean,
+  size: {
+    type: Number,
+    default: 8
+  }
 })
 </script>

@@ -6,5 +6,8 @@
 
 <script setup>
 import { useUserStore } from '@/stores/user';
-const user = useUserStore()
+
+const props = defineProps(['user'])
+
+const user = props.user ?? useUserStore()
 </script>

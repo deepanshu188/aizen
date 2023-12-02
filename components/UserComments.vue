@@ -5,7 +5,7 @@
         <div class="card-body">
           <div>
             <p>{{ creator.display_name }}</p>
-            <Avatar :url='creator.avatar' :name='creator.display_name' :size='8' />
+            <Avatar :url='creator.avatar' :name='creator.display_name ?? creator.name' />
           </div>
           <p>{{ comment.content }}</p>
         </div>
@@ -16,6 +16,9 @@
 
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user';
+
+const props = defineProps(['comments'])
+
 const user = useUserStore();
-const comments = user.data.comments
+const comments = props.comments ?? user?.data?.comments
 </script>

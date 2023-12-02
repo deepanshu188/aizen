@@ -4,6 +4,12 @@ export const fetchPosts = async (options: any) => {
   return res
 }
 
+export const fetchPost = async (options: any) => {
+  const client = useApi()
+  const res = await client.getPost(options)
+  return res
+}
+
 export const favouritePost = async (options: any) => {
   const client = useApi()
   const res = await client.savePost(options)

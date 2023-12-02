@@ -9,7 +9,8 @@ export default function useApi() {
       ? {
         Authorization: `Bearer ${jwt}`,
       }
-      : undefined
+      : undefined,
+
   };
   let baseUrl = 'https://lemmy.ml';
   let client = new LemmyHttp(baseUrl, options)
