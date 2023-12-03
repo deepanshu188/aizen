@@ -1,7 +1,7 @@
 <template>
   <section class='flex flex-col items-center'>
     <div v-if='props.filters' class="flex gap-2 flex-col md:flex-row justify-between items-center w-[98%]">
-      <select class="select select-bordered w-full max-w-xs md:ml-4 md:self-start" v-model="postStore.options.SortType">
+      <select class="select select-bordered w-full max-w-xs md:ml-4 md:self-start" @click="handleSort">
         <option disabled selected>Sort</option>
         <option v-for="(option, index) in sortOptions" :key='index'>{{ option }}</option>
       </select>
@@ -26,6 +26,8 @@ const props = defineProps(['savedOnly', 'filters'])
 
 const postStore = usePostsStore()
 
+const { options } = storeToRefs(postStore)
+
 const sortOptions = ["Active", "Hot", "New", "Old", "MostComments", "NewComments"]
 
 postStore.setOptions({ community_id: query.id, saved_only: props.savedOnly })
@@ -45,28 +47,35 @@ const updatePostData = (updatedPostValue: any, type: string) => {
   console.log(type)
 }
 
+const handleSort = (e: string) => {
+  postStore.setOptions({ sort: e.target.value })
+}
+
 onMounted(() => {
   window.onscroll = () => {
     let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
     if (bottomOfWindow) {
-      loading.value = true;
-      postStore.setOptions({ page: postStore.options.page })
-
+      postStore.setOptions({ page: options.value.page + 1 })
     }
   }
 })
 
-const fetchData = async () => {
+const fetchData = async (action?: string) => {
+  loading.value = true;
+  const payload = postStore.options
   try {
-    const res = await fetchPosts(postStore.options)
-    posts.value.push(...res.posts)
+    const res = await fetchPosts(payload)
+    action === 'push' ? posts.value.push(...res.posts) : posts.value = res.posts
   } finally {
     loading.value = false
     initialLoading.value = false
   }
 }
 
-watchEffect(() => {
-  fetchData()
-})
+watch(options, (current, prev) => {
+  const action = current.page !== prev?.page ? 'push' : ''
+  if (!loading.value)
+    fetchData(action)
+}, { immediate: true })
+
 </script>

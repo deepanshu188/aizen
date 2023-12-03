@@ -1,7 +1,7 @@
 <template>
   <section>
     <ul v-if="subscriptions">
-      <li v-for="c in subscriptions" :key='c.id' class="card bg-base-100 shadow-md m-2 p-2">
+      <li v-for="c in subscriptions" :key='c.id' class="card bg-base-100 shadow-md m-2 p-2 h-12">
         <div class='flex gap-2 items-center cursor-pointer'
           @click='router.push(`c/${c.community.name}?id=${c.community.id}`)'>
           <Avatar :name='c.community.title' :url='c.community.icon' alt='icon' />
