@@ -21,17 +21,21 @@
         </div>
       </div>
     </div>
+    <CommentReplies :comments='cmt.comments' />
   </section>
 </template>
 
 <script setup lang="ts">
 import MarkdownIt from "markdown-it";
+import { getComments } from "~/services/comments";
 
 const markdown = new MarkdownIt();
 
 const { data } = defineProps(['data'])
 
 const body = data.post?.body ? markdown.render(data.post?.body) : ''
+
+const cmt = await getComments({ post_id: data.post.id, community_id: data.community.id, sort: 'Hot' })
 
 const handleVote = (payload: Object) => {
 }

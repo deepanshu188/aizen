@@ -11,9 +11,10 @@
       </div>
       <div class="text-center my-3 md:h-auto h-36 overflow-y-auto" v-html="descriptionMd">
       </div>
-      <button class='btn btn-outline' :class="{ 'btn-secondary': isSubscribed }">{{ isSubscribed ? 'Subscribed' :
-        'Subscribe'
-      }}</button>
+      <button class='btn btn-outline' :class="{ 'btn-secondary': isSubscribed }"
+        @click="handleSubscribe(c.community.id)">{{ isSubscribed ? 'Subscribed' :
+          'Subscribe'
+        }}</button>
     </div>
   </Model>
   <section>
@@ -30,9 +31,9 @@
   </section>
 </template>
 
-<script setup lang="js">
+<script setup lang="ts">
 import MarkdownIt from "markdown-it";
-import { fetchCommunity } from '../services/community'
+import { fetchCommunity, followCommunity } from '../services/community'
 
 const markdown = new MarkdownIt();
 const c = ref()
@@ -49,4 +50,10 @@ const isSubscribed = c.value.subscribed === 'Subscribed'
 const desc = c.value.community.description
 
 const descriptionMd = desc ? markdown.render(desc) : ''
+
+const handleSubscribe = async (community_id: Number) => {
+  const res = await followCommunity({ community_id, follow: !isSubscribed })
+  c.value = res.community_view
+  console.log(c.value, res.community_view, 'cv')
+}
 </script>

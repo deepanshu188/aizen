@@ -30,7 +30,10 @@
             </label>
           </div>
           <div class="form-control mt-6">
-            <button class="btn btn-primary">Login</button>
+            <button class="btn btn-primary">
+              <span v-if="loading" class="loading loading-spinner loading-md"></span>
+              <span v-else>Login</span>
+            </button>
           </div>
         </form>
       </div>
@@ -41,15 +44,17 @@
 <script setup lang="ts">
 import { userLogin } from '../services/auth'
 const user = ref({ username_or_email: '', password: '' })
+const loading = ref(false)
 const error = ref(false)
 const instance = ref('https://lemmy.ml')
 const router = useRouter()
 
 const userData = useCookie('userData')
 
-const setCookie = (name:string, value:string) => userData.value = {...userData.value, [name]: value}
+const setCookie = (name: string, value: string) => userData.value = { ...userData.value, [name]: value }
 
 const login = async () => {
+  loading.value = true
   await setCookie('instance', instance.value)
   try {
     const res = await userLogin(user.value)
@@ -63,6 +68,9 @@ const login = async () => {
     setTimeout(() => {
       error.value = false
     }, 2000)
+  }
+  finally {
+    loading.value = false
   }
 }
 </script>

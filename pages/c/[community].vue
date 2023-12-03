@@ -1,3 +1,3 @@
 <template>
-  <Community />
+  <CommunityView />
 </template>
