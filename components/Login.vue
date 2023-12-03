@@ -10,6 +10,12 @@
         <form class="card-body" @submit.prevent="login">
           <div class="form-control">
             <label class="label">
+              <span class="label-text">Instance</span>
+            </label>
+            <input type="text" placeholder="Instance" class="input input-bordered" v-model="instance" />
+          </div>
+          <div class="form-control">
+            <label class="label">
               <span class="label-text">Email</span>
             </label>
             <input type="text" placeholder="Username" class="input input-bordered" v-model="user.username_or_email" />
@@ -36,15 +42,19 @@
 import { userLogin } from '../services/auth'
 const user = ref({ username_or_email: '', password: '' })
 const error = ref(false)
+const instance = ref('https://lemmy.ml')
 const router = useRouter()
 
-const token = useCookie('token')
+const userData = useCookie('userData')
+
+const setCookie = (name:string, value:string) => userData.value = {...userData.value, [name]: value}
 
 const login = async () => {
+  await setCookie('instance', instance.value)
   try {
     const res = await userLogin(user.value)
     if (res) {
-      token.value = res
+      setCookie('jwt', res)
       router.push('/')
     }
   }

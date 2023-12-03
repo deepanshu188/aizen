@@ -1,13 +1,13 @@
 <template>
   <div v-for="{ community, post, counts, saved, my_vote } in data"
-    class="card card-side bg-base-200 shadow-xl flex flex-col md:mx-4 my-6 md:p-4 p-2">
+    class="card card-side bg-base-200 shadow-xl flex flex-col md:mx-4 mx-2 my-6 md:p-4 p-2 rounded-md min-h-56">
     <CommunityBar :community='community' />
     <div class="flex items-center my-2 cursor-pointer" @click="handleViewPost(post.id)">
       <div v-if='post.thumbnail_url' class="md:w-28 md:h-28 w-24 h-24 aspect-square">
         <NuxtImg :src="post.thumbnail_url" class="w-full h-full object-cover" alt="thumbnail" />
       </div>
       <div class="card-body">
-        <h2 class='md:text-xl'>{{ post.name }}</h2>
+        <p class='md:text-xl text-sm leading-6'>{{ post.name }}</p>
       </div>
     </div>
     <Interactions :post='post' :counts='counts' :saved='saved' :my_vote='my_vote' @emitVote='handleVote'

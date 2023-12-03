@@ -2,7 +2,7 @@
   <div>
     <div v-if='loading' class="skeleton rounded-full shrink-0" :class="`h-${size} w-${size}`"></div>
     <div v-else>
-      <NuxtImg v-if='url' :src='url' :alt='name || alt' class="rounded-full object-cover"
+      <NuxtImg v-if='url' :src='url' :alt='name || alt' class="rounded-full object-cover "
         :class="`h-${size} w-${size}`" />
       <div class="avatar placeholder" v-else>
         <div class="bg-neutral text-neutral-content rounded-full" :class="`w-${size}`">

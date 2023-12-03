@@ -1,8 +1,9 @@
 import { LemmyHttp } from 'lemmy-js-client';
 
 export default function useApi() {
-  const token = useCookie('token')
-  const jwt = token.value
+  const userData = useCookie('userData').value
+  const jwt = userData?.jwt
+  const baseUrl = userData?.instance || 'https://lemmy.ml'
 
   const options = {
     headers: jwt
@@ -12,7 +13,6 @@ export default function useApi() {
       : undefined,
 
   };
-  let baseUrl = 'https://lemmy.ml';
-  let client = new LemmyHttp(baseUrl, options)
+  const client = new LemmyHttp(baseUrl, options)
   return client
 }

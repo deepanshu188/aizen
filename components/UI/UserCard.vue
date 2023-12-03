@@ -1,16 +1,16 @@
 <template>
-  <Model :title='person.display_name ?? person.name'>
+  <Model>
     <div class="flex flex-col items-center my-2">
       <div>
-        <p><span class="font-light">Post Count:</span> {{ counts.post_count }}</p>
-        <p><span class="font-light">Comment Count:</span> {{ counts.comment_count }}</p>
+        <p><span class="font-semibold">Post Count:</span> {{ counts.post_count }}</p>
+        <p><span class="font-semibold">Comment Count:</span> {{ counts.comment_count }}</p>
       </div>
     </div>
   </Model>
   <div class="card bg-base-100 shadow-xl">
     <div class="card-body items-center">
       <p class="card-title">{{ person.display_name ?? person.name }}</p>
-      <div class="cursor-pointer" onclick='user_popup.showModal()'>
+      <div class="cursor-pointer" onclick='popup.showModal()'>
         <Avatar :url='person.avatar' :name='person.display_name ?? person.name' :size='24' :loading='loading' />
       </div>
       <div class="flex flex-col items-center gap-1 my-1">

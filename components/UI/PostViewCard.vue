@@ -1,7 +1,7 @@
 <template>
   <section class="md:w-1/2 w-full">
     <div class="card  bg-base-200 shadow-xl min-h-52 p-4">
-      <div class="my-2 flex justify-between">
+      <div class="my-2 flex justify-between items-center">
         <CommunityBar :community='data.community' />
         <NuxtLink :to='`/user/${data.creator.id}`'>
           <div class="flex items-center gap-x-1">
@@ -12,12 +12,10 @@
       <div v-if='data.post?.thumbnail_url' class="h-72 w-full aspect-square self-center">
         <NuxtImg :src='data.post.thumbnail_url' alt="image" class="w-full h-full rounded object-cover" />
       </div>
-      <div class="card-body">
-        <a class="text-xl" :href='data.post?.url'>{{ data?.post?.name }}</a>
-        <p>{{ data.post?.body }}</p>
-        <p>{{ data.post?.embed_description }}</p>
+      <div class="card-body px-0">
+        <a class="text-xl hover:underline" :href='data.post?.url'>{{ data?.post?.name }}</a>
+        <p class='text-neutral-400' v-html='body'></p>
         <div class="card-actions">
-
           <Interactions :post='data.post' :counts='data.counts' :saved='data.saved' :my_vote='data.my_vote'
             @emitVote='handleVote' @emitSave='savePost' />
         </div>
@@ -27,10 +25,13 @@
 </template>
 
 <script setup lang="ts">
+import MarkdownIt from "markdown-it";
 
-defineProps({
-  data: Object
-})
+const markdown = new MarkdownIt();
+
+const { data } = defineProps(['data'])
+
+const body = data.post?.body ? markdown.render(data.post?.body) : ''
 
 const handleVote = (payload: Object) => {
 }

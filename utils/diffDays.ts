@@ -7,3 +7,5 @@ export const diffDays = (date: string) => {
     return `${diff}d`
   } else return 'today'
 }
+
+export const fromNow = (date: string) => dayjs(date).fromNow()

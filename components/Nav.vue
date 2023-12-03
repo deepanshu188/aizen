@@ -50,10 +50,11 @@
 import { userDetails, getPersonInfo } from '../services/user';
 import { useUserStore } from '@/stores/user';
 
-const token = useCookie('token')
+const userData = useCookie('userData')
+const jwt = userData.value?.jwt
 const user: any = useUserStore()
 
-if (token.value) {
+if (jwt) {
   const res = await userDetails()
   const person_id = res?.my_user?.local_user_view?.person.id
   const response = await getPersonInfo({ person_id })
@@ -63,6 +64,6 @@ if (token.value) {
 const userInfo = computed(() => user.data?.person_view?.person)
 
 const logout = () => {
-  token.value = ''
+  userData.value = ''
 }
 </script>

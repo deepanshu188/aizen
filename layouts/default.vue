@@ -9,7 +9,7 @@
 <script setup lang="ts">
 useHead({
   htmlAttrs: {
-    'data-theme': 'dracula',
+    'data-theme': 'dark',
   }
 })
 </script>
