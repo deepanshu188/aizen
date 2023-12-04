@@ -26,48 +26,19 @@
         </div>
       </div>
     </div>
-    <CommentReplies :comments='comments' :loading='loading' />
+    <CommentReplies :data='data' />
   </section>
 </template>
 
 <script setup lang="ts">
 import MarkdownIt from "markdown-it";
-import { getComments } from "~/services/comments";
 
 const markdown = new MarkdownIt();
 
 const { data } = defineProps(['data'])
-const comments = ref([])
-const loading = ref(false)
-const options = ref({ post_id: data.post.id, community_id: data.community.id, sort: 'Hot', page: 1 })
 
 const body = data.post?.body ? markdown.render(data.post?.body) : ''
 
-onMounted(() => {
-  window.onscroll = () => {
-    let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-    if (bottomOfWindow) {
-      if (comments.value.length < data.counts.comments) {
-        options.value.page += 1
-      }
-    }
-  }
-})
-
-const fetchComments = async () => {
-  loading.value = true;
-  try {
-    const cmt = await getComments(options.value)
-    comments.value.push(...cmt.comments)
-  } finally {
-    loading.value = false
-  }
-}
-
-watch(options.value, () => {
-  if (!loading.value)
-    fetchComments()
-}, { immediate: true })
 
 const handleVote = (payload: Object) => {
 }

@@ -14,7 +14,7 @@
         <span @click="viewComments">
           <IComment :iconClass='iconClass' />
         </span>
-        <p>{{ counts?.comments }}</p>
+        <p>{{ counts?.comments ?? counts?.child_count }}</p>
       </div>
       <div class="flex items-center gap-1">
         <span>

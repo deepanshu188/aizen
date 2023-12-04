@@ -1,33 +1,50 @@
 <template>
   <ul>
-    <li v-for="c in comments" class='bg-base-200 shadow-lg my-4 p-3 rounded-md'>
-      <NuxtLink :to='`/user/${c?.creator?.id}`'>
-        <div class='inline-flex items-center gap-x-2' role='button'>
-          <div class="avatar placeholder">
-            <div class="bg-neutral text-neutral-content rounded-full w-6">
-              <span class='text-xs'>{{ capitalFirst(c?.creator?.name) }}</span>
-            </div>
-          </div>
-          <p class='text-sm'>{{ c.creator.name }}</p>
-        </div>
-      </NuxtLink>
-      <p class="my-2" v-if='c?.comment?.content' v-html="markdown.render(c?.comment?.content)"></p>
-      <Interactions :my_vote='c.my_vote' :post='c.post' :counts='c.counts' :saved='c.saved' />
+    <li v-for="c in  comments " class='bg-base-200 shadow-lg my-4 p-3 rounded-md'>
+      <CommentCard :c='c' />
     </li>
-    <div class='flex justify-center'>
-      <span class="loading loading-ring loading-lg"></span>
-    </div>
   </ul>
+  <div class='flex justify-center'>
+    <span class="loading loading-ring loading-lg"></span>
+  </div>
 </template>
 
 <script setup lang="ts">
-import MarkdownIt from "markdown-it";
 
-const markdown = new MarkdownIt();
+import { getComments } from '~/services/comments';
+const loading = ref(false)
+const comments = ref([])
 
-const { comments, loading } = defineProps([
-  'comments',
-  'loading'
+const { data } = defineProps([
+  'data',
 ])
 
+const options = ref({ post_id: data.post.id, community_id: data.community.id, sort: 'Hot', page: 1 })
+
+const fetchComments = async () => {
+  loading.value = true;
+  try {
+    const cmt = await getComments(options.value)
+    comments.value.push(...cmt.comments)
+  } finally {
+    loading.value = false
+  }
+}
+
+watch(options.value, () => {
+  if (!loading.value)
+    fetchComments()
+}, { immediate: true })
+
+onMounted(() => {
+  window.onscroll = () => {
+    let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+    if (bottomOfWindow) {
+      if (comments.value.length < data.counts.comments) {
+        options.value.page += 1
+        console.log(options, 'page')
+      }
+    }
+  }
+})
 </script>
