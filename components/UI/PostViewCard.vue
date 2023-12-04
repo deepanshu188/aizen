@@ -9,11 +9,16 @@
           </div>
         </NuxtLink>
       </div>
-      <div v-if='data.post?.thumbnail_url' class="h-72 w-full aspect-square self-center">
-        <NuxtImg :src='data.post.thumbnail_url' alt="image" class="w-full h-full rounded object-cover" />
-      </div>
       <div class="card-body px-0">
-        <a class="text-xl hover:underline" :href='data.post?.url'>{{ data?.post?.name }}</a>
+        <a class="text-xl" :href='data.post?.url'>{{ data?.post?.name }}</a>
+        <div v-if='data.post?.thumbnail_url' class="w-full self-center">
+          <div class='relative'>
+            <NuxtImg :src='data.post.thumbnail_url' alt="image"
+              class="w-full h-full rounded object-cover blur-3xl opacity-30" loading="lazy" />
+            <NuxtImg :src='data.post.thumbnail_url' alt="image"
+              class="w-full h-full rounded object-contain top-0 absolute" loading="lazy" />
+          </div>
+        </div>
         <p class='text-neutral-400' v-html='body'></p>
         <div class="card-actions">
           <Interactions :post='data.post' :counts='data.counts' :saved='data.saved' :my_vote='data.my_vote'
@@ -21,7 +26,7 @@
         </div>
       </div>
     </div>
-    <CommentReplies :comments='cmt.comments' />
+    <CommentReplies :comments='comments' :loading='loading' />
   </section>
 </template>
 
@@ -32,10 +37,37 @@ import { getComments } from "~/services/comments";
 const markdown = new MarkdownIt();
 
 const { data } = defineProps(['data'])
+const comments = ref([])
+const loading = ref(false)
+const options = ref({ post_id: data.post.id, community_id: data.community.id, sort: 'Hot', page: 1 })
 
 const body = data.post?.body ? markdown.render(data.post?.body) : ''
 
-const cmt = await getComments({ post_id: data.post.id, community_id: data.community.id, sort: 'Hot' })
+onMounted(() => {
+  window.onscroll = () => {
+    let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+    if (bottomOfWindow) {
+      if (comments.value.length < data.counts.comments) {
+        options.value.page += 1
+      }
+    }
+  }
+})
+
+const fetchComments = async () => {
+  loading.value = true;
+  try {
+    const cmt = await getComments(options.value)
+    comments.value.push(...cmt.comments)
+  } finally {
+    loading.value = false
+  }
+}
+
+watch(options.value, () => {
+  if (!loading.value)
+    fetchComments()
+}, { immediate: true })
 
 const handleVote = (payload: Object) => {
 }

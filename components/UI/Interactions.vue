@@ -2,10 +2,10 @@
   <div class="flex gap-2 justify-between items-center w-full">
     <div class='flex gap-2'>
       <div class="flex items-center gap-1">
-        <span @click="handleVote({ post_id: post.id, score: my_vote !== 1 ? 1 : 0 })">
+        <span @click="handleVote({ post_id: post?.id, score: my_vote !== 1 ? 1 : 0 })">
           <IUpvote :my_vote='my_vote' :iconClass='iconClass' />
         </span>
-        <p>{{ counts.upvotes }}</p>
+        <p>{{ counts?.upvotes }}</p>
         <span @click='handleVote({ post_id: post.id, score: my_vote !== -1 ? -1 : 0 })'>
           <IDownvote :my_vote='my_vote' :iconClass='iconClass' />
         </span>
@@ -14,13 +14,13 @@
         <span @click="viewComments">
           <IComment :iconClass='iconClass' />
         </span>
-        <p>{{ counts.comments }}</p>
+        <p>{{ counts?.comments }}</p>
       </div>
       <div class="flex items-center gap-1">
         <span>
           <IClock :iconClass='iconClass' />
         </span>
-        <p>{{ diffDays(counts.published) }}</p>
+        <p>{{ diffDays(counts?.published) }}</p>
       </div>
     </div>
     <div>
