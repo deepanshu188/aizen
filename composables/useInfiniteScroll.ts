@@ -1,32 +1,37 @@
 export default function useInfiniteScroll(configs: Object) {
+  const { initialPayload, apiCall, totalLength, listKey } = configs;
+  const options = ref(initialPayload)
   const loading = ref(false)
   const data = ref([])
-  const { options, apiCall } = configs;
+  const action = ref('')
 
   onMounted(() => {
     window.onscroll = () => {
       let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
       if (bottomOfWindow) {
-        options.value.page += 1
+        if (totalLength > data.value.length || totalLength === undefined) {
+          options.value.page += 1
+          action.value = 'push'
+        }
       }
     }
   })
 
-  const fetchData = async (action: string) => {
+  const fetchData = async () => {
     loading.value = true;
     try {
       const res = await apiCall(options.value)
-      action === 'push' ? data.value.push(...res.communities) : data.value = res.communities;
+      action.value === 'push' ? data.value.push(...res[listKey]) : data.value = res[listKey];
     } finally {
       loading.value = false
+      action.value = ''
     }
   }
 
-  watch(options.value, (current, prev) => {
-    const action = current.page !== prev?.page ? 'push' : ''
+  watch(options.value, () => {
     if (!loading.value)
-      fetchData(action)
+      fetchData()
   }, { immediate: true })
 
-  return { loading, data }
+  return { loading, data, options }
 }

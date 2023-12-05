@@ -30,8 +30,8 @@
 import sortOptions from '~/content/sortOptions'
 import { listCommunities } from '../services/community'
 
-const options = ref({ sort: 'Active', page: 1, limit: 15, _type: 'All' })
+const initialPayload = { sort: 'Active', page: 1, limit: 15, _type: 'All' }
 
-const { data: communities, loading } = useInfiniteScroll({ options, apiCall: listCommunities })
+const { data: communities, options } = useInfiniteScroll({ apiCall: listCommunities, initialPayload, hasMore: true, listKey: 'communities' })
 
 </script>
