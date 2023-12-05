@@ -19,6 +19,7 @@
 </template>
 
 <script setup lang="ts">
+import sortOptions from '~/content/sortOptions'
 import { fetchPosts } from '../services/posts';
 import { usePostsStore } from '@/stores/posts';
 const { query } = useRoute()
@@ -29,8 +30,6 @@ const props = defineProps(['savedOnly', 'filters'])
 const postStore = usePostsStore()
 
 const { options } = storeToRefs(postStore)
-
-const sortOptions = ["Active", "Hot", "New", "Old", "MostComments", "NewComments"]
 
 postStore.setOptions({ community_id: query.id, saved_only: props.savedOnly })
 
