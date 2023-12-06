@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/image',
     '@pinia/nuxt',
+    '@vite-pwa/nuxt'
   ],
   image: {
     quality: 100,

@@ -62,7 +62,7 @@ const commonItems = [
   {
     name: 'Settings',
     icon: ISettings,
-    link: ''
+    link: '/settings'
   }
 ]
 

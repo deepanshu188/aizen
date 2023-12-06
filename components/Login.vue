@@ -64,6 +64,7 @@ const login = async () => {
     }
   }
   catch (err) {
+    console.log(err, 'error')
     error.value = true
     setTimeout(() => {
       error.value = false

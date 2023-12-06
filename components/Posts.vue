@@ -1,6 +1,6 @@
 <template>
   <section class='flex flex-col items-center mt-4'>
-    <div class="flex gap-2 flex-col md:flex-row justify-between items-center w-[98%]">
+    <div class="flex gap-2 flex-col-reverse md:flex-row justify-between items-center w-[98%]">
       <select class="select select-bordered max-w-xs md:ml-4 md:self-start" :value='options.sort' @click="handleSort">
         <option disabled selected>Sort</option>
         <option v-for="(option, index) in sortOptions" :key='index'>{{ option }}</option>

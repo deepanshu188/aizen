@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@vite-pwa/nuxt": "^0.3.3",
     "autoprefixer": "^10.4.16",
     "daisyui": "^4.4.9",
     "nuxt": "^3.8.2",
