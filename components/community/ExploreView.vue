@@ -11,7 +11,7 @@
         </select>
       </div>
       <span>
-        <Tabs2 />
+        <Tabs2 :value='options.type_' @select-tab='selectTab' />
       </span>
     </div>
     <div>
@@ -28,9 +28,13 @@
 
 <script setup lang="ts">
 import sortOptions from '~/content/sortOptions'
-import { listCommunities } from '../services/community'
+import { listCommunities } from '~/services/community'
 
-const initialPayload = { sort: 'Active', page: 1, limit: 15, _type: 'All' }
+const selectTab = (value: string) => {
+  options.value.type_ = value
+}
+
+const initialPayload = { sort: 'Active', page: 1, limit: 15, type_: 'All' }
 
 const { data: communities, options } = useInfiniteScroll({ apiCall: listCommunities, initialPayload, hasMore: true, listKey: 'communities' })
 

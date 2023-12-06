@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { fetchCommunity } from '../services/community'
+import { fetchCommunity } from '~/services/community'
 
 const c = ref()
 const mods = ref()

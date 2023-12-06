@@ -13,9 +13,7 @@
     <Interactions :post='post' :counts='counts' :saved='saved' :my_vote='my_vote' @emitVote='handleVote'
       @view-comments="handleViewPost(post.id)" @emitSave='savePost' />
   </div>
-  <div class="flex justify-center">
-    <span v-if='loading' class="loading loading-ring loading-lg"></span>
-  </div>
+  <loader :loading='loading'></loader>
 </template>
 
 <script setup lang="ts">

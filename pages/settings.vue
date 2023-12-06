@@ -1,3 +1,3 @@
 <template>
-  <settingsView />
+  <SettingsView />
 </template>

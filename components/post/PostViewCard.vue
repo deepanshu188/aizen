@@ -26,11 +26,23 @@
         </div>
       </div>
     </div>
+    <div class='mt-4'>
+      <div class='flex justify-between items-center m-2'>
+        <p><b>{{ data.counts.comments }}</b> comments</p>
+        <select class="select select-bordered">
+          <option v-for='(o, i) in sortOptions' :key='i'>{{ o }}</option>
+        </select>
+      </div>
+      <div class='flex justify-center'>
+        <Editor placeholder='type comment...' :id='data.post.id' />
+      </div>
+    </div>
     <CommentReplies :data='data' />
   </section>
 </template>
 
 <script setup lang="ts">
+import sortOptions from '~/content/commentSortOptions.json'
 import MarkdownIt from "markdown-it";
 
 const markdown = new MarkdownIt();
