@@ -4,7 +4,7 @@
     <CommunityBar :community='community' />
     <div class="flex items-center my-2 cursor-pointer" @click="handleViewPost(post.id)">
       <div v-if='post.thumbnail_url' class="md:w-28 md:h-28 w-24 h-24 aspect-square">
-        <NuxtImg :src="post.thumbnail_url" class="w-full h-full object-cover" alt="thumbnail" loading="lazy" />
+        <NuxtImg :src="post.thumbnail_url" class="w-full h-full object-cover" loading="lazy" />
       </div>
       <div class="card-body">
         <p class='md:text-xl text-sm leading-6'>{{ post.name }}</p>

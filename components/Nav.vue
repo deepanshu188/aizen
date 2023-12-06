@@ -25,7 +25,7 @@
               {{ item.name }}
             </NuxtLink>
           </li>
-          <li v-for="item in navItems" v-else>
+          <li v-for="item in navItems" v-else @click='close'>
             <NuxtLink :to="item.link" class="p-2">
               <component :is='item.icon'></component>
               {{ item.name }}
@@ -47,6 +47,8 @@ import ILogout from './icons/ILogout.vue'
 import IExplore from './icons/IExplore.vue'
 import IUser from './icons/IUser.vue'
 import ISettings from './icons/ISettings.vue'
+
+
 
 const commonItems = [
   {
@@ -107,7 +109,15 @@ if (jwt) {
 }
 const userInfo = computed(() => user.data?.person_view?.person)
 
+const close = () => {
+  const elem = document?.activeElement
+  if (elem) {
+    elem.blur()
+  }
+}
+
 const logout = (name: string) => {
+  close()
   if (name === 'Logout') {
     userData.value = ''
     window.location.reload()

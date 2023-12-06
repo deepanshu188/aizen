@@ -13,10 +13,10 @@
         <a class="text-xl" :href='data.post?.url'>{{ data?.post?.name }}</a>
         <div v-if='data.post?.thumbnail_url' class="w-full self-center">
           <div class='relative'>
-            <NuxtImg :src='data.post.thumbnail_url' alt="image"
-              class="w-full h-full rounded object-cover blur-3xl opacity-30" loading="lazy" />
-            <NuxtImg :src='data.post.thumbnail_url' alt="image"
-              class="w-full h-full rounded object-contain top-0 absolute" loading="lazy" />
+            <NuxtImg :src='data.post.thumbnail_url' class="w-full h-full rounded object-cover blur-3xl opacity-30"
+              loading="lazy" />
+            <NuxtImg :src='data.post.thumbnail_url' class="w-full h-full rounded object-contain top-0 absolute"
+              loading="lazy" />
           </div>
         </div>
         <p class='text-neutral-400' v-html='body'></p>

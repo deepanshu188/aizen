@@ -1,4 +1,5 @@
 <template>
+  <NuxtPwaManifest />
   <section>
     <Nav />
     <slot />
@@ -12,7 +13,7 @@ const isDarkSystem = window.matchMedia("(prefers-color-scheme: dark)").matches ?
 const theme = computed(() => settings.value?.theme)
 
 settings.value = { theme: theme.value ?? 'system' }
-const selectedTheme = theme.value === 'system' ? isDarkSystem : theme.value
+const selectedTheme = computed(() => theme.value === 'system' ? isDarkSystem : theme.value)
 
 useHead({
   htmlAttrs: {
