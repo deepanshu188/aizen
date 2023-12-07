@@ -5,7 +5,11 @@
         <CommunityBar :community='data.community' />
         <NuxtLink :to='`/user/${data.creator.id}`'>
           <div class="flex items-center gap-x-1">
-            <IUser /><span>{{ data.creator.name }}</span>
+            <span v-if='data.creator_is_admin || data.creator_is_moderator'>
+              <IShield />
+            </span><span v-else>
+              <IUser />
+            </span><span>{{ data.creator.name }}</span>
           </div>
         </NuxtLink>
       </div>
