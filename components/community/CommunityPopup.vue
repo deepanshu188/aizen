@@ -8,7 +8,7 @@
           :id='m.moderator.id' />
       </div>
     </div>
-    <div class="text-center my-3 md:h-auto h-36 overflow-y-auto" v-html="descriptionMd">
+    <div class="text-center my-3 md:h-auto h-36 overflow-y-auto md-style" v-html="descriptionMd">
     </div>
     <button class='btn btn-outline' :class="{ 'btn-secondary': isSubscribed }" @click="handleSubscribe(c.community.id)">{{
       isSubscribed ? 'Subscribed' :
