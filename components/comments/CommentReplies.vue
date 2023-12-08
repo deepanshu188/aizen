@@ -5,7 +5,7 @@
     </li>
   </ul>
   <div class='flex justify-center'>
-    <span class="loading loading-ring loading-lg"></span>
+    <loader :loading='initalLoading' />
   </div>
 </template>
 
@@ -19,9 +19,11 @@ const { data } = defineProps([
 
 const initialPayload = { post_id: data.post.id, community_id: data.community.id, sort: 'Hot', page: 1 }
 
-const { data: comments } = useInfiniteScroll({
+const { data: comments, loading } = useInfiniteScroll({
   apiCall: getComments, initialPayload
   , listKey: 'comments', totalLength: data.counts.comments
 })
+
+const initalLoading = computed(() => !comments.value.length && loading.value)
 
 </script>

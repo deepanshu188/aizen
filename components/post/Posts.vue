@@ -9,7 +9,10 @@
       </span>
     </div>
     <div class='md:p-4 md:m-3 m-auto w-full'>
-      <NormalPostCard :data='posts' :loading='loading' @updatePost='updatePostData' />
+      <NormalPostCard :data='posts' @updatePost='updatePostData' />
+      <div class="flex justify-center min-h-[80vh]">
+        <loader :loading='initalLoading' />
+      </div>
     </div>
   </section>
 </template>
@@ -23,6 +26,8 @@ const props = defineProps(['savedOnly', 'filters'])
 const initialPayload = { type_: 'All', sort: 'Active', limit: 30, page: 1, community_id: query.id, saved_only: props.savedOnly }
 
 const { data: posts, options, loading } = useInfiniteScroll({ apiCall: fetchPosts, initialPayload, hasMore: true, listKey: 'posts' })
+
+const initalLoading = computed(() => !posts.value.length && loading.value)
 
 const selectTab = (value: string) => {
   options.value.type_ = value

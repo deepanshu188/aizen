@@ -18,8 +18,8 @@
       <template v-for='c in communities'>
         <community-card :c='c'></community-card>
       </template>
-      <div class='flex justify-center'>
-        <span class="loading loading-ring loading-lg"></span>
+      <div class='flex h-[80vh] justify-center'>
+        <loader :loading='initalLoading' />
       </div>
     </div>
 
@@ -36,6 +36,9 @@ const selectTab = (value: string) => {
 
 const initialPayload = { sort: 'Active', page: 1, limit: 15, type_: 'All' }
 
-const { data: communities, options } = useInfiniteScroll({ apiCall: listCommunities, initialPayload, hasMore: true, listKey: 'communities' })
+const { data: communities, options, loading } = useInfiniteScroll({ apiCall: listCommunities, initialPayload, hasMore: true, listKey: 'communities' })
+
+
+const initalLoading = computed(() => !communities.value.length && loading.value)
 
 </script>

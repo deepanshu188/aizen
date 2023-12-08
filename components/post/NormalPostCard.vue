@@ -13,7 +13,6 @@
     <Interactions :post='post' :counts='counts' :saved='saved' :my_vote='my_vote' @emitVote='handleVote'
       @view-comments="handleViewPost(post.id)" @emitSave='savePost' />
   </div>
-  <loader :loading='loading'></loader>
 </template>
 
 <script setup lang="ts">
@@ -25,7 +24,6 @@ const router = useRouter()
 
 defineProps({
   data: Object,
-  loading: Boolean
 })
 
 const handleViewPost = (id: number) => {
