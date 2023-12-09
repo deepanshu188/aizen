@@ -4,13 +4,15 @@
       <div class="my-2 flex justify-between items-center">
         <CommunityBar :community='data.community' />
         <NuxtLink :to='`/user/${data.creator.id}`'>
-          <div class="flex items-center gap-x-1">
-            <span v-if='data.creator_is_admin || data.creator_is_moderator'>
-              <IShield />
-            </span><span v-else>
-              <IUser />
-            </span><span>{{ data.creator.name }}</span>
-          </div>
+          <Tooltip :text='toolTipText'>
+            <div class="flex items-center gap-x-1">
+              <span v-if='isAdmin || isMod'>
+                <IShield />
+              </span><span v-else>
+                <IUser />
+              </span><span>{{ data.creator.name }}</span>
+            </div>
+          </Tooltip>
         </NuxtLink>
       </div>
       <div class="card-body px-0">
@@ -30,28 +32,20 @@
         </div>
       </div>
     </div>
-    <div class='mt-4'>
-      <div class='flex justify-between items-center m-2'>
-        <p><b>{{ data.counts.comments }}</b> comments</p>
-        <select class="select select-bordered">
-          <option v-for='(o, i) in sortOptions' :key='i'>{{ o }}</option>
-        </select>
-      </div>
-      <div class='flex justify-center'>
-        <Editor placeholder='type comment...' :id='data.post.id' />
-      </div>
-    </div>
     <CommentReplies :data='data' />
   </section>
 </template>
 
 <script setup lang="ts">
-import sortOptions from '~/content/commentSortOptions.json'
 import MarkdownIt from "markdown-it";
 
 const markdown = new MarkdownIt();
 
 const { data } = defineProps(['data'])
+
+const isAdmin = data.creator_is_admin
+const isMod = data.creator_is_moderator
+const toolTipText = isAdmin && isMod ? 'Admin & Mod' : isAdmin ? 'Admin' : isMod ? 'Mod' : ''
 
 const body = data.post?.body ? markdown.render(data.post?.body) : ''
 

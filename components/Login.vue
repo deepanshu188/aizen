@@ -16,7 +16,7 @@
           </div>
           <div class="form-control">
             <label class="label">
-              <span class="label-text">Email</span>
+              <span class="label-text">Username</span>
             </label>
             <input type="text" placeholder="Username" class="input input-bordered" v-model="user.username_or_email" />
           </div>

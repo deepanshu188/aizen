@@ -13,7 +13,7 @@
       </button>
     </div>
     <textarea class="textarea textarea-bordered resize-none h-32" :placeholder="placeholder" v-model="comment"></textarea>
-    <button class='btn self-end mt-2' @click="postComment">Submit</button>
+    <button class='btn self-end mt-2' @click="postComment">Post</button>
   </div>
 </template>
 
