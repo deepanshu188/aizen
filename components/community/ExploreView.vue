@@ -18,8 +18,8 @@
       <template v-for='c in communities'>
         <community-card :c='c'></community-card>
       </template>
-      <div class='flex h-[80vh] justify-center'>
-        <loader :loading='initalLoading' />
+      <div class='flex h-[80vh] justify-center' v-if='initalLoading'>
+        <Loader />
       </div>
     </div>
 

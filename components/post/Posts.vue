@@ -10,8 +10,8 @@
     </div>
     <div class='md:p-4 md:m-3 m-auto w-full'>
       <NormalPostCard :data='posts' @updatePost='updatePostData' />
-      <div class="flex justify-center min-h-[80vh]">
-        <loader :loading='initalLoading' />
+      <div class="flex justify-center min-h-[80vh]" v-if='initalLoading'>
+        <Loader />
       </div>
     </div>
   </section>

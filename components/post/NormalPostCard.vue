@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { favouritePost, vote } from '../../services/posts'
+import { favouritePost, vote } from '~/services/posts'
 
 const emit = defineEmits(['updatePost'])
 

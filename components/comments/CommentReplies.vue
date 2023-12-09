@@ -17,8 +17,8 @@
       </li>
     </ul>
     <p v-if='comments.length === 0' class='text-center'>No Comment to see</p>
-    <div class='flex justify-center'>
-      <loader :loading='initalLoading' />
+    <div class='flex justify-center' v-if='initalLoading'>
+      <Loader />
     </div>
   </section>
 </template>
