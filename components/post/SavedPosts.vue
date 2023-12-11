@@ -1,3 +1,3 @@
 <template>
-  <Posts :savedOnly='true' />
+  <Posts :savedOnly="true" />
 </template>

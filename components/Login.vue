@@ -1,37 +1,95 @@
+<script setup lang="ts">
+  import { userLogin } from '../services/auth';
+  const user = ref({ username_or_email: '', password: '' });
+  const loading = ref(false);
+  const error = ref(false);
+  const instance = ref('https://lemmy.ml');
+  const router = useRouter();
+
+  const userData = useCookie('userData');
+
+  const setCookie = (name: string, value: string) =>
+    (userData.value = { ...userData.value, [name]: value });
+
+  const login = async () => {
+    loading.value = true;
+    await setCookie('instance', instance.value);
+    try {
+      const res = await userLogin(user.value);
+      if (res) {
+        setCookie('jwt', res);
+        router.push('/');
+      }
+    } catch (err) {
+      console.log(err, 'error');
+      error.value = true;
+      setTimeout(() => {
+        error.value = false;
+      }, 2000);
+    } finally {
+      loading.value = false;
+    }
+  };
+</script>
+
 <template>
-  <Toast v-if="error" type='error'>Incorrect login</Toast>
+  <Toast v-if="error" type="error">Incorrect login</Toast>
   <div class="hero min-h-screen">
-    <div class="hero-content flex-col lg:flex-row min-w-full justify-evenly">
+    <div
+      class="hero-content flex-col lg:flex-row min-w-full justify-evenly"
+    >
       <div class="text-center lg:text-left">
         <h1 class="text-5xl text-center font-bold">Aizen</h1>
         <p class="py-6 text-xl">Yet Another web based lemmy client</p>
       </div>
-      <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+      <div
+        class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
+      >
         <form class="card-body" @submit.prevent="login">
           <div class="form-control">
             <label class="label">
               <span class="label-text">Instance</span>
             </label>
-            <input type="text" placeholder="Instance" class="input input-bordered" v-model="instance" />
+            <input
+              type="text"
+              placeholder="Instance"
+              class="input input-bordered"
+              v-model="instance"
+            />
           </div>
           <div class="form-control">
             <label class="label">
               <span class="label-text">Username</span>
             </label>
-            <input type="text" placeholder="Username" class="input input-bordered" v-model="user.username_or_email" />
+            <input
+              type="text"
+              placeholder="Username"
+              class="input input-bordered"
+              v-model="user.username_or_email"
+            />
           </div>
           <div class="form-control">
             <label class="label">
               <span class="label-text">Password</span>
             </label>
-            <input type="password" placeholder="Password" class="input input-bordered" v-model="user.password" />
+            <input
+              type="password"
+              placeholder="Password"
+              class="input input-bordered"
+              v-model="user.password"
+            />
             <label class="label">
-              <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+              <a href="#" class="label-text-alt link link-hover"
+                >Forgot password?</a
+              >
             </label>
           </div>
           <div class="form-control mt-6">
             <button class="btn btn-primary">
-              <span v-if="loading" class="loading loading-spinner loading-md"></span>
+              <span
+                v-if="loading"
+                class="loading loading-spinner loading-md"
+              ></span>
               <span v-else>Login</span>
             </button>
           </div>
@@ -40,38 +98,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { userLogin } from '../services/auth'
-const user = ref({ username_or_email: '', password: '' })
-const loading = ref(false)
-const error = ref(false)
-const instance = ref('https://lemmy.ml')
-const router = useRouter()
-
-const userData = useCookie('userData')
-
-const setCookie = (name: string, value: string) => userData.value = { ...userData.value, [name]: value }
-
-const login = async () => {
-  loading.value = true
-  await setCookie('instance', instance.value)
-  try {
-    const res = await userLogin(user.value)
-    if (res) {
-      setCookie('jwt', res)
-      router.push('/')
-    }
-  }
-  catch (err) {
-    console.log(err, 'error')
-    error.value = true
-    setTimeout(() => {
-      error.value = false
-    }, 2000)
-  }
-  finally {
-    loading.value = false
-  }
-}
-</script>

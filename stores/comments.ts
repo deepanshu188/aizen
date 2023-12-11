@@ -1,7 +1,7 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 export const useCommentStore = defineStore('comments', () => {
-  const ignoreComments = ref([])
+  const ignoreComments = ref([]);
 
-  return { ignoreComments }
-})
+  return { ignoreComments };
+});
