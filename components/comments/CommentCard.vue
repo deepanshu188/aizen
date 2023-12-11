@@ -1,28 +1,41 @@
 <template>
   <div>
-    <NuxtLink :to='`/user/${c?.creator?.id}`'>
-      <div class='inline-flex items-center gap-x-2' role='button'>
-        <div class="avatar placeholder">
-          <div class="bg-neutral text-neutral-content rounded-full w-6">
-            <span class='text-xs'>{{ capitalFirst(c?.creator?.name) }}</span>
+    <div>
+      <div class='flex justify-between items-center'>
+        <NuxtLink :to='`/user/${c?.creator?.id}`'>
+          <div class='inline-flex items-center gap-x-2' role='button'>
+            <div class="avatar placeholder">
+              <div class="bg-neutral text-neutral-content rounded-full w-6">
+                <span class='text-xs'>{{ capitalFirst(c?.creator?.name) }}</span>
+              </div>
+            </div>
+            <p class='text-sm'>{{ c.creator.name }}</p>
           </div>
-        </div>
-        <p class='text-sm'>{{ c.creator.name }}</p>
+        </NuxtLink>
+        <p class='text-sm'>{{ diffDays(c.counts?.published) }}</p>
       </div>
-    </NuxtLink>
-    <p class="my-2 md-style" v-if='c?.comment?.content' v-html="markdown.render(c?.comment?.content)"></p>
-    <Interactions :my_vote='c?.my_vote' :post='c.post' :counts='c.counts' :saved='c.saved' />
-    <div v-if='c.counts.child_count && !child' class="mt-2">
-      <NestedComments :data='c' />
+      <p class="my-2 md-style" v-html="renderMd(c?.comment?.content)"></p>
+      <Interactions :my_vote='c?.my_vote' :post='c.post' :counts='c.counts' :saved='c.saved' minimal />
+    </div>
+    <div class="mt-2" v-if='c.counts.child_count'>
+      <NestedComments :data='isChildren' />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { getChildComments } from './comment'
+import { useCommentStore } from '@/stores/comments';
+const { ignoreComments } = useCommentStore()
 
-import MarkdownIt from "markdown-it";
+const { c, comments } = defineProps(['c', 'comments'])
 
-const markdown = new MarkdownIt();
+const isChildren = getChildComments(comments, c)
 
-const { c, child } = defineProps(['c', 'child'])
+const commentId = c.comment.id // this comment id
+const childrenIds = isChildren?.map((i: Object) => i.comment.id) ?? [] // all the nested children id's
+
+const allIds = new Set(childrenIds)
+
+ignoreComments.push(...allIds)
 </script>

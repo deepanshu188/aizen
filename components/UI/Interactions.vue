@@ -10,13 +10,13 @@
           <IDownvote :my_vote='my_vote' :iconClass='iconClass' />
         </span>
       </div>
-      <div class="flex items-center gap-1">
+      <div class="flex items-center gap-1" v-if='!minimal'>
         <span @click="viewComments">
           <IComment :iconClass='iconClass' />
         </span>
         <p>{{ counts?.comments ?? counts?.child_count }}</p>
       </div>
-      <div class="flex items-center gap-1">
+      <div class="flex items-center gap-1" v-if='!minimal'>
         <span>
           <IClock :iconClass='iconClass' />
         </span>
@@ -38,7 +38,8 @@ defineProps({
   post: Object,
   counts: Object,
   saved: Boolean,
-  my_vote: Number
+  my_vote: Number,
+  minimal: Boolean
 })
 
 const iconClass = 'w-5 h-5 cursor-pointer'

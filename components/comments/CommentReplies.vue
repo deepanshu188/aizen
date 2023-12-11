@@ -12,9 +12,11 @@
       </div>
     </div>
     <ul>
-      <li v-for="c in  comments" class='bg-base-200 shadow-lg my-4 p-3 rounded-md'>
-        <CommentCard :c='c' />
-      </li>
+      <template v-for="c in  comments">
+        <li class='bg-base-200 shadow-lg my-4 p-3 rounded-md' v-if='!ignoreComments.includes(c?.comment?.id)'>
+          <CommentCard :c='c' :comments='comments' />
+        </li>
+      </template>
     </ul>
     <p v-if='comments.length === 0' class='text-center'>No Comment to see</p>
     <div class='flex justify-center' v-if='initalLoading'>
@@ -27,16 +29,18 @@
 
 import sortOptions from '~/content/commentSortOptions.json'
 import { getComments } from '~/services/comments';
+import { useCommentStore } from '@/stores/comments';
+const { ignoreComments } = useCommentStore()
 
 const { data } = defineProps({
   data: Object
 })
 
-const initialPayload = { post_id: data.post.id, community_id: data.community.id, sort: 'Hot', page: 1 }
+const initialPayload = { post_id: data.post.id, community_id: data.community.id, sort: 'Hot', page: 1, max_depth: 6 }
 
 const { data: comments, loading, options } = useInfiniteScroll({
   apiCall: getComments, initialPayload
-  , listKey: 'comments', totalLength: data.counts.comments
+  , listKey: 'comments', totalLength: 0
 })
 
 const initalLoading = computed(() => !comments.value.length && loading.value)

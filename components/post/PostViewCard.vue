@@ -25,7 +25,7 @@
               loading="lazy" />
           </div>
         </div>
-        <p class='text-neutral-400' v-html='body'></p>
+        <p class='text-neutral-400' v-html='renderMd(data.post?.body)'></p>
         <div class="card-actions">
           <Interactions :post='data.post' :counts='data.counts' :saved='data.saved' :my_vote='data.my_vote'
             @emitVote='handleVote' @emitSave='savePost' />
@@ -37,18 +37,11 @@
 </template>
 
 <script setup lang="ts">
-import MarkdownIt from "markdown-it";
-
-const markdown = new MarkdownIt();
-
 const { data } = defineProps(['data'])
 
 const isAdmin = data.creator_is_admin
 const isMod = data.creator_is_moderator
 const toolTipText = isAdmin && isMod ? 'Admin & Mod' : isAdmin ? 'Admin' : isMod ? 'Mod' : ''
-
-const body = data.post?.body ? markdown.render(data.post?.body) : ''
-
 
 const handleVote = (payload: Object) => {
 }
