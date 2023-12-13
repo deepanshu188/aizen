@@ -65,7 +65,7 @@
     <div class="md:p-4 md:m-3 m-auto w-full">
       <NormalPostCard :data="posts" @updatePost="updatePostData" />
       <div
-        class="flex justify-center min-h-[80vh]"
+        class="flex justify-center min-h-[70vh]"
         v-if="initalLoading"
       >
         <Loader />

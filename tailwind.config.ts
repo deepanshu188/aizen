@@ -1,62 +1,60 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./components/**/*.{vue,ts}",
-    "./layouts/**/*.vue",
-    "./pages/**/*.vue",
-    "./plugins/**/*.{ts}",
-    "./app.vue",
-    "./error.vue",
+    './components/**/*.{vue,ts}',
+    './layouts/**/*.vue',
+    './pages/**/*.vue',
+    './plugins/**/*.{ts}',
+    './app.vue',
+    './error.vue',
   ],
   theme: {
     extend: {},
   },
-  plugins: [require("daisyui")],
+  plugins: [require('daisyui')],
 
   daisyui: {
     themes: [
       {
         dark: {
+          primary: '#3f00ff',
 
-          "primary": "#3f00ff",
+          secondary: '#1f00ff',
 
-          "secondary": "#1f00ff",
+          accent: '#30e500',
 
-          "accent": "#30e500",
+          neutral: '#000d0a',
 
-          "neutral": "#000d0a",
+          'base-100': '#191825',
 
-          "base-100": "#262626",
+          info: '#3d97ff',
 
-          "info": "#3d97ff",
+          success: '#00ed94',
 
-          "success": "#00ed94",
+          warning: '#d98d00',
 
-          "warning": "#d98d00",
-
-          "error": "#fe004d",
+          error: '#fe004d',
         },
         light: {
+          primary: '#9A79D0',
 
-          "primary": "#9A79D0",
+          secondary: '#ff5e00',
 
-          "secondary": "#ff5e00",
+          accent: '#003bff',
 
-          "accent": "#003bff",
+          neutral: '#181d26',
 
-          "neutral": "#181d26",
+          'base-100': '#fffdf1',
 
-          "base-100": "#fffdf1",
+          info: '#048bff',
 
-          "info": "#048bff",
+          success: '#2ca73d',
 
-          "success": "#2ca73d",
+          warning: '#ff7200',
 
-          "warning": "#ff7200",
-
-          "error": "#ff4462",
+          error: '#ff4462',
         },
-      }],
+      },
+    ],
   },
-}
-
+};
