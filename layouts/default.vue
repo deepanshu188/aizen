@@ -18,6 +18,10 @@ const selectedTheme = computed(() => theme.value === 'system' ? isDarkSystem : t
 useHead({
   htmlAttrs: {
     'data-theme': selectedTheme,
-  }
+  },
+  title: 'Aizen',
+  meta: [
+    { name: 'description', content: 'A web based lemmy client' }
+  ],
 })
 </script>
