@@ -2,6 +2,7 @@
   <NuxtPwaManifest />
   <section>
     <Nav />
+    <NuxtLoadingIndicator />
     <slot />
   </section>
 </template>
