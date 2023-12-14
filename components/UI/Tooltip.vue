@@ -5,7 +5,7 @@
 </script>
 
 <template>
-  <div class="tooltip" :data-tip="text">
+  <div :class="{ tooltip: text }" :data-tip="text">
     <slot />
   </div>
 </template>

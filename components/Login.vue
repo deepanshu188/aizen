@@ -3,10 +3,11 @@
   const user = ref({ username_or_email: '', password: '' });
   const loading = ref(false);
   const error = ref(false);
+  const toastMsg = ref('');
   const instance = ref('https://lemmy.ml');
   const router = useRouter();
 
-  const userData = useCookie('userData');
+  const userData: Object = useCookie('userData');
 
   const setCookie = (name: string, value: string) =>
     (userData.value = { ...userData.value, [name]: value });
@@ -20,8 +21,17 @@
         setCookie('jwt', res);
         router.push('/');
       }
-    } catch (err) {
-      console.log(err, 'error');
+    } catch ({ message }: any) {
+      switch (message) {
+        case 'incorrect_login':
+          toastMsg.value = 'Incorrect Login!';
+          break;
+        case 'deleted':
+          toastMsg.value = 'Account Deleted';
+          break;
+        default:
+          toastMsg.value = 'Error Occured';
+      }
       error.value = true;
       setTimeout(() => {
         error.value = false;
@@ -33,7 +43,7 @@
 </script>
 
 <template>
-  <Toast v-if="error" type="error">Incorrect login</Toast>
+  <Toast v-if="error" type="error">{{ toastMsg }}</Toast>
   <div class="hero min-h-screen">
     <div
       class="hero-content flex-col lg:flex-row min-w-full justify-evenly"
