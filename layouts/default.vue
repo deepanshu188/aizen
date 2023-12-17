@@ -2,7 +2,7 @@
   <NuxtPwaManifest />
   <section>
     <Nav />
-    <NuxtLoadingIndicator />
+    <NuxtLoadingIndicator color="#4B0082" :height="2" />
     <slot />
   </section>
 </template>
