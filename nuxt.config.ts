@@ -9,7 +9,8 @@ export default defineNuxtConfig({
     manifest: {
       name: 'Aizen for Lemmy',
       short_name: 'Aizen',
-      theme_color: '#000',
+      theme_color: '#fff',
+      background_color: '#000',
     },
     client: {
       installPrompt: true,
