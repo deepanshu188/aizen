@@ -1,5 +1,11 @@
 <script setup lang="ts">
-  const settings = useCookie('settings');
+  interface iSettings {
+    theme?: string;
+    value: {
+      theme: string;
+    };
+  }
+  const settings: iSettings = useCookie('settings');
 </script>
 
 <template>

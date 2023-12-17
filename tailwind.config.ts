@@ -36,7 +36,7 @@ export default {
           error: '#fe004d',
         },
         light: {
-          primary: '#9A79D0',
+          primary: '#1A1A1A',
 
           secondary: '#ff5e00',
 
