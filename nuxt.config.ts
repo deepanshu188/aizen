@@ -9,10 +9,18 @@ export default defineNuxtConfig({
     manifest: {
       name: 'Aizen for Lemmy',
       short_name: 'Aizen',
-      theme_color: '#ffffff',
+      theme_color: '#000',
     },
     client: {
       installPrompt: true,
+    },
+    workbox: {
+      runtimeCaching: [
+        {
+          urlPattern: '/',
+          handler: 'StaleWhileRevalidate',
+        },
+      ],
     },
     devOptions: {
       enabled: true,
