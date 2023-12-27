@@ -20,11 +20,7 @@
             router.push(`c/${c.community.name}?id=${c.community.id}`)
           "
         >
-          <Avatar
-            :name="c.community.title"
-            :url="c.community.icon"
-            alt="icon"
-          />
+          <Avatar :name="c.community.title" :url="c.community.icon" />
           <p>{{ c.community.title }}</p>
         </div>
       </li>

@@ -1,0 +1,3 @@
+<template>
+  <Appearences />
+</template>
