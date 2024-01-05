@@ -15,14 +15,6 @@ export default defineNuxtConfig({
     client: {
       installPrompt: true,
     },
-    workbox: {
-      runtimeCaching: [
-        {
-          urlPattern: '/',
-          handler: 'StaleWhileRevalidate',
-        },
-      ],
-    },
     devOptions: {
       enabled: true,
     },

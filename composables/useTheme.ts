@@ -8,7 +8,10 @@ export default function useTheme() {
     : 'light';
   const theme = computed(() => settings.value?.theme);
 
-  settings.value = { theme: theme.value ?? 'system' };
+  settings.value = {
+    ...settings.value,
+    theme: theme.value ?? 'system',
+  };
   const selectedTheme = computed(() =>
     theme.value === 'system' ? isDarkSystem : theme.value
   );

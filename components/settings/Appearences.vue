@@ -16,7 +16,7 @@
           { name: 'Appearences' },
         ]"
       />
-      <div class="mt-4 flex flex-col gap-4">
+      <div class="mt-4 flex flex-col gap-8">
         <div>
           <div class="label">
             <span class="label-text">Theme</span>
