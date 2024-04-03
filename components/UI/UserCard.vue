@@ -25,7 +25,7 @@
       </p>
       <div class="cursor-pointer" onclick="popup.showModal()">
         <Avatar
-          :url="person.avatar"
+          :image="person.avatar"
           :name="person.display_name ?? person.name"
           :size="24"
           :loading="loading"

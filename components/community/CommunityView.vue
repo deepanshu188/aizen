@@ -44,7 +44,7 @@
         <p class="card-title">{{ c.community.title }}</p>
         <span onclick="popup.showModal()" role="button">
           <Avatar
-            :url="c.community.icon"
+            :image="c.community.icon"
             :name="c.community.name"
             :size="24"
           />

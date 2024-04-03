@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   nitro: {
     ignore: ['/*'],
   },
-  modules: ['@nuxt/image', '@pinia/nuxt', '@vite-pwa/nuxt'],
+  modules: ['@nuxt/image', '@pinia/nuxt', '@vite-pwa/nuxt', '@nuxt/test-utils/module'],
   pwa: {
     manifest: {
       name: 'Aizen for Lemmy',

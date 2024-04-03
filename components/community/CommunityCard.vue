@@ -21,7 +21,7 @@
             role="button"
           >
             <Avatar
-              :url="c.community.icon"
+              :image="c.community.icon"
               :name="c.community.name"
             />
             <p class="text-lg">{{ c.community.name }}</p>

@@ -15,7 +15,7 @@
           <div>
             <p>{{ creator.display_name }}</p>
             <Avatar
-              :url="creator.avatar"
+              :image="creator.avatar"
               :name="creator.display_name ?? creator.name"
             />
           </div>
