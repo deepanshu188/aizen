@@ -26,7 +26,7 @@
           <Tooltip :text="toolTipText">
             <div class="flex items-center gap-x-1">
               <span v-if="isAdmin || isMod"> <IShield /> </span
-              ><span v-else> <IUser /> </span
+              ><span v-else> <Icon name="mynaui:user-circle" /> </span
               ><span>{{ data.creator.name }}</span>
             </div>
           </Tooltip>

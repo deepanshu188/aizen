@@ -1,28 +1,21 @@
 <script setup lang="ts">
   import { userDetails, getPersonInfo } from '../services/user';
   import { useUserStore } from '@/stores/user';
-  import IHome from './icons/IHome.vue';
-  import IProfile from './icons/IProfile.vue';
-  import ICommunities from './icons/ICommunities.vue';
-  import ILogout from './icons/ILogout.vue';
-  import IExplore from './icons/IExplore.vue';
-  import IUser from './icons/IUser.vue';
-  import ISettings from './icons/ISettings.vue';
 
   const commonItems = [
     {
       name: 'Home',
-      icon: IHome,
+      icon: 'ci:house-01',
       link: '/',
     },
     {
       name: 'Explore',
-      icon: IExplore,
+      icon: 'mynaui:navigation-one',
       link: '/explore',
     },
     {
       name: 'Settings',
-      icon: ISettings,
+      icon: 'mynaui:fine-tune',
       link: '/settings',
     },
   ];
@@ -31,7 +24,7 @@
     ...commonItems,
     {
       name: 'Login',
-      icon: IUser,
+      icon: 'mynaui:user-circle',
       link: '/login',
     },
   ];
@@ -40,17 +33,17 @@
     ...commonItems,
     {
       name: 'Profile',
-      icon: IProfile,
+      icon: 'mynaui:user-circle',
       link: '/profile',
     },
     {
       name: 'Communities',
-      icon: ICommunities,
+      icon: 'mynaui:at',
       link: '/communities',
     },
     {
       name: 'Logout',
-      icon: ILogout,
+      icon: 'mynaui:power',
       link: '/',
     },
   ];
@@ -113,7 +106,8 @@
             </div>
           </div>
           <button class="btn btn-ghost btn-circle" v-else>
-            <IMenu />
+            <!-- hamburger icon -->
+            <Icon name="mynaui:menu" />
           </button>
         </div>
         <ul
@@ -125,13 +119,13 @@
             @click="logout(item.name)"
           >
             <NuxtLink :to="item.link" class="p-2">
-              <component :is="item.icon"></component>
+              <Icon :name="item.icon" />
               {{ item.name }}
             </NuxtLink>
           </li>
           <li v-for="item in navItems" v-else @click="close">
             <NuxtLink :to="item.link" class="p-2">
-              <component :is="item.icon"></component>
+              <Icon :name="item.icon" />
               {{ item.name }}
             </NuxtLink>
           </li>

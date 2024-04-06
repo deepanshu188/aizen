@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   nitro: {
     ignore: ['/*'],
   },
-  modules: ['@nuxt/image', '@pinia/nuxt', '@nuxt/test-utils/module'],
+  modules: ['@nuxt/image', '@pinia/nuxt', '@nuxt/test-utils/module', 'nuxt-icon'],
   image: {
     quality: 100,
   },

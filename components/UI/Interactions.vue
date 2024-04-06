@@ -9,8 +9,6 @@
     minimal: Boolean,
   });
 
-  const iconClass = 'w-5 h-5 cursor-pointer';
-
   const handleVote = (payload: Object) => {
     emit('emitVote', payload);
   };
@@ -20,6 +18,8 @@
   };
 
   const viewComments = () => emit('viewComments');
+
+  const iconProps = { size: '18', class: 'cursor-pointer' }
 </script>
 
 <template>
@@ -34,7 +34,7 @@
             })
           "
         >
-          <IUpvote :my_vote="my_vote" :iconClass="iconClass" />
+          <Icon name="mynaui:arrow-up" :="iconProps" :class="my_vote === 1 ? 'text-accent' : 'text-secondary'" />
         </span>
         <p>{{ counts?.upvotes }}</p>
         <span
@@ -45,25 +45,27 @@
             })
           "
         >
-          <IDownvote :my_vote="my_vote" :iconClass="iconClass" />
+          <Icon name="mynaui:arrow-down" :="iconProps" :class="my_vote === -1 ? 'text-error' : 'text-secondary'" />
         </span>
       </div>
-      <div class="flex items-center gap-1" v-if="!minimal">
+      <template v-if="!minimal">
+        <div class="flex items-center gap-1">
         <span @click="viewComments">
-          <IComment :iconClass="iconClass" />
+          <Icon name="mynaui:message" :="iconProps" />
         </span>
         <p>{{ counts?.comments ?? counts?.child_count }}</p>
       </div>
-      <div class="flex items-center gap-1" v-if="!minimal">
+      <div class="flex items-center gap-1">
         <span>
-          <IClock :iconClass="iconClass" />
+          <Icon name="mynaui:clock-four" :="iconProps" />
         </span>
         <p>{{ diffDays(counts?.published) }}</p>
       </div>
+      </template>
     </div>
     <div>
       <span @click="savePost({ post_id: post.id, save: !saved })">
-        <IBookmark :saved="saved" :iconClass="iconClass" />
+        <IBookmark :saved="saved" class="w-5 h-5 cursor-pointer" />
       </span>
     </div>
   </div>
