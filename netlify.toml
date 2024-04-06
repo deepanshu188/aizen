@@ -1,2 +1,2 @@
 [images]
-  remote_images = ["*"]
+  remote_images = [".*"]
