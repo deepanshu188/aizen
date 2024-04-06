@@ -10,8 +10,7 @@
     fill="none"
     viewBox="0 0 24 24"
     stroke-width="1.5"
-    :stroke="my_vote === -1 ? '#ff0000' : '#fff'"
-    :class="iconClass"
+    :class="[iconClass, my_vote === -1 ? 'stroke-error' : 'stroke-secondary']"
   >
     <path
       stroke-linecap="round"

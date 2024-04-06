@@ -19,7 +19,7 @@ export default {
         dark: {
           primary: '#3f00ff',
 
-          secondary: '#1f00ff',
+          secondary: '#ffffff',
 
           accent: '#30e500',
 
@@ -33,12 +33,12 @@ export default {
 
           warning: '#d98d00',
 
-          error: '#fe004d',
+          error: '#ff4462',
         },
         light: {
           primary: '#1A1A1A',
 
-          secondary: '#ff5e00',
+          secondary: '#000000',
 
           accent: '#003bff',
 
@@ -52,7 +52,7 @@ export default {
 
           warning: '#ff7200',
 
-          error: '#ff4462',
+          error: '#fe004d',
         },
       },
     ],

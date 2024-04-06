@@ -4,21 +4,7 @@ export default defineNuxtConfig({
   nitro: {
     ignore: ['/*'],
   },
-  modules: ['@nuxt/image', '@pinia/nuxt', '@vite-pwa/nuxt', '@nuxt/test-utils/module'],
-  pwa: {
-    manifest: {
-      name: 'Aizen for Lemmy',
-      short_name: 'Aizen',
-      theme_color: '#fff',
-      background_color: '#000',
-    },
-    client: {
-      installPrompt: true,
-    },
-    devOptions: {
-      enabled: true,
-    },
-  },
+  modules: ['@nuxt/image', '@pinia/nuxt', '@nuxt/test-utils/module'],
   image: {
     quality: 100,
   },
