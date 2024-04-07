@@ -4,9 +4,6 @@
 </script>
 
 <template>
-  <Model>
-    <community-popup :c="c"></community-popup>
-  </Model>
   <div class="card bg-base-300 shadow-md m-4 p-4 h-32">
     <div class="h-full flex items-center justify-between">
       <div class="h-full flex flex-col justify-between gap-y-4 w-fit">
@@ -46,7 +43,7 @@
         </div>
       </div>
       <div class="flex items-center gap-2">
-        <div onclick="popup.showModal()" role="button">
+        <div @click="$emit('openModel', c)" role="button">
           <Icon name="mynaui:chevron-up-down" />
         </div>
         <button class="btn">

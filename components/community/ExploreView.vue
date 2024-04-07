@@ -1,52 +1,57 @@
 <script setup lang="ts">
-  import sortOptions from '~/content/sortOptions';
-  import { listCommunities } from '~/services/community';
+import sortOptions from '~/content/sortOptions';
+import { listCommunities } from '~/services/community';
 
-  const selectTab = (value: string) => {
-    options.value.type_ = value;
-  };
+const selectTab = (value: string) => {
+  options.value.type_ = value;
+};
 
-  const initialPayload = {
-    sort: 'Active',
-    page: 1,
-    limit: 15,
-    type_: 'All',
-  };
+const initialPayload = {
+  sort: 'Active',
+  page: 1,
+  limit: 15,
+  type_: 'All',
+};
 
-  const {
-    data: communities,
-    options,
-    loading,
-  } = useInfiniteScroll({
-    apiCall: listCommunities,
-    initialPayload,
-    hasMore: true,
-    listKey: 'communities',
-  });
+const {
+  data: communities,
+  options,
+  loading,
+} = useInfiniteScroll({
+  apiCall: listCommunities,
+  initialPayload,
+  hasMore: true,
+  listKey: 'communities',
+});
 
-  const initalLoading = computed(
-    () => !communities.value.length && loading.value
-  );
+const initalLoading = computed(
+  () => !communities.value.length && loading.value
+);
+
+const modelData = ref()
+
+const openModel = async (item) => {
+  modelData.value = item
+  await nextTick()
+  const popup = document.querySelector('#popup')
+  if (popup) {
+    popup.showModal()
+  }
+}
 </script>
 
 <template>
+  <Model v-if="modelData">
+    <community-popup :c="modelData"></community-popup>
+  </Model>
   <section>
-    <div
-      class="flex gap-2 flex-col md:flex-row justify-between items-center w-[98%] m-auto"
-    >
+    <div class="flex gap-2 flex-col md:flex-row justify-between items-center w-[98%] m-auto">
       <div class="flex gap-4">
         <label class="label cursor-pointer">
           <span class="label-text mr-2">Nsfw</span>
-          <input
-            type="checkbox"
-            class="checkbox"
-            v-model="options.show_nsfw"
-          />
+          <input type="checkbox" class="checkbox" v-model="options.show_nsfw" />
         </label>
-        <select
-          class="select select-bordered max-w-xs md:ml-4 md:self-start"
-          v-model="options.sort"
-        >
+        <select class="select select-bordered max-w-xs md:ml-4 md:self-start" v-model="options.sort">
           <option v-for="(option, index) in sortOptions" :key="index">
             {{ option }}
           </option>
@@ -58,7 +63,7 @@
     </div>
     <div>
       <template v-for="c in communities">
-        <community-card :c="c"></community-card>
+        <community-card :c="c" @openModel="openModel"></community-card>
       </template>
       <div class="flex h-[80vh] justify-center" v-if="initalLoading">
         <Loader />
