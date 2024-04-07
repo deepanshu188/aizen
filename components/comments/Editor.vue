@@ -38,12 +38,12 @@
       <button :class="btnStyle" @click="addFormat('****')">B</button>
       <button :class="btnStyle" @click="addFormat('**')">/</button>
       <button :class="btnStyle" @click="addFormat('[label](url)')">
-        <ILink />
+        <Icon name="mynaui:link-one" size="18" />
       </button>
       <button :class="btnStyle" @click="addFormat('#')">H</button>
       <button :class="btnStyle" @click="addFormat('>')">"</button>
       <button :class="btnStyle" @click="addFormat('``')">
-        <ICode />
+        <Icon name="mynaui:code" size="18" />
       </button>
     </div>
     <textarea

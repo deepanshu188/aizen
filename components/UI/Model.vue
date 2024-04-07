@@ -7,7 +7,7 @@
           class="btn btn-ghost btn-sm btn-circle"
           onclick="popup.close()"
         >
-          <ICross />
+          <Icon name="fe:close" />
         </button>
       </div>
       <slot />

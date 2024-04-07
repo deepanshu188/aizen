@@ -25,7 +25,7 @@
         <NuxtLink :to="`/user/${data.creator.id}`">
           <Tooltip :text="toolTipText">
             <div class="flex items-center gap-x-1">
-              <span v-if="isAdmin || isMod"> <IShield /> </span
+              <span v-if="isAdmin || isMod"> <Icon name="mynaui:shield-check" color="#32cc00" /> </span
               ><span v-else> <Icon name="mynaui:user-circle" /> </span
               ><span>{{ data.creator.name }}</span>
             </div>

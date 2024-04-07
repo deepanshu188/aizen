@@ -32,22 +32,22 @@
         </div>
         <div class="flex items-center gap-2">
           <div class="flex items-center gap-1">
-            <IUserGroup />
+            <Icon name="mynaui:users-group" />
             <span>{{ c.counts.subscribers }}</span>
           </div>
           <div class="flex items-center gap-1">
-            <IPosts />
+            <Icon name="mynaui:edit-one" />
             <span>{{ c.counts.posts }}</span>
           </div>
           <div class="flex items-center gap-1">
-            <IComments />
+            <Icon name="mynaui:chat-dots" />
             <span>{{ c.counts.comments }}</span>
           </div>
         </div>
       </div>
       <div class="flex items-center gap-2">
         <div onclick="popup.showModal()" role="button">
-          <IOptions />
+          <Icon name="mynaui:chevron-up-down" />
         </div>
         <button class="btn">
           {{
