@@ -10,11 +10,17 @@ export const useUserStore = defineStore('user', () => {
 
   const setUserDetails = (res: {}) => (user.value = res);
 
+  const clearAllUserDetails = () => {
+    data.value = {}
+    user.value = {}
+  }
+
   return {
     data,
     user,
     setPersonInfo,
     setUserDetails,
+    clearAllUserDetails,
     dataLoading,
     userLoading,
   };

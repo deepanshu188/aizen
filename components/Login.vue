@@ -5,7 +5,6 @@ const loading = ref(false);
 const error = ref(false);
 const toastMsg = ref('');
 const instance = ref('lemmy.ml');
-const router = useRouter();
 
 const userData: Object = useCookie('userData');
 
@@ -23,7 +22,7 @@ const login = async () => {
     const res = await userLogin(user.value);
     if (res) {
       setCookie('jwt', res);
-      router.push('/');
+      navigateTo('/')
     }
   } catch ({ message }: any) {
     switch (message) {

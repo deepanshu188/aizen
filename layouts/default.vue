@@ -1,6 +1,6 @@
 <template>
   <section>
-    <LazyNav />
+    <Nav />
     <NuxtLoadingIndicator color="#4B0082" :height="2" />
     <slot />
   </section>
