@@ -11,7 +11,7 @@ const userData: Object = useCookie('userData');
 
 const { data: serverList } = useFetch('https://data.lemmyverse.net/data/instance.full.json')
 
-const serverOptions = computed(() => serverList.value?.map(({ baseurl, time }: { baseurl: string; time: string }) => ({ id: time, text: baseurl })))
+const serverOptions = computed(() => serverList.value?.map(({ baseurl, time }: { baseurl: string; time: string }) => ({ id: time, text: baseurl })) ?? [])
 
 const setCookie = (name: string, value: string) =>
   (userData.value = { ...userData.value, [name]: value });

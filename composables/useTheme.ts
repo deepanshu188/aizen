@@ -1,6 +1,6 @@
 export default function useTheme() {
   const settings: { value: { theme: string } } =
-    useCookie('settings');
+    <iSettings>useCookie('settings');
   const isDarkSystem = window.matchMedia(
     '(prefers-color-scheme: dark)'
   ).matches
