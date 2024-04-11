@@ -83,7 +83,7 @@ const login = async () => {
             </label>
           </div>
           <div class="form-control mt-6">
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" :class="{ 'pointer-events-none opacity-80': loading }">
               <span v-if="loading" class="loading loading-spinner loading-md"></span>
               <span v-else>Login</span>
             </button>
