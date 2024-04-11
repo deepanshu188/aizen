@@ -4,10 +4,14 @@ const user = ref({ username_or_email: '', password: '' });
 const loading = ref(false);
 const error = ref(false);
 const toastMsg = ref('');
-const instance = ref('https://lemmy.ml');
+const instance = ref('lemmy.ml');
 const router = useRouter();
 
 const userData: Object = useCookie('userData');
+
+const { data: serverList } = useFetch('https://data.lemmyverse.net/data/instance.full.json')
+
+const serverOptions = computed(() => serverList.value?.map(({ baseurl, time }: { baseurl: string; time: string }) => ({ id: time, text: baseurl })))
 
 const setCookie = (name: string, value: string) =>
   (userData.value = { ...userData.value, [name]: value });
@@ -61,7 +65,7 @@ const login = async () => {
             <label class="label">
               <span class="label-text">Instance</span>
             </label>
-            <input type="text" placeholder="Instance" class="input input-bordered" v-model="instance" />
+            <AutoComplete :data="serverOptions" id='lemmyVerse' v-model="instance" />
           </div>
           <div class="form-control">
             <label class="label">
