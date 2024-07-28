@@ -6,6 +6,10 @@ export default defineNuxtConfig({
     ignore: ['/*'],
   },
 
+  icon: {
+    size: '22px',
+  },
+
   modules: ['@nuxt/image', '@pinia/nuxt', '@nuxt/test-utils/module', '@nuxt/icon'],
 
   image: {
