@@ -28,7 +28,7 @@ const savePost = async (payload: Object) => {
 <template>
     <div
         v-for="{ community, post, counts, saved, my_vote } in data"
-        class="card card-side bg-base-200 shadow-xl flex flex-col md:mx-4 mx-2 my-6 md:p-4 p-2 rounded-md min-h-56"
+        class="card card-side bg-base-200 shadow-xl flex flex-col md:mx-4 mx-2 my-6 md:p-4 p-2 rounded-md"
     >
         <CommunityBar :community="community" />
         <div
@@ -42,11 +42,14 @@ const savePost = async (payload: Object) => {
             >
                 <NuxtImg
                     :src="post.thumbnail_url"
-                    class="w-full h-full object-cover rounded-md"
+                    format="webp"
+                    fit="cover"
+                    class="w-full h-full rounded-md"
                     loading="lazy"
+                    placeholder
                 />
             </div>
-            <div class="card-body">
+            <div :class="{ 'card-body': post.thumbnail_url }">
                 <p class="md:text-xl text-sm leading-6">{{ post.name }}</p>
             </div>
         </div>
