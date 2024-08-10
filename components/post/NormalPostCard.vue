@@ -43,8 +43,7 @@ const savePost = async (payload: Object) => {
                 <NuxtImg
                     :src="post.thumbnail_url"
                     format="webp"
-                    fit="cover"
-                    class="w-full h-full rounded-md"
+                    class="w-full h-full rounded-md object-cover"
                     loading="lazy"
                     placeholder
                 />

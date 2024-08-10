@@ -24,8 +24,7 @@ defineProps({
                 :src="image"
                 :alt="alt"
                 format="webp"
-                fit="cover"
-                class="rounded-full aspect-square"
+                class="rounded-full aspect-square object-cover"
                 :class="`h-${size} w-${size}`"
                 loading="lazy"
                 placeholder
