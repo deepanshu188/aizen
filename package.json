@@ -11,28 +11,28 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^1.3.9",
-    "@nuxt/icon": "^1.3.1",
-    "@nuxt/test-utils": "^3.13.1",
+    "@nuxt/devtools": "^1.6.0",
+    "@nuxt/icon": "^1.5.8",
+    "@nuxt/test-utils": "^3.14.4",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@types/markdown-it": "^14.1.2",
     "@vue/test-utils": "^2.4.6",
-    "autoprefixer": "^10.4.19",
-    "daisyui": "^4.12.10",
-    "happy-dom": "^14.12.3",
-    "nuxt": "^3.12.4",
-    "postcss": "^8.4.40",
-    "tailwindcss": "^3.4.7",
-    "vitest": "^2.0.4",
-    "vue": "^3.4.34",
-    "vue-router": "^4.4.0"
+    "autoprefixer": "^10.4.20",
+    "daisyui": "^4.12.13",
+    "happy-dom": "^15.7.4",
+    "nuxt": "^3.13.2",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "vitest": "^2.1.3",
+    "vue": "^3.5.12",
+    "vue-router": "^4.4.5"
   },
   "dependencies": {
-    "@nuxt/image": "^1.7.0",
-    "@pinia/nuxt": "^0.5.2",
-    "dayjs": "^1.11.12",
-    "lemmy-js-client": "0.20.0-alpha.1",
+    "@nuxt/image": "^1.8.1",
+    "@pinia/nuxt": "^0.5.5",
+    "dayjs": "^1.11.13",
+    "lemmy-js-client": "0.20.0-private-community.6",
     "markdown-it": "^14.1.0",
-    "pinia": "^2.2.0"
+    "pinia": "^2.2.4"
   }
 }
