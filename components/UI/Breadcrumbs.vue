@@ -1,9 +1,5 @@
-<script>
-export default {
-  props: {
-    data: Array,
-  },
-};
+<script setup>
+  const { data } = defineProps(['data']);
 </script>
 
 <template>
