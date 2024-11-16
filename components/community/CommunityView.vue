@@ -4,18 +4,7 @@
     followCommunity,
   } from '~/services/community';
 
-  // const c = ref();
-  // const mods = ref();
   const { params, query } = useRoute();
-
-  // if (query.id) {
-  //   const res = await fetchCommunity({
-  //     name: params.community,
-  //     id: query.id,
-  //   });
-  //   c.value = res.community_view;
-  //   mods.value = res.moderators;
-  // }
 
 const { data: c } = await useAsyncData(() => fetchCommunity({
     name: params.community,
