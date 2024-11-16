@@ -2,11 +2,10 @@
   const { c, mods } = defineProps(['c', 'mods']);
   const emit = defineEmits(['subscribe-community']);
 
-  const isSubscribed = c.subscribed === 'Subscribed';
-  const btnText = isSubscribed ? 'Subscribed' : 'Subscribe';
+  const isSubscribed = computed(() => c.subscribed === 'Subscribed');
 
   const handleSubscribe = () => {
-    emit('subscribe-community', c.community.id, isSubscribed);
+    emit('subscribe-community', c.community.id, isSubscribed.value);
   };
 </script>
 
@@ -36,7 +35,7 @@
       :class="{ 'btn-secondary': isSubscribed }"
       @click="handleSubscribe"
     >
-      {{ btnText }}
+      {{ isSubscribed ? 'Subscribed' : 'Subscribe' }}
     </button>
   </div>
 </template>
