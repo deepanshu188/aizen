@@ -61,7 +61,10 @@ const updatePostData = (updatedPostValue: any, type: string) => {
             </span>
         </div>
         <div class="md:p-4 md:m-3 m-auto w-full">
-            <NormalPostCard :data="posts" @updatePost="updatePostData" />
+            <NormalPostCard v-if="posts.length" :posts="posts" />
+            <div v-else class="flex flex-col items-center justify-center">
+                <p class="text-center text-xl">No posts found</p>
+            </div>
             <div
                 class="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2"
                 v-if="initalLoading"

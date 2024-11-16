@@ -26,7 +26,6 @@
       follow: !isSubscribed,
     });
     c.value = res.community_view;
-    console.log(c.value, res.community_view, 'cv');
   };
 </script>
 
