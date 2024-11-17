@@ -2,11 +2,10 @@
 import { userLogin } from '../services/auth';
 const user = ref({ username_or_email: '', password: '' });
 const loading = ref(false);
-const error = ref(false);
-const toastMsg = ref('');
 const instance = ref('lemmy.ml');
 
 const userData: Object = useCookie('userData');
+  const { $toast } = useNuxtApp();
 
 const { data: serverList } = useFetch('https://data.lemmyverse.net/data/instance.full.json')
 
@@ -27,18 +26,14 @@ const login = async () => {
   } catch ({ message }: any) {
     switch (message) {
       case 'incorrect_login':
-        toastMsg.value = 'Incorrect Login!';
+        $toast.error('Incorrect Login!');
         break;
       case 'deleted':
-        toastMsg.value = 'Account Deleted';
+        $toast.error('Account Deleted');
         break;
       default:
-        toastMsg.value = 'Error Occured';
+        $toast.error('Error Occured');
     }
-    error.value = true;
-    setTimeout(() => {
-      error.value = false;
-    }, 2000);
   } finally {
     loading.value = false;
   }
@@ -46,7 +41,6 @@ const login = async () => {
 </script>
 
 <template>
-  <Toast v-if="error" type="error">{{ toastMsg }}</Toast>
   <div class="hero min-h-screen">
     <div class="hero-content flex-col lg:flex-row min-w-full justify-evenly">
       <div class="text-center lg:text-left">

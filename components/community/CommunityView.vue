@@ -5,6 +5,10 @@
   } from '~/services/community';
 
   const { params, query } = useRoute();
+  const { $toast } = useNuxtApp();
+  const user = useUserStore();
+
+  const userData = computed(() => user?.data?.person_view);
 
 const { data: c } = await useAsyncData(() => fetchCommunity({
     name: params.community,
@@ -17,6 +21,10 @@ const { data: c } = await useAsyncData(() => fetchCommunity({
     community_id: Number,
     isSubscribed: Boolean
   ) => {
+    if(!userData.value) {
+      $toast.error('You need to login first');
+      return;
+    };
     const res = await followCommunity({
       community_id,
       follow: !isSubscribed,

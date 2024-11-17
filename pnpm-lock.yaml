@@ -26,6 +26,9 @@ importers:
       pinia:
         specifier: ^2.2.5
         version: 2.2.5(vue@3.5.12)
+      vue3-toastify:
+        specifier: ^0.2.4
+        version: 0.2.4(vue@3.5.12)
     devDependencies:
       '@nuxt/devtools':
         specifier: ^1.6.0
@@ -3669,6 +3672,15 @@ packages:
     resolution: {integrity: sha512-4fKZygS8cH1yCyuabAXGUAsyi1b2/o/OKgu/RUb+znIYOxPRxdkytJEx+0wGcpBE1pX6vUgh5jwWOKRGvuA/7Q==}
     peerDependencies:
       vue: ^3.2.0
+
+  vue3-toastify@0.2.4:
+    resolution: {integrity: sha512-BMOwmoT0HKPYs2mEfsehitS3Kz8YjdsSAgHABba+eT573XLgzdHSOerdZ2KvPB1ldbTqnJ6AIfTM8TmBxg+Clw==}
+    engines: {node: '>=20', npm: '>=9.0.0'}
+    peerDependencies:
+      vue: '>=3.2.0'
+    peerDependenciesMeta:
+      vue:
+        optional: true
 
   vue@3.5.12:
     resolution: {integrity: sha512-CLVZtXtn2ItBIi/zHZ0Sg1Xkb7+PU32bJJ8Bmy7ts3jxXTcbfsEfBivFYYWz1Hur+lalqGAh65Coin0r+HRUfg==}
@@ -7817,6 +7829,10 @@ snapshots:
   vue-router@4.4.5(vue@3.5.12):
     dependencies:
       '@vue/devtools-api': 6.6.4
+      vue: 3.5.12
+
+  vue3-toastify@0.2.4(vue@3.5.12):
+    optionalDependencies:
       vue: 3.5.12
 
   vue@3.5.12:
