@@ -10,8 +10,5 @@
 import { fetchPost } from '../../services/posts'
 
 const { params } = useRoute()
-const post = ref(undefined)
-
-const res = await fetchPost({ id: params.id })
-post.value = res
+const { data: post } = await useAsyncData(() => fetchPost({ id: params.id }))
 </script>

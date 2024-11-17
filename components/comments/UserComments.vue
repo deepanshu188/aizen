@@ -5,7 +5,6 @@
 
   const user: iUser = useUserStore();
   const comments = props.comments ?? user?.data?.comments;
-  console.log(comments, 'cmts');
 </script>
 
 <template>
