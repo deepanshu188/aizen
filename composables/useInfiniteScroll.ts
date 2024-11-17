@@ -2,7 +2,7 @@ export default function useInfiniteScroll(configs: Object) {
   const { initialPayload, apiCall, totalLength, listKey } = configs;
   const options = ref(initialPayload);
   const loading = ref(false);
-  const data = ref([]);
+  const data = ref(null);
   const action = ref('');
 
   onMounted(() => {

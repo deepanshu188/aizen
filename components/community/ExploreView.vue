@@ -25,7 +25,7 @@ const {
 });
 
 const initalLoading = computed(
-  () => !communities.value.length && loading.value
+  () => !communities.value?.length && loading.value
 );
 
 const modelData = ref()
