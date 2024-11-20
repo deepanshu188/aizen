@@ -1,20 +1,17 @@
 <script setup lang="ts">
-  const { data } = defineProps(['data']);
+import { useImage } from "@vueuse/core";
+const { data } = defineProps(["data"]);
 
-  const isAdmin = data.creator_is_admin;
-  const isMod = data.creator_is_moderator;
-  const toolTipText =
-    isAdmin && isMod
-      ? 'Admin & Mod'
-      : isAdmin
-      ? 'Admin'
-      : isMod
-      ? 'Mod'
-      : '';
+const isAdmin = data.creator_is_admin;
+const isMod = data.creator_is_moderator;
+const toolTipText =
+  isAdmin && isMod ? "Admin & Mod" : isAdmin ? "Admin" : isMod ? "Mod" : "";
 
-  const handleVote = (payload: Object) => {};
+const handleVote = (payload: Object) => {};
 
-  const savePost = (payload: Object) => {};
+const savePost = (payload: Object) => {};
+
+const { error: thumbnailError } = useImage({ src: data.post?.thumbnail_url });
 </script>
 
 <template>
@@ -25,7 +22,8 @@
         <NuxtLink :to="`/user/${data.creator.id}`">
           <Tooltip :text="toolTipText">
             <div class="flex items-center gap-x-1">
-              <span v-if="isAdmin || isMod"> <Icon name="mynaui:shield-check" color="#32cc00" /> </span
+              <span v-if="isAdmin || isMod">
+                <Icon name="mynaui:shield-check" color="#32cc00" /> </span
               ><span v-else> <Icon name="mynaui:user-circle" /> </span
               ><span>{{ data.creator.name }}</span>
             </div>
@@ -33,11 +31,9 @@
         </NuxtLink>
       </div>
       <div class="card-body px-0">
-        <a class="text-xl" :href="data.post?.url">{{
-          data?.post?.name
-        }}</a>
+        <a class="text-xl" :href="data.post?.url">{{ data?.post?.name }}</a>
         <div
-          v-if="data.post?.thumbnail_url"
+          v-if="data.post?.thumbnail_url && !thumbnailError"
           class="w-full self-center"
         >
           <div class="relative">
@@ -53,10 +49,7 @@
             />
           </div>
         </div>
-        <p
-          class="text-neutral-400"
-          v-html="renderMd(data.post?.body)"
-        ></p>
+        <p class="text-neutral-400" v-html="renderMd(data.post?.body)"></p>
         <div class="card-actions">
           <Interactions
             :post="data.post"
