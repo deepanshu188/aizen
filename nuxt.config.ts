@@ -47,4 +47,6 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+
+  compatibilityDate: "2024-11-21",
 });

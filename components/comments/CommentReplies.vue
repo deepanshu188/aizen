@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import sortOptions from '~/content/commentSortOptions.json';
-import { getComments } from '~/services/comments';
-import { useCommentStore } from '@/stores/comments';
+import sortOptions from "~/content/commentSortOptions.json";
+import { getComments } from "~/services/comments";
+import { useCommentStore } from "@/stores/comments";
 const { ignoreComments } = useCommentStore();
 
 const { data } = defineProps({
@@ -11,7 +11,7 @@ const { data } = defineProps({
 const initialPayload = {
   post_id: data.post.id,
   community_id: data.community.id,
-  sort: 'Hot',
+  sort: "Hot",
   page: 1,
   max_depth: 6,
 };
@@ -23,13 +23,11 @@ const {
 } = useInfiniteScroll({
   apiCall: getComments,
   initialPayload,
-  listKey: 'comments',
+  listKey: "comments",
   totalLength: 0,
 });
 
-const initalLoading = computed(
-  () => !comments.value?.length && loading.value
-);
+const initalLoading = computed(() => !comments.value?.length && loading.value);
 </script>
 
 <template>
@@ -51,13 +49,19 @@ const initalLoading = computed(
     </div>
     <ul>
       <template v-for="c in comments">
-        <li class="bg-base-200 shadow-lg my-4 p-3 rounded-md" v-if="!ignoreComments.includes(c?.comment?.id)">
+        <li
+          class="bg-base-200 shadow-lg my-4 p-3 rounded-md"
+          v-if="!ignoreComments.includes(c?.comment?.id)"
+        >
           <CommentCard :c="c" :comments="comments" />
         </li>
       </template>
     </ul>
-    <p v-if="comments && comments.length" class="text-center">
+    <p v-if="!loading && !comments.length" class="text-center">
       No Comment to see
+    </p>
+    <p v-if="!loading && comments.length" class="text-center text-sm">
+      No more comments
     </p>
     <div class="flex justify-center" v-if="initalLoading">
       <Loader />
