@@ -35,6 +35,6 @@
     "lemmy-js-client": "0.20.0-private-community.7",
     "markdown-it": "^14.1.0",
     "pinia": "^2.2.6",
-    "vue3-toastify": "^0.2.2"
+    "vue3-toastify": "^0.2.4"
   }
 }
