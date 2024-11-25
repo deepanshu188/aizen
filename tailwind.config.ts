@@ -17,7 +17,7 @@ export default {
     themes: [
       {
         dark: {
-          primary: '#3f00ff',
+          primary: '#f1f4ff',
 
           secondary: '#ffffff',
 
@@ -25,7 +25,7 @@ export default {
 
           neutral: '#000d0a',
 
-          'base-100': '#191825',
+          'base-100': '#181818',
 
           info: '#3d97ff',
 

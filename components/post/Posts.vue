@@ -43,7 +43,7 @@ const updatePostData = (updatedPostValue: any, type: string) => {
 </script>
 
 <template>
-  <section class="flex flex-col items-center mt-4">
+  <section class="flex flex-col items-center">
     <div
       class="flex gap-2 flex-col-reverse md:flex-row justify-between items-center w-[98%]"
     >

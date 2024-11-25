@@ -2,36 +2,31 @@
 import { userDetails, getPersonInfo } from "../services/user";
 import { useUserStore } from "@/stores/user";
 
-const commonItems = [
-    {
-        name: "Home",
-        icon: "ci:house-01",
-        link: "/",
-    },
-    {
-        name: "Explore",
-        icon: "mynaui:navigation-one",
-        link: "/explore",
-    },
-    {
-        name: "Settings",
-        icon: "mynaui:fine-tune",
-        link: "/settings",
-    },
-];
-
-const privateItems = [
-    ...commonItems,
-    {
-        name: "Communities",
-        icon: "mynaui:at",
-        link: "/communities",
-    },
-    {
-        name: "Logout",
-        icon: "mynaui:power",
-        link: "/",
-    },
+const sideBarLinks = [
+  {
+    name: "Home",
+    icon: "ci:house-01",
+    link: "/",
+    private: false,
+  },
+  {
+    name: "Explore",
+    icon: "mynaui:navigation-one",
+    link: "/explore",
+    private: false,
+  },
+  {
+    name: "Settings",
+    icon: "mynaui:fine-tune",
+    link: "/settings",
+    private: false,
+  },
+  {
+    name: "Communities",
+    icon: "mynaui:at",
+    link: "/communities",
+    private: true,
+  },
 ];
 
 const userData = useCookie("userData");
@@ -39,90 +34,66 @@ const jwt = computed(() => userData.value?.jwt);
 const user: any = useUserStore();
 
 if (jwt.value) {
-    const res = await userDetails();
-    const person_id = res?.my_user?.local_user_view?.person.id;
-    const response = await getPersonInfo({ person_id });
-    // all info
-    user.setUserDetails(res);
-    // profile related
-    user.setPersonInfo(response);
+  const res = await userDetails();
+  const person_id = res?.my_user?.local_user_view?.person.id;
+  const response = await getPersonInfo({ person_id });
+  // all info
+  user.setUserDetails(res);
+  // profile related
+  user.setPersonInfo(response);
 }
 
 const userInfo = computed(() => user.data?.person_view?.person);
 
-const close = () => {
-    const elem = document?.activeElement;
-    if (elem) {
-        elem.blur();
-    }
-};
-
-const logout = (name: string) => {
-    close();
-    if (name === "Logout") {
-        userData.value = "";
-        user.clearAllUserDetails();
-        navigateTo("/");
-    }
+const handleLogout = () => {
+  userData.value = "";
+  user.clearAllUserDetails();
+  navigateTo("/");
 };
 </script>
 
 <template>
-    <ul
-        class="menu bg-base-200 rounded-box sticky top-0 h-screen flex items-center md:px-4"
+  <ul class="menu bg-base-200 sticky top-0 h-screen flex items-between">
+    <p
+      class="text-xl my-2 tracking-widest font-semibold text-center max-sm:hidden"
     >
-        <li v-if="jwt" class="my-1">
-            <div
-                tabindex="0"
-                role="button"
-                class="btn btn-ghost btn-circle avatar"
-                @click="navigateTo('/profile')"
-            >
-                <div class="w-8 rounded-full">
-                    <img
-                        v-if="userInfo?.avatar"
-                        :src="userInfo?.avatar"
-                        alt="avatar"
-                    />
-                    <div class="avatar placeholder" v-else>
-                        <div
-                            class="bg-neutral text-neutral-content rounded-full w-8"
-                        >
-                            <span class="text-xs">{{
-                                capitalFirst(userInfo?.display_name)
-                            }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </li>
-        <li v-else>
-            <Tooltip text="Login">
-                <NuxtLink to="/login">
-                    <Icon name="mynaui:user-circle" />
-                </NuxtLink>
-            </Tooltip>
-        </li>
+      Aizen
+    </p>
+    <label class="input input-bordered items-center gap-4 m-2 sm:flex hidden">
+      <input type="text" class="grow" placeholder="Search" />
+      <Icon name="bitcoin-icons:search-outline" />
+    </label>
+    <li v-if="jwt" class="my-1">
+      <NuxtLink to="/profile" class="gap-x-4 max-sm:px-0 max-sm:py-1">
+        <Avatar
+          :name="userInfo?.display_name"
+          :image="userInfo?.avatar"
+          alt="avatar"
+        />
+        <p class="sm:flex hidden">{{ userInfo?.display_name }}</p>
+      </NuxtLink>
+    </li>
+    <li v-else>
+      <NuxtLink to="/login" class="gap-x-4 max-sm:px-0 max-sm:py-1">
+        <Icon name="iconamoon:profile-light" />
+        <p class="sm:flex hidden">Login</p>
+      </NuxtLink>
+    </li>
 
-        <li
-            v-for="item in privateItems"
-            v-if="jwt"
-            @click="logout(item.name)"
-            class="my-1"
-        >
-            <Tooltip :text="item.name">
-                <NuxtLink :to="item.link">
-                    <Icon :name="item.icon" />
-                </NuxtLink>
-            </Tooltip>
-        </li>
+    <template v-for="item in sideBarLinks" :key="item.name">
+      <li v-if="item.private ? jwt : true" @click="close" class="my-1">
+        <NuxtLink :to="item.link" class="gap-x-4 max-sm:px-0 max-sm:py-1">
+          <Icon :name="item.icon" />
+          <p class="sm:flex hidden">{{ item.name }}</p>
+        </NuxtLink>
+      </li>
+    </template>
 
-        <li v-for="item in commonItems" v-else @click="close" class="my-1">
-            <Tooltip :text="item.name">
-                <NuxtLink :to="item.link">
-                    <Icon :name="item.icon" />
-                </NuxtLink>
-            </Tooltip>
-        </li>
-    </ul>
+    <li v-if="jwt" class="my-1">
+      <div @click="handleLogout" class="gap-x-4 max-sm:px-0 max-sm:py-1">
+        <Icon name="mynaui:power" />
+        <p class="sm:flex hidden">Logout</p>
+      </div>
+    </li>
+  </ul>
 </template>

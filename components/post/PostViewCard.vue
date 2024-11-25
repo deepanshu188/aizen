@@ -15,7 +15,7 @@ const { error: thumbnailError } = useImage({ src: data.post?.thumbnail_url });
 </script>
 
 <template>
-  <section class="md:w-1/2 w-full">
+  <section class="md:w-3/4 w-full">
     <div class="card bg-base-200 shadow-xl min-h-52 p-4">
       <div class="my-2 flex justify-between items-center">
         <CommunityBar :community="data.community" />
