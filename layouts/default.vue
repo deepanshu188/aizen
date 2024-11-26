@@ -9,6 +9,7 @@
       </div>
     </div>
   </section>
+  <BottomNav />
 </template>
 
 <script setup lang="ts">

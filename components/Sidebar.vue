@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { userDetails, getPersonInfo } from "../services/user";
 import { useUserStore } from "@/stores/user";
 
 const sideBarLinks = [
@@ -29,31 +28,15 @@ const sideBarLinks = [
   },
 ];
 
-const userData = useCookie("userData");
-const jwt = computed(() => userData.value?.jwt);
 const user: any = useUserStore();
-
-if (jwt.value) {
-  const res = await userDetails();
-  const person_id = res?.my_user?.local_user_view?.person.id;
-  const response = await getPersonInfo({ person_id });
-  // all info
-  user.setUserDetails(res);
-  // profile related
-  user.setPersonInfo(response);
-}
-
+await user.fetchUserDetails();
 const userInfo = computed(() => user.data?.person_view?.person);
-
-const handleLogout = () => {
-  userData.value = "";
-  user.clearAllUserDetails();
-  navigateTo("/");
-};
 </script>
 
 <template>
-  <ul class="menu bg-base-200 sticky top-0 h-screen flex items-between">
+  <ul
+    class="menu bg-base-200 sticky top-0 h-screen flex items-between max-sm:hidden"
+  >
     <p
       class="text-xl my-2 tracking-widest font-semibold text-center max-sm:hidden"
     >
@@ -63,7 +46,7 @@ const handleLogout = () => {
       <input type="text" class="grow" placeholder="Search" />
       <Icon name="bitcoin-icons:search-outline" />
     </label>
-    <li v-if="jwt" class="my-1">
+    <li v-if="user.jwt" class="my-1">
       <NuxtLink to="/profile" class="gap-x-4 max-sm:px-0 max-sm:py-1">
         <Avatar
           :name="userInfo?.display_name"
@@ -81,7 +64,7 @@ const handleLogout = () => {
     </li>
 
     <template v-for="item in sideBarLinks" :key="item.name">
-      <li v-if="item.private ? jwt : true" @click="close" class="my-1">
+      <li v-if="item.private ? user.jwt : true" class="my-1">
         <NuxtLink :to="item.link" class="gap-x-4 max-sm:px-0 max-sm:py-1">
           <Icon :name="item.icon" />
           <p class="sm:flex hidden">{{ item.name }}</p>
@@ -89,8 +72,8 @@ const handleLogout = () => {
       </li>
     </template>
 
-    <li v-if="jwt" class="my-1">
-      <div @click="handleLogout" class="gap-x-4 max-sm:px-0 max-sm:py-1">
+    <li v-if="user.jwt" class="my-1">
+      <div @click="user.logoutUser" class="gap-x-4 max-sm:px-0 max-sm:py-1">
         <Icon name="mynaui:power" />
         <p class="sm:flex hidden">Logout</p>
       </div>
