@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import sortOptions from "~/content/commentSortOptions.json";
 import { getComments } from "~/services/comments";
-import { useCommentStore } from "@/stores/comments";
-const { ignoreComments } = useCommentStore();
+import { buildCommentTree } from "./comment";
 
 const { data } = defineProps({
   data: Object,
@@ -28,6 +27,10 @@ const {
 });
 
 const initalLoading = computed(() => !comments.value?.length && loading.value);
+
+const treeComments = computed(() => {
+  return buildCommentTree(comments.value);
+});
 </script>
 
 <template>
@@ -48,12 +51,9 @@ const initalLoading = computed(() => !comments.value?.length && loading.value);
       </div>
     </div>
     <ul>
-      <template v-for="c in comments">
-        <li
-          class="bg-base-200 shadow-lg my-4 p-3 rounded-md"
-          v-if="!ignoreComments.includes(c?.comment?.id)"
-        >
-          <CommentCard :c="c" :comments="comments" />
+      <template v-for="c in treeComments">
+        <li class="bg-base-200 shadow-lg my-4 p-3 rounded-md">
+          <CommentCard :c="c" :comments="treeComments" />
         </li>
       </template>
     </ul>

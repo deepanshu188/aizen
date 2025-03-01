@@ -1,3 +1,5 @@
+import tailwindcss from "@tailwindcss/vite";
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
@@ -17,6 +19,12 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxtjs/google-fonts",
   ],
+
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
 
   googleFonts: {
     families: {
@@ -40,13 +48,6 @@ export default defineNuxtConfig({
   ],
 
   css: ["~/assets/css/main.css"],
-
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
-  },
 
   compatibilityDate: "2024-11-21",
 });

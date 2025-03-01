@@ -35,7 +35,7 @@ const userInfo = computed(() => user.data?.person_view?.person);
 
 <template>
   <ul
-    class="menu bg-base-200 sticky top-0 h-screen flex items-between max-sm:hidden"
+    class="menu min-w-64 bg-base-200 sticky top-0 h-screen flex items-between max-sm:hidden"
   >
     <p
       class="text-xl my-2 tracking-widest font-semibold text-center max-sm:hidden"

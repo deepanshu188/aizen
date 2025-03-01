@@ -1,5 +1,5 @@
 <template>
-  <div class="btm-nav sm:hidden">
+  <div class="dock sm:hidden">
     <span
       v-for="item in navData"
       :key="item.name"

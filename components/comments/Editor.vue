@@ -1,35 +1,35 @@
 <script setup lang="ts">
-  import { addComment } from '~/services/comments';
-  const comment = ref('');
-  const btnStyle =
-    'w-8 h-8 rounded-md border border-neutral-700 font-bold text-sm flex justify-center items-center hover:bg-neutral-700';
-  const { id } = defineProps({
-    placeholder: String,
-    id: Number,
-  });
+import { addComment } from "~/services/comments";
+const comment = ref("");
+const btnStyle =
+  "w-8 h-8 rounded-md border border-neutral-700 font-bold text-sm flex justify-center items-center hover:bg-neutral-700";
+const { id } = defineProps({
+  placeholder: String,
+  id: Number,
+});
 
-  const addFormat = (value: string) => {
-    const textarea = document.querySelector('textarea');
-    comment.value += value;
+const addFormat = (value: string) => {
+  const textarea = document.querySelector("textarea");
+  comment.value += value;
 
-    if (textarea) {
-      textarea.focus();
-      const len = textarea.value.length;
-      textarea.setSelectionRange(len - 2, len);
-      textarea.selectionEnd = len - 2;
-    }
-  };
+  if (textarea) {
+    textarea.focus();
+    const len = textarea.value.length;
+    textarea.setSelectionRange(len - 2, len);
+    textarea.selectionEnd = len - 2;
+  }
+};
 
-  const postComment = async () => {
-    try {
-      const res = await addComment({
-        content: comment.value,
-        post_id: id,
-      });
-      console.log(res);
-      comment.value = '';
-    } catch {}
-  };
+const postComment = async () => {
+  try {
+    const res = await addComment({
+      content: comment.value,
+      post_id: id,
+    });
+    console.log(res);
+    comment.value = "";
+  } catch {}
+};
 </script>
 
 <template>
@@ -47,12 +47,10 @@
       </button>
     </div>
     <textarea
-      class="textarea textarea-bordered resize-none h-32"
+      class="textarea w-full resize-none h-32"
       :placeholder="placeholder"
       v-model="comment"
     ></textarea>
-    <button class="btn self-end mt-2" @click="postComment">
-      Post
-    </button>
+    <button class="btn self-end mt-2" @click="postComment">Post</button>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  const { data } = defineProps(['data']);
+const { data } = defineProps(["data"]);
 </script>
 
 <template>
@@ -9,7 +9,7 @@
   >
     <li
       v-for="(c, index) in data"
-      class="bg-base-200 shadow-lg my-4 p-3 border-l"
+      class="bg-base-200 my-4 p-3 border-l"
       :key="index"
       :class="{
         'ml-2': index % 2 !== 0,

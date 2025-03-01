@@ -1,9 +1,9 @@
 <script setup lang="ts">
-  const { path } = useRoute();
+const { path } = useRoute();
 
-  defineProps({
-    tabs: Array,
-  });
+defineProps({
+  tabs: Array,
+});
 </script>
 
 <template>

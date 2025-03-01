@@ -1,38 +1,48 @@
 <script setup lang="ts">
-import { userLogin } from '../services/auth';
-const user = ref({ username_or_email: '', password: '' });
+import { userLogin } from "../services/auth";
+const user = ref({ username_or_email: "", password: "" });
 const loading = ref(false);
-const instance = ref('lemmy.ml');
+const instance = ref("lemmy.ml");
 
-const userData: Object = useCookie('userData');
-  const { $toast } = useNuxtApp();
+const userData: Object = useCookie("userData");
+const { $toast } = useNuxtApp();
 
-const { data: serverList } = useFetch('https://data.lemmyverse.net/data/instance.full.json')
+const { data: serverList } = useFetch(
+  "https://data.lemmyverse.net/data/instance.full.json",
+);
 
-const serverOptions = computed(() => serverList.value?.map(({ baseurl, time }: { baseurl: string; time: string }) => ({ id: time, text: baseurl })) ?? [])
+const serverOptions = computed(
+  () =>
+    serverList.value?.map(
+      ({ baseurl, time }: { baseurl: string; time: string }) => ({
+        id: time,
+        text: baseurl,
+      }),
+    ) ?? [],
+);
 
 const setCookie = (name: string, value: string) =>
   (userData.value = { ...userData.value, [name]: value });
 
 const login = async () => {
   loading.value = true;
-  await setCookie('instance', instance.value);
+  await setCookie("instance", instance.value);
   try {
     const res = await userLogin(user.value);
     if (res) {
-      setCookie('jwt', res);
-      navigateTo('/')
+      setCookie("jwt", res);
+      navigateTo("/");
     }
   } catch ({ message }: any) {
     switch (message) {
-      case 'incorrect_login':
-        $toast.error('Incorrect Login!');
+      case "incorrect_login":
+        $toast.error("Incorrect Login!");
         break;
-      case 'deleted':
-        $toast.error('Account Deleted');
+      case "deleted":
+        $toast.error("Account Deleted");
         break;
       default:
-        $toast.error('Error Occured');
+        $toast.error("Error Occured");
     }
   } finally {
     loading.value = false;
@@ -58,26 +68,48 @@ const login = async () => {
             <label class="label">
               <span class="label-text">Instance</span>
             </label>
-            <AutoComplete :data="serverOptions" id='lemmyVerse' v-model="instance" />
+            <AutoComplete
+              :data="serverOptions"
+              id="lemmyVerse"
+              v-model="instance"
+            />
           </div>
           <div class="form-control">
             <label class="label">
               <span class="label-text">Username</span>
             </label>
-            <input type="text" placeholder="Username" class="input input-bordered" v-model="user.username_or_email" />
+            <input
+              type="text"
+              placeholder="Username"
+              class="input input-bordered"
+              v-model="user.username_or_email"
+            />
           </div>
           <div class="form-control">
             <label class="label">
               <span class="label-text">Password</span>
             </label>
-            <input type="password" placeholder="Password" class="input input-bordered" v-model="user.password" />
+            <input
+              type="password"
+              placeholder="Password"
+              class="input input-bordered"
+              v-model="user.password"
+            />
             <label class="label">
-              <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+              <a href="#" class="label-text-alt link link-hover"
+                >Forgot password?</a
+              >
             </label>
           </div>
           <div class="form-control mt-6">
-            <button class="btn btn-primary" :class="{ 'pointer-events-none opacity-80': loading }">
-              <span v-if="loading" class="loading loading-spinner loading-md"></span>
+            <button
+              class="btn btn-primary"
+              :class="{ 'pointer-events-none opacity-80': loading }"
+            >
+              <span
+                v-if="loading"
+                class="loading loading-spinner loading-md"
+              ></span>
               <span v-else>Login</span>
             </button>
           </div>
