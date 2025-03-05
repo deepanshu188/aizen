@@ -40,7 +40,7 @@ const treeComments = computed(() => {
         <p>
           <b>{{ data.counts.comments }}</b> comments
         </p>
-        <select class="select select-bordered" v-model="options.sort">
+        <select class="select select-bordered w-max" v-model="options.sort">
           <option v-for="(o, i) in sortOptions" :key="i">
             {{ o }}
           </option>
