@@ -56,3 +56,7 @@
 .md-style a {
     color: #2f81f7;
 }
+
+.md-style pre {
+  overflow-x: auto;
+}
