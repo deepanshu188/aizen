@@ -1,33 +1,8 @@
 @import "tailwindcss";
 @plugin "daisyui" {
   exclude: calendar;
-  theme-root: ":root";
-  prefix: "";
   logs: true;
-}
-
-[data-theme="dark"] {
-  --primary: 241 244 255;
-  --secondary: 255 255 255;
-  --accent: 48 229 0;
-  --neutral: 0 13 10;
-  --base-100: 24 24 24;
-  --info: 61 151 255;
-  --success: 0 237 148;
-  --warning: 217 141 0;
-  --error: 255 68 98;
-}
-
-[data-theme="light"] {
-  --primary: 26 26 26;
-  --secondary: 0 0 0;
-  --accent: 0 59 255;
-  --neutral: 24 29 38;
-  --base-100: 255 255 255;
-  --info: 4 139 255;
-  --success: 44 167 61;
-  --warning: 255 114 0;
-  --error: 254 0 77;
+  themes: cupcake --default, business --prefersdark;
 }
 
 ::-webkit-scrollbar {
