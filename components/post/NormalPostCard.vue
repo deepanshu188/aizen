@@ -15,6 +15,10 @@ const savePost = async (payload: Object) => {
   const res = await favouritePost(payload);
   emit("updatePost", res.post_view, "save");
 };
+
+const handleViewPost = (id: number) => {
+  navigateTo(`/posts/${id}`);
+};
 </script>
 
 <template>

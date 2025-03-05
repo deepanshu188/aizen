@@ -26,7 +26,6 @@
 import type { iSettings } from "../settings/Appearences.vue";
 import { useImage } from "@vueuse/core";
 
-const router = useRouter();
 const settings = useCookie<iSettings>("settings");
 
 type Props = {
@@ -38,6 +37,6 @@ const { post } = defineProps<Props>();
 const { error: thumbnailError } = useImage({ src: post.thumbnail_url });
 
 const handleViewPost = (id: number) => {
-  router.push(`/posts/${id}`);
+  navigateTo(`/posts/${id}`);
 };
 </script>
