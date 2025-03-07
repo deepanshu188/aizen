@@ -33,7 +33,7 @@ const { error } = useImage({ src: image });
         loading="lazy"
         placeholder
       />
-      <div class="avatar placeholder" v-else>
+      <div class="avatar avatar-placeholder" v-else>
         <div
           class="bg-neutral text-neutral-content rounded-full"
           :class="`w-${size}`"

@@ -8,13 +8,11 @@ const { c, comments } = defineProps(["c", "comments"]);
       <div class="flex justify-between items-center">
         <NuxtLink :to="`/user/${c?.creator?.id}`">
           <div class="inline-flex items-center gap-x-2" role="button">
-            <div class="avatar placeholder">
-              <div class="bg-neutral text-neutral-content rounded-full w-6">
-                <span class="text-xs">{{
-                  capitalFirst(c?.creator?.name)
-                }}</span>
-              </div>
-            </div>
+            <Avatar
+              :name="capitalFirst(c?.creator?.name)"
+              :image="c?.creator?.avatar"
+              :alt="c?.creator?.name"
+            />
             <p class="text-sm">{{ c.creator.name }}</p>
           </div>
         </NuxtLink>
