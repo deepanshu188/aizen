@@ -2,7 +2,7 @@
 @plugin "daisyui" {
   exclude: calendar;
   logs: true;
-  themes: cupcake --default, business --prefersdark;
+  themes: light --default, business --prefersdark, cupcake;
 }
 
 ::-webkit-scrollbar {
