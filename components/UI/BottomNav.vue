@@ -1,40 +1,59 @@
 <template>
   <div class="dock sm:hidden">
-    <span
-      v-for="item in navData"
-      :key="item.name"
-      @click="navigateTo(item.link)"
-    >
-      <Icon
-        :name="item.icon"
-        :class="{ 'text-blue-500': $route.path === item.link }"
-      />
-      <span class="btm-nav-label">{{ item.name }}</span>
-    </span>
+    <template v-for="item in navData" :key="item.name">
+      <button
+        v-if="item.private ? user.jwt : true"
+        :class="{ 'text-[#00dc82] dock-active': $route.path === item.link }"
+        @click="navigateTo(item.link)"
+      >
+        <Icon :name="item.icon" />
+        <span class="dock-label">{{ item.name }}</span>
+      </button>
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
-const navData = [
+const user: any = useUserStore();
+const navData = computed(() => [
   {
     name: "Home",
     icon: "ci:house-01",
     link: "/",
+    private: false,
+  },
+  {
+    ...(user.jwt
+      ? {
+          name: "Profile",
+          icon: "lucide:circle-user",
+          link: "/profile",
+          private: true,
+        }
+      : {
+          name: "Login",
+          icon: "iconamoon:profile-light",
+          link: "/login",
+          private: false,
+        }),
   },
   {
     name: "Explore",
     icon: "mynaui:navigation-one",
     link: "/explore",
+    private: false,
   },
   {
     name: "Communities",
     icon: "mynaui:at",
     link: "/communities",
+    private: true,
   },
   {
     name: "Settings",
     icon: "mynaui:fine-tune",
     link: "/settings",
+    private: false,
   },
-];
+]);
 </script>
