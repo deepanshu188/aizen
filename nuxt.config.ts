@@ -17,19 +17,13 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxt/test-utils/module",
     "@nuxt/icon",
-    "@nuxtjs/google-fonts",
+    '@nuxt/fonts',
   ],
 
   vite: {
     plugins: [
       tailwindcss(),
     ],
-  },
-
-  googleFonts: {
-    families: {
-      Roboto: true,
-    },
   },
 
   image: {

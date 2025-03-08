@@ -5,6 +5,10 @@
   themes: light --default, business --prefersdark, cupcake;
 }
 
+body {
+font-family: system-ui, sans-serif;
+}
+
 ::-webkit-scrollbar {
     width: 6px;
 }
