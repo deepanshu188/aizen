@@ -6,21 +6,25 @@ export default function useInfiniteScroll(configs: Object) {
   const action = ref('');
 
   onMounted(() => {
-    window.onscroll = () => {
-      let bottomOfWindow =
-        document.documentElement.scrollTop + window.innerHeight ===
-        document.documentElement.offsetHeight;
-      if (bottomOfWindow) {
-        if (
-          totalLength > data.value.length ||
-          totalLength === undefined
-        ) {
-          options.value.page += 1;
-          action.value = 'push';
-        }
-      }
-    };
+    window.addEventListener("scroll", handleScroll);
   });
+
+  onUnmounted(() => {
+    window.removeEventListener("scroll", handleScroll);
+  });
+
+  const handleScroll = () => {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+    const clientHeight = window.innerHeight;
+
+    const bottomOfWindow = scrollTop + clientHeight >= scrollHeight - 10;
+
+    if (bottomOfWindow && (totalLength === undefined || data.value.length < totalLength)) {
+      options.value.page += 1;
+      action.value = 'push';
+    }
+  };
 
   const fetchData = async () => {
     loading.value = true;
