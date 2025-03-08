@@ -30,6 +30,7 @@ export default function useInfiniteScroll(configs: Object) {
     loading.value = true;
     try {
       const res = await apiCall(options.value);
+      if (!data.value) data.value = [];
       action.value === 'push'
         ? data.value.push(...res[listKey])
         : (data.value = res[listKey]);
