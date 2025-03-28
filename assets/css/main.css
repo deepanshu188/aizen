@@ -1,41 +1,76 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  exclude: calendar;
-  logs: true;
-  themes: light --default, business --prefersdark, cupcake;
+    exclude: calendar;
+    logs: true;
+    themes:
+        light --default,
+        business --prefersdark,
+        cupcake;
 }
 
 body {
-font-family: system-ui, sans-serif;
+    font-family: system-ui, sans-serif;
+    line-height: 1.6;
+}
+
+:root {
+    --cupcake-pink: #ffbad2;
+    --cupcake-blue: #b0e3ff;
+    --cupcake-yellow: #ffe9a2;
+    --cupcake-mint: #d1ffe3;
 }
 
 ::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
+
+    &-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        background-color: var(--cupcake-mint);
+    }
+
+    &-thumb {
+        border-radius: 10px;
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+        background-color: var(--cupcake-pink);
+    }
 }
 
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6);
-    border-radius: 10px;
-}
+.md-style {
+    p {
+        padding: 6px 0;
+        word-wrap: break-word;
+    }
 
-::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-}
+    hr {
+        margin: 12px 0;
+        border-color: var(--cupcake-blue);
+        opacity: 0.5;
+    }
 
-.md-style p {
-    padding: 4px 0;
-    word-wrap: break-word;
-}
+    a {
+        color: #2f81f7;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        &:hover {
+            color: #1d6ef5;
+            border-bottom: 1px solid #2f81f7;
+        }
+    }
 
-.md-style hr {
-    margin: 8px 0;
-}
+    pre {
+        overflow-x: auto;
+        border-radius: 8px;
+        padding: 12px;
+        background-color: #f8f3ff;
+        border: 1px solid var(--cupcake-pink);
+    }
 
-.md-style a {
-    color: #2f81f7;
-}
-
-.md-style pre {
-  overflow-x: auto;
+    code {
+        font-family: "Fira Code", monospace;
+        background-color: #f8f3ff;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        font-size: 0.9em;
+    }
 }
