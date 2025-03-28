@@ -5,12 +5,15 @@ export default function useInfiniteScroll(configs: Object) {
   const data = ref(null);
   const action = ref('');
 
+  const controller = new AbortController();
+  const { signal } = controller;
+
   onMounted(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { signal });
   });
 
   onUnmounted(() => {
-    window.removeEventListener("scroll", handleScroll);
+    controller.abort();
   });
 
   const handleScroll = () => {
