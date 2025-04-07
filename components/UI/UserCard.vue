@@ -1,41 +1,75 @@
 <script setup>
-  const { user, loading } = defineProps(['user', 'loading']);
-  const { person, counts } = user;
+const { user, loading } = defineProps(["user", "loading"]);
+const { person, counts } = user;
+
+import { renderMd } from "@/utils/markdown";
+import { useClipboard } from "@vueuse/core";
+const { text, copy, copied } = useClipboard({
+    source: person.name,
+});
 </script>
 
 <template>
-  <Model>
-    <div class="flex flex-col items-center my-2">
-      <div>
-        <p>
-          <span class="font-semibold">Post Count:</span>
-          {{ counts.post_count }}
-        </p>
-        <p>
-          <span class="font-semibold">Comment Count:</span>
-          {{ counts.comment_count }}
-        </p>
-      </div>
+    <Model>
+        <div class="p-4 max-w-md">
+            <div class="flex items-center gap-4 mb-4">
+                <Avatar
+                    :image="person.avatar"
+                    :name="person.display_name ?? person.name"
+                    :size="36"
+                    :loading="loading"
+                />
+                <h3 class="text-xl font-bold">
+                    {{ person.display_name ?? person.name }}
+                </h3>
+            </div>
+
+            <div class="my-4" v-if="person.bio">
+                <h4 class="font-medium text-sm text-gray-500 mb-2">Bio</h4>
+                <div class="prose" v-html="renderMd(person.bio)"></div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 my-4">
+                <div class="stat bg-base-200 rounded-lg p-3">
+                    <div class="stat-title text-xs">Posts</div>
+                    <div class="stat-value text-2xl">
+                        {{ counts.post_count }}
+                    </div>
+                </div>
+                <div class="stat bg-base-200 rounded-lg p-3">
+                    <div class="stat-title text-xs">Comments</div>
+                    <div class="stat-value text-2xl">
+                        {{ counts.comment_count }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Model>
+
+    <div class="card bg-base-100 border border-cyan-600">
+        <div class="card-body items-center">
+            <p class="card-title">
+                {{ person.display_name ?? person.name }}
+            </p>
+            <div class="cursor-pointer" onclick="popup.showModal()">
+                <Avatar
+                    :image="person.avatar"
+                    :name="person.display_name ?? person.name"
+                    :size="24"
+                    :loading="loading"
+                />
+            </div>
+            <div class="flex items-center">
+                <p class="text-xs text-gray-500 mt-1 mr-1" v-if="person.name">
+                    @{{ person.name }}
+                </p>
+                <Icon
+                    name="lucide:clipboard-copy"
+                    class="cursor-pointer"
+                    size="14"
+                    @click="copy(person.name)"
+                />
+            </div>
+        </div>
     </div>
-  </Model>
-  <div class="card bg-base-100 shadow-xl">
-    <div class="card-body items-center">
-      <p class="card-title">
-        {{ person.display_name ?? person.name }}
-      </p>
-      <div class="cursor-pointer" onclick="popup.showModal()">
-        <Avatar
-          :image="person.avatar"
-          :name="person.display_name ?? person.name"
-          :size="24"
-          :loading="loading"
-        />
-      </div>
-      <div class="flex flex-col items-center gap-1 my-1">
-        <p class="text-center" v-if="person.bio">
-          <span v-html="renderMd(person.bio)"></span>
-        </p>
-      </div>
-    </div>
-  </div>
 </template>

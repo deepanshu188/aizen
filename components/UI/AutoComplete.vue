@@ -1,17 +1,21 @@
 <template>
-  <input type="text" v-model="model" :list="id" class="input input-bordered w-full border-gray-300 rounded-md" />
+  <input
+    type="text"
+    v-model="model"
+    :list="id"
+    class="input input-bordered w-full border-gray-300 rounded-md"
+  />
   <datalist :id="id">
-    <option v-for="item in data" :key="item?.id" :value="item?.text">
-    </option>
+    <option v-for="item in data" :key="item?.id" :value="item?.text"></option>
   </datalist>
-</template>    
+</template>
 
 <script setup lang="ts">
 type Props = {
-  data: { id: number, text: string }[];
+  data: { id: number; text: string }[];
   id: string;
-}
+};
 
-defineProps<Props>()
-const model = defineModel()
+defineProps<Props>();
+const model = defineModel();
 </script>
