@@ -68,48 +68,27 @@ const login = async () => {
             <label class="label">
               <span class="label-text">Instance</span>
             </label>
-            <AutoComplete
-              :data="serverOptions"
-              id="lemmyVerse"
-              v-model="instance"
-            />
+            <AutoComplete :data="serverOptions" id="lemmyVerse" v-model="instance" />
           </div>
           <div class="form-control">
             <label class="label">
               <span class="label-text">Username</span>
             </label>
-            <input
-              type="text"
-              placeholder="Username"
-              class="input input-bordered"
-              v-model="user.username_or_email"
-            />
+            <input type="text" placeholder="Username" class="input input-bordered w-full"
+              v-model="user.username_or_email" />
           </div>
           <div class="form-control">
             <label class="label">
               <span class="label-text">Password</span>
             </label>
-            <input
-              type="password"
-              placeholder="Password"
-              class="input input-bordered"
-              v-model="user.password"
-            />
+            <input type="password" placeholder="Password" class="input input-bordered w-full" v-model="user.password" />
             <label class="label">
-              <a href="#" class="label-text-alt link link-hover"
-                >Forgot password?</a
-              >
+              <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
             </label>
           </div>
           <div class="form-control mt-6">
-            <button
-              class="btn btn-primary"
-              :class="{ 'pointer-events-none opacity-80': loading }"
-            >
-              <span
-                v-if="loading"
-                class="loading loading-spinner loading-md"
-              ></span>
+            <button class="btn btn-primary" :class="{ 'pointer-events-none opacity-80': loading }">
+              <span v-if="loading" class="loading loading-spinner loading-md"></span>
               <span v-else>Login</span>
             </button>
           </div>
