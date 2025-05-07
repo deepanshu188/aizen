@@ -31,6 +31,7 @@
     "@nuxt/fonts": "^0.10.3",
     "@nuxt/image": "^1.9.0",
     "@pinia/nuxt": "^0.10.1",
+    "@vite-pwa/nuxt": "^1.0.0",
     "@vueuse/core": "^12.8.2",
     "dayjs": "^1.11.13",
     "lemmy-js-client": "0.20.0-alpha.18",
