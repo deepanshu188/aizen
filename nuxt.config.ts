@@ -22,14 +22,11 @@ export default defineNuxtConfig({
   ],
 
   pwa: {
-    devOptions: {
-      enabled: true,
-    },
     manifest: {
       name: "Aizen",
       short_name: "Aizen",
       description: "A web based lemmy client",
-      theme_color: "#ffffff",
+      theme_color: "#000000",
       start_url: "/",
       display: "standalone",
       background_color: "#000000",
@@ -37,18 +34,18 @@ export default defineNuxtConfig({
         {
           "src": "/nuxt-icon-sm.webp",
           "sizes": "192x192",
-          "type": "image/png"
+          "type": "image/webp"
         },
         {
           "src": "/nuxt-icon-md.webp",
           "sizes": "512x512",
-          "type": "image/png"
+          "type": "image/webp"
         }
       ]
     },
     registerType: "autoUpdate",
     workbox: {
-      globPatterns: ["**/*.{js,css,html,ico,png,svg,txt,xml,webmanifest}"],
+      globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
     },
   },
 
