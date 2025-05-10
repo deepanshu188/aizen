@@ -1,2 +1,23 @@
 [images]
   remote_images = [".*"]
+
+[build]
+publish = ".output/public"
+command = "pnpm run generate"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+
+[[headers]]
+for = "/manifest.webmanifest"
+[headers.values]
+Content-Type = "application/manifest+json"
+
+[[headers]]
+for = "/_nuxt/*"
+[headers.values]
+cache-control = '''
+max-age=31536000,
+immutable
