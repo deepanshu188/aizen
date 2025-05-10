@@ -1,6 +1,6 @@
 <template>
   <section class="p-4 flex justify-center">
-    <div class="md:w-4/6 w-full shadow-xl p-4">
+    <div class="md:w-4/6 w-full p-4">
       <Breadcrumbs :data="breadcrumbData" />
       <slot />
     </div>
