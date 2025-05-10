@@ -1,10 +1,9 @@
 import { userDetails, getPersonInfo } from "../services/user";
 
 export const useUserStore = defineStore('user', () => {
-  const data = ref({});
-  const user = ref({});
-  const dataLoading = false;
-  const userLoading = false;
+  const data = shallowRef({});
+  const user = shallowRef({});
+  const isLoading = ref(false);
   const userData = useCookie<any>("userData");
   const jwt = computed(() => userData.value?.jwt);
 
@@ -16,6 +15,7 @@ export const useUserStore = defineStore('user', () => {
   };
 
   const fetchUserDetails = async () => {
+    isLoading.value = true;
     if (jwt.value) {
       const res = await userDetails();
       const person_id = res?.my_user?.local_user_view?.person.id;
@@ -23,14 +23,14 @@ export const useUserStore = defineStore('user', () => {
       user.value = res;
       data.value = response;
     }
+    isLoading.value = false;
   }
 
   return {
     data,
     user,
     jwt,
-    dataLoading,
-    userLoading,
+    isLoading,
     logoutUser,
     fetchUserDetails
   };
