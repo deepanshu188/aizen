@@ -24,40 +24,52 @@ export default defineNuxtConfig({
   ],
 
   pwa: {
+    devOptions: {
+      enabled: true,
+      type: 'module',
+    },
+    client: {
+      installPrompt: true,
+    },
     manifest: Manifest as ManifestOptions,
     registerType: "autoUpdate",
     workbox: {
+      navigateFallback: "/index.html",
       globPatterns: [
         "**/*.{js,css,html,png,jpg,jpeg,svg,webp,ttf,ico,webmanifest}"
       ],
       runtimeCaching: [
         {
-          urlPattern: /^https:\/\/api\.iconify\.design/,
-          handler: "CacheFirst",
+          urlPattern: ({ url }) => url.pathname.startsWith('/_nuxt/'),
+          handler: 'CacheFirst',
           options: {
-            cacheName: "iconify-cache",
+            cacheName: 'nuxt-assets-cache',
+            cacheableResponse: { statuses: [0, 200] }
+          }
+        },
+        {
+          urlPattern: ({ request }) => request.mode === 'navigate',
+          handler: 'NetworkFirst',
+          options: {
+            cacheName: 'html-cache',
+            cacheableResponse: { statuses: [0, 200] }
+          }
+        },
+        {
+          urlPattern: /^https:\/\/api\.iconify\.design/,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'iconify-cache',
             expiration: {
               maxEntries: 100,
               maxAgeSeconds: 60 * 60 * 24 * 30
             },
-            cacheableResponse: {
-              statuses: [0, 200],
-            },
-          },
-        },
-        {
-          handler: "StaleWhileRevalidate",
-          urlPattern: /^\/_nuxt\//,
-          method: "GET",
-          options: {
-            cacheName: "nuxt-cache",
-            cacheableResponse: {
-              statuses: [0, 200],
-            },
-          },
-        },
-      ],
-    },
+            cacheableResponse: { statuses: [0, 200] }
+          }
+        }
+      ]
+    }
+    ,
   },
 
   vite: {
