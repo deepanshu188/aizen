@@ -10,7 +10,7 @@ const { text, copy, copied } = useClipboard({
 </script>
 
 <template>
-  <Model>
+  <Modal>
     <div class="p-4 max-w-md">
       <div class="flex items-center gap-4 mb-4">
         <Avatar :image="person.avatar" :name="person.display_name ?? person.name" :size="36" :loading="loading" />
@@ -39,7 +39,7 @@ const { text, copy, copied } = useClipboard({
         </div>
       </div>
     </div>
-  </Model>
+  </Modal>
 
   <div class="card bg-base-100 shadow-xl rounded-md my-2">
     <div class="card-body items-center">

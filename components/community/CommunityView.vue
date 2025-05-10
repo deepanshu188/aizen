@@ -34,13 +34,13 @@ const { data: c } = await useAsyncData(() => fetchCommunity({
 </script>
 
 <template>
-  <Model>
+  <Modal>
     <community-popup
       :c="c.community_view"
       :mods="c.moderators"
       @subscribe-community="handleSubscribe"
     ></community-popup>
-  </Model>
+  </Modal>
   <section>
     <div class="card bg-base-100 shadow-xl md:m-4 m-2">
       <div class="card-body items-center">

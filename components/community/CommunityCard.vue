@@ -33,7 +33,7 @@ const { c } = defineProps(["c"]);
         </div>
       </div>
       <div class="flex items-center gap-2 md:w-full">
-        <div @click="$emit('openModel', c)" role="button" class="md:hidden">
+        <div @click="$emit('openModal', c)" role="button" class="md:hidden">
           <Icon name="mynaui:chevron-up-down" />
         </div>
         <button class="btn md:h-full md:w-full bg-white text-black p-1 hover:bg-gray-200">
