@@ -4,7 +4,9 @@ const user = ref({ username_or_email: "", password: "" });
 const loading = ref(false);
 const instance = ref("lemmy.ml");
 
-const userData: Object = useCookie("userData");
+const userData: Object = useCookie("userData", {
+  maxAge: 1000 * 60 * 60 * 24 * 90,
+});
 const { $toast } = useNuxtApp();
 
 const { data: serverList } = useFetch(
