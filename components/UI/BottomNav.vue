@@ -3,13 +3,17 @@
     <template v-for="item in navData" :key="item.name">
       <button v-if="item.private ? user.jwt : true" :class="{ 'text-[#00dc82]': $route.path === item.link }"
         @click="navigateTo(item.link)">
-        <Icon :name="item.icon" />
+        <div class="indicator">
+          <span v-if="item?.indicator" class="indicator-item status status-info"></span>
+          <Icon :name="item.icon" />
+        </div>
       </button>
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
+const { $pwa } = useNuxtApp();
 const user: any = useUserStore();
 const navData = computed(() => [
   {
@@ -50,6 +54,7 @@ const navData = computed(() => [
     icon: "mynaui:fine-tune",
     link: "/settings",
     private: false,
+    indicator: $pwa?.needRefresh,
   },
 ]);
 </script>
