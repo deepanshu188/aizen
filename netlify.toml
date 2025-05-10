@@ -2,7 +2,7 @@
   remote_images = [".*"]
 
 [build]
-publish = ".output/public"
+publish = "dist"
 command = "pnpm run generate"
 
 [[redirects]]
