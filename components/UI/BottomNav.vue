@@ -1,10 +1,9 @@
 <template>
-  <div class="dock sm:hidden">
+  <div class="dock dock-xs sm:hidden">
     <template v-for="item in navData" :key="item.name">
-      <button v-if="item.private ? user.jwt : true" :class="{ 'text-[#00dc82] dock-active': $route.path === item.link }"
+      <button v-if="item.private ? user.jwt : true" :class="{ 'text-[#00dc82]': $route.path === item.link }"
         @click="navigateTo(item.link)">
         <Icon :name="item.icon" />
-        <span class="dock-label">{{ item.name }}</span>
       </button>
     </template>
   </div>
