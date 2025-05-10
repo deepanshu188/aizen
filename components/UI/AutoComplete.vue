@@ -1,10 +1,5 @@
 <template>
-  <input
-    type="text"
-    v-model="model"
-    :list="id"
-    class="input input-bordered w-full border-gray-300 rounded-md"
-  />
+  <input type="text" v-model="model" :list="id" class="input input-bordered w-full rounded-md" />
   <datalist :id="id">
     <option v-for="item in data" :key="item?.id" :value="item?.text"></option>
   </datalist>

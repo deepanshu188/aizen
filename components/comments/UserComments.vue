@@ -1,10 +1,9 @@
 <script setup lang="ts">
-  import { useUserStore } from '@/stores/user';
-  import type { iUser } from './comment';
-  const props = defineProps(['comments']);
+import type { iUser } from './comment';
+const props = defineProps(['comments']);
 
-  const user: iUser = useUserStore();
-  const comments = props.comments ?? user?.data?.comments;
+const user: iUser = useUserStore();
+const comments = props.comments ?? user?.data?.comments;
 </script>
 
 <template>
@@ -14,10 +13,7 @@
         <div class="card-body">
           <div>
             <p>{{ creator.display_name }}</p>
-            <Avatar
-              :image="creator.avatar"
-              :name="creator.display_name ?? creator.name"
-            />
+            <Avatar :image="creator.avatar" :name="creator.display_name ?? creator.name" />
           </div>
           <p>{{ comment.content }}</p>
           <Interactions :counts="counts" :saved="saved" />

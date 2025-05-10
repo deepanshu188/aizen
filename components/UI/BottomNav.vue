@@ -1,11 +1,8 @@
 <template>
   <div class="dock sm:hidden">
     <template v-for="item in navData" :key="item.name">
-      <button
-        v-if="item.private ? user.jwt : true"
-        :class="{ 'text-[#00dc82] dock-active': $route.path === item.link }"
-        @click="navigateTo(item.link)"
-      >
+      <button v-if="item.private ? user.jwt : true" :class="{ 'text-[#00dc82] dock-active': $route.path === item.link }"
+        @click="navigateTo(item.link)">
         <Icon :name="item.icon" />
         <span class="dock-label">{{ item.name }}</span>
       </button>
@@ -25,17 +22,17 @@ const navData = computed(() => [
   {
     ...(user.jwt
       ? {
-          name: "Profile",
-          icon: "lucide:circle-user",
-          link: "/profile",
-          private: true,
-        }
+        name: "Profile",
+        icon: "lucide:circle-user",
+        link: "/profile",
+        private: true,
+      }
       : {
-          name: "Login",
-          icon: "iconamoon:profile-light",
-          link: "/login",
-          private: false,
-        }),
+        name: "Login",
+        icon: "iconamoon:profile-light",
+        link: "/login",
+        private: false,
+      }),
   },
   {
     name: "Explore",

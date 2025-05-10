@@ -67,7 +67,7 @@ watch(
     <community-popup :c="modelData"></community-popup>
   </Model>
   <section>
-    <div class="flex gap-2 flex-col md:flex-row justify-between items-center w-[98%] m-auto">
+    <div class="flex gap-2 flex-col md:flex-row justify-between items-center w-[98%] mx-auto mt-8">
       <div class="flex gap-4">
         <label class="label cursor-pointer">
           <span class="label-text mr-2">Nsfw</span>
@@ -79,7 +79,7 @@ watch(
           </option>
         </select>
       </div>
-      <div class="w-full md:w-auto">
+      <div class="md:w-auto">
         <Tabs2 :value="options.type_" @select-tab="selectTab" />
       </div>
     </div>

@@ -51,11 +51,11 @@ const login = async () => {
 </script>
 
 <template>
-  <div class="hero min-h-screen">
+  <div class="hero min-h-screen -mt-10">
     <div class="hero-content flex-col lg:flex-row min-w-full justify-evenly">
-      <div class="text-center lg:text-left">
-        <h1 class="text-5xl text-center font-bold">Aizen</h1>
-        <p class="py-6 text-xl">Yet Another web based lemmy client</p>
+      <div>
+        <h1 class="text-2xl md:text-4xl font-bold text-center">Aizen</h1>
+        <p class="py-2 md:text-md">PWA for Lemmy</p>
         <div class="text-center">
           <a href="https://github.com/deepanshu188/aizen" target="_blank">
             <Icon name="flowbite:github-solid" size="30" />
@@ -64,34 +64,20 @@ const login = async () => {
       </div>
       <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
         <form class="card-body" @submit.prevent="login">
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text">Instance</span>
-            </label>
-            <AutoComplete :data="serverOptions" id="lemmyVerse" v-model="instance" />
-          </div>
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text">Username</span>
-            </label>
-            <input type="text" placeholder="Username" class="input input-bordered w-full"
-              v-model="user.username_or_email" />
-          </div>
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text">Password</span>
-            </label>
-            <input type="password" placeholder="Password" class="input input-bordered w-full" v-model="user.password" />
-            <label class="label">
-              <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
-            </label>
-          </div>
-          <div class="form-control mt-6">
-            <button class="btn btn-primary" :class="{ 'pointer-events-none opacity-80': loading }">
-              <span v-if="loading" class="loading loading-spinner loading-md"></span>
-              <span v-else>Login</span>
-            </button>
-          </div>
+          <legend class="fieldset-legend">Login</legend>
+
+          <label class="label">Instance</label>
+          <AutoComplete :data="serverOptions" id="lemmyVerse" v-model="instance" />
+
+          <label class="label">Email</label>
+          <input type="text" class="input w-full" placeholder="Username" v-model="user.username_or_email" />
+
+          <label class="label">Password</label>
+          <input type="password" class="input w-full" placeholder="Password" v-model="user.password" />
+
+          <button class="btn btn-neutral mt-4 rounded-md" :class="{ 'pointer-events-none opacity-80': loading }">
+            <span v-if="loading" class="loading loading-spinner loading-md"></span>
+            <span v-else>Login</span></button>
         </form>
       </div>
     </div>

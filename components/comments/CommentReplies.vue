@@ -46,7 +46,7 @@ const treeComments = computed(() => {
           </option>
         </select>
       </div>
-      <div class="flex justify-center">
+      <div class="flex justify-center mx-2">
         <Editor placeholder="type comment..." :id="data.post.id" />
       </div>
     </div>

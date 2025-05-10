@@ -26,10 +26,6 @@ export default defineNuxtConfig({
   pwa: {
     devOptions: {
       enabled: true,
-      type: 'module',
-    },
-    client: {
-      installPrompt: true,
     },
     manifest: Manifest as ManifestOptions,
     registerType: "autoUpdate",
@@ -40,8 +36,8 @@ export default defineNuxtConfig({
       ],
       runtimeCaching: [
         {
-          urlPattern: ({ url }) => url.pathname.startsWith('/_nuxt/'),
-          handler: 'CacheFirst',
+          urlPattern: ({ url }) => url.pathname.startsWith('/_nuxt/') && !url.pathname.includes('node_modules'),
+          handler: 'StaleWhileRevalidate',
           options: {
             cacheName: 'nuxt-assets-cache',
             cacheableResponse: { statuses: [0, 200] }
@@ -83,6 +79,7 @@ export default defineNuxtConfig({
 
   image: {
     quality: 100,
+    formats: ["webp", "jpeg", "png"],
   },
 
   components: [

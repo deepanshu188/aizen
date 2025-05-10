@@ -2,10 +2,8 @@
   <section>
     <div class="flex">
       <Sidebar />
-      <div class="flex-grow mt-8 w-full">
-        <Section>
-          <slot />
-        </Section>
+      <div class="flex-grow w-full mb-10">
+        <slot />
       </div>
     </div>
   </section>

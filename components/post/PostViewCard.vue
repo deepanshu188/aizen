@@ -7,9 +7,9 @@ const isMod = data.creator_is_moderator;
 const toolTipText =
   isAdmin && isMod ? "Admin & Mod" : isAdmin ? "Admin" : isMod ? "Mod" : "";
 
-const handleVote = (payload: Object) => {};
+const handleVote = (payload: Object) => { };
 
-const savePost = (payload: Object) => {};
+const savePost = (payload: Object) => { };
 
 const { error: thumbnailError } = useImage({ src: data.post?.thumbnail_url });
 </script>
@@ -23,42 +23,28 @@ const { error: thumbnailError } = useImage({ src: data.post?.thumbnail_url });
           <Tooltip :text="toolTipText">
             <div class="flex items-center gap-x-1">
               <span v-if="isAdmin || isMod">
-                <Icon name="mynaui:shield-check" color="#32cc00" /> </span
-              ><span v-else> <Icon name="mynaui:user-circle" /> </span
-              ><span>{{ data.creator.name }}</span>
+                <Icon name="mynaui:shield-check" color="#32cc00" />
+              </span><span v-else>
+                <Icon name="mynaui:user-circle" />
+              </span><span>{{ data.creator.name }}</span>
             </div>
           </Tooltip>
         </NuxtLink>
       </div>
       <div class="card-body px-0">
         <a class="text-xl" :href="data.post?.url">{{ data?.post?.name }}</a>
-        <div
-          v-if="data.post?.thumbnail_url && !thumbnailError"
-          class="w-full self-center"
-        >
+        <div v-if="data.post?.thumbnail_url && !thumbnailError" class="w-full self-center">
           <div class="relative">
-            <NuxtImg
-              :src="data.post.thumbnail_url"
-              class="w-full h-full rounded object-cover blur-3xl opacity-30"
-              loading="lazy"
-            />
-            <NuxtImg
-              :src="data.post.thumbnail_url"
-              class="w-full h-full rounded object-contain top-0 absolute"
-              loading="lazy"
-            />
+            <NuxtImg :src="data.post.thumbnail_url" class="w-full h-full rounded object-cover blur-3xl opacity-30"
+              loading="lazy" />
+            <NuxtImg :src="data.post.thumbnail_url" class="w-full h-full rounded object-contain top-0 absolute"
+              loading="lazy" placeholder />
           </div>
         </div>
         <p class="text-neutral-400" v-html="renderMd(data.post?.body)"></p>
         <div class="card-actions">
-          <Interactions
-            :post="data.post"
-            :counts="data.counts"
-            :saved="data.saved"
-            :my_vote="data.my_vote"
-            @emitVote="handleVote"
-            @emitSave="savePost"
-          />
+          <Interactions :post="data.post" :counts="data.counts" :saved="data.saved" :my_vote="data.my_vote"
+            @emitVote="handleVote" @emitSave="savePost" />
         </div>
       </div>
     </div>

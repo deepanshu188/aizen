@@ -28,7 +28,7 @@ const postComment = async () => {
     });
     console.log(res);
     comment.value = "";
-  } catch {}
+  } catch { }
 };
 </script>
 
@@ -46,11 +46,7 @@ const postComment = async () => {
         <Icon name="mynaui:code" size="18" />
       </button>
     </div>
-    <textarea
-      class="textarea w-full resize-none h-32"
-      :placeholder="placeholder"
-      v-model="comment"
-    ></textarea>
-    <button class="btn self-end mt-2" @click="postComment">Post</button>
+    <textarea class="textarea w-full resize-none h-32" :placeholder="placeholder" v-model="comment"></textarea>
+    <button class="btn self-end mt-2 w-full rounded-md" @click="postComment">Post</button>
   </div>
 </template>
