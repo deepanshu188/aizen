@@ -1,4 +1,6 @@
 import tailwindcss from "@tailwindcss/vite";
+import type { ManifestOptions } from "vite-plugin-pwa";
+import Manifest from "./public/manifest.json";
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -22,30 +24,39 @@ export default defineNuxtConfig({
   ],
 
   pwa: {
-    manifest: {
-      name: "Aizen",
-      short_name: "Aizen",
-      description: "A web based lemmy client",
-      theme_color: "#000000",
-      start_url: "/",
-      display: "standalone",
-      background_color: "#000000",
-      "icons": [
-        {
-          "src": "/nuxt-icon-sm.webp",
-          "sizes": "192x192",
-          "type": "image/webp"
-        },
-        {
-          "src": "/nuxt-icon-md.webp",
-          "sizes": "512x512",
-          "type": "image/webp"
-        }
-      ]
-    },
+    manifest: Manifest as ManifestOptions,
     registerType: "autoUpdate",
     workbox: {
-      globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+      globPatterns: [
+        "**/*.{js,css,html,png,jpg,jpeg,svg,webp,ttf,ico,webmanifest}"
+      ],
+      runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/api\.iconify\.design/,
+          handler: "CacheFirst",
+          options: {
+            cacheName: "iconify-cache",
+            expiration: {
+              maxEntries: 100,
+              maxAgeSeconds: 60 * 60 * 24 * 30
+            },
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+          },
+        },
+        {
+          handler: "StaleWhileRevalidate",
+          urlPattern: /^\/_nuxt\//,
+          method: "GET",
+          options: {
+            cacheName: "nuxt-cache",
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+          },
+        },
+      ],
     },
   },
 
@@ -53,6 +64,9 @@ export default defineNuxtConfig({
     plugins: [
       tailwindcss(),
     ],
+    server: {
+      allowedHosts: ['rneef-103-216-142-2.a.free.pinggy.link'],
+    }
   },
 
   image: {
