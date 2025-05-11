@@ -3,6 +3,8 @@ import sortOptions from "~/content/sortOptions";
 import { fetchPosts } from "~/services/posts";
 const { query } = useRoute();
 const props = defineProps(["savedOnly", "filters"]);
+import { useOnline } from "@vueuse/core";
+const isOnline = useOnline()
 
 const initialPayload = {
   type_: "All",
@@ -54,7 +56,7 @@ const updatePostData = (updatedPostValue: any, type: string) => {
         <Tabs2 :value="options.type_" @select-tab="selectTab" />
       </span>
     </div>
-    <div class="md:p-4 md:m-3 m-auto w-full">
+    <div class="md:p-4 md:m-3 m-auto w-full" v-if="isOnline">
       <template v-if="posts">
         <NormalPostCard v-if="posts.length" :data="posts" />
         <div v-else class="flex flex-col items-center justify-center">
@@ -65,5 +67,6 @@ const updatePostData = (updatedPostValue: any, type: string) => {
         <Loader />
       </div>
     </div>
+    <Offline v-else />
   </section>
 </template>

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import sortOptions from "~/content/sortOptions";
 import { listCommunities } from "~/services/community";
+import { useOnline } from "@vueuse/core";
+const isOnline = useOnline()
 
 interface Options {
   sort: string;
@@ -83,7 +85,7 @@ watch(
         <Tabs2 :value="options.type_" @select-tab="selectTab" />
       </div>
     </div>
-    <div>
+    <div v-if="isOnline">
       <div v-if="initalLoading" class="flex justify-center py-12">
         <Loader />
       </div>
@@ -96,12 +98,8 @@ watch(
         <community-card v-for="(c, index) in communities" :key="index" :c="c" @openModal="openModal"
           class="h-full"></community-card>
       </div>
-      <div v-if="loadingMore" class="flex justify-center py-4 mt-4">
-        <div class="flex items-center gap-2">
-          <div class="loading loading-spinner loading-sm"></div>
-          <span>Loading more communities...</span>
-        </div>
-      </div>
+      <Loader v-if="loadingMore" />
     </div>
+    <Offline v-else />
   </section>
 </template>
