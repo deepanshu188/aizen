@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { favouritePost, vote } from "~/services/posts";
 import { useImage } from "@vueuse/core";
 const { data } = defineProps(["data"]);
 
@@ -7,9 +8,15 @@ const isMod = data.creator_is_moderator;
 const toolTipText =
   isAdmin && isMod ? "Admin & Mod" : isAdmin ? "Admin" : isMod ? "Mod" : "";
 
-const handleVote = (payload: Object) => { };
+const handleVote = async (payload: Object) => {
+  const res = await vote(payload);
+  // todo : update the UI
+};
 
-const savePost = (payload: Object) => { };
+const savePost = async (payload: Object) => {
+  const res = await favouritePost(payload);
+  // todo : update the UI
+};
 
 const { error: thumbnailError } = useImage({ src: data.post?.thumbnail_url });
 </script>
@@ -43,10 +50,10 @@ const { error: thumbnailError } = useImage({ src: data.post?.thumbnail_url });
               loading="lazy" placeholder />
           </div>
         </div>
-        <p class="text-neutral-400" v-html="renderMd(data.post?.body)"></p>
+        <p class="text-neutral-400 md-style" v-html="renderMd(data.post?.body)"></p>
         <div class="card-actions">
           <Interactions :post="data.post" :counts="data.counts" :saved="data.saved" :my_vote="data.my_vote"
-            @emitVote="handleVote" @emitSave="savePost" />
+            @vote="handleVote" @save="savePost" />
         </div>
       </div>
     </div>
