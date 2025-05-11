@@ -2,14 +2,15 @@
   <NuxtLayout name="settings" :breadcrumbData="breadcrumbData">
     <SettingsView />
   </NuxtLayout>
-  <span v-if="$pwa?.needRefresh" class="flex items-center justify-center gap-2 text-sm text-gray-200 cursor-pointer"
-    @click="refreshApp">
+  <span v-if="registerSW.needRefresh.value"
+    class="flex items-center justify-center gap-2 text-sm text-gray-200 cursor-pointer" @click="refreshApp">
     <Icon name="material-symbols-light:refresh" :class="{ rotate: isRotating }" @animationend="isRotating = false" />
     Update
   </span>
 </template>
 
 <script setup lang="ts">
+import { useRegisterSW } from 'virtual:pwa-register/vue';
 const isRotating = ref(false)
 
 useHead({
@@ -21,9 +22,11 @@ const breadcrumbData = [
   { name: "Settings", link: "" },
 ];
 
+const registerSW = useRegisterSW()
+
 const refreshApp = () => {
   isRotating.value = true;
-  $pwa?.updateServiceWorker();
+  registerSW.updateServiceWorker
 };
 </script>
 
