@@ -41,7 +41,7 @@ const { text, copy, copied } = useClipboard({
     </div>
   </Modal>
 
-  <div class="card bg-base-100 shadow-xl rounded-md my-2">
+  <div class="card bg-base-100 shadow-xl rounded-md my-2 ">
     <div class="card-body items-center">
       <p class="card-title">
         {{ person.display_name ?? person.name }}
@@ -50,7 +50,7 @@ const { text, copy, copied } = useClipboard({
         <Avatar :image="person.avatar" :name="person.display_name ?? person.name" :size="24" :loading="loading" />
       </div>
       <div class="flex items-center">
-        <p class="text-xs text-gray-500 mt-1 mr-1" v-if="person.name">
+        <p class="text-xs text-gray-400 mt-1 mr-1" v-if="person.name">
           @{{ person.name }}
         </p>
         <Icon name="lucide:clipboard-copy" class="cursor-pointer" size="14" @click="copy(person.name)" />

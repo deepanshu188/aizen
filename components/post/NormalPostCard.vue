@@ -33,9 +33,9 @@ const handleViewPost = (id: number) => {
             :counts="counts"
             :saved="saved"
             :my_vote="my_vote"
-            @emitVote="handleVote"
+            @vote="handleVote"
             @view-comments="handleViewPost(post.id)"
-            @emitSave="savePost"
+            @save="savePost"
         />
     </div>
 </template>
