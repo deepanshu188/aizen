@@ -57,10 +57,10 @@ const treeComments = computed(() => {
         </li>
       </template>
     </ul>
-    <p v-if="!loading && !comments.length" class="text-center">
-      No Comment to see
+    <p v-if="!loading && !comments.length" class="text-center text-gray-400 my-4">
+      No Comments to see
     </p>
-    <p v-if="!loading && comments.length" class="text-center text-sm">
+    <p v-if="!loading && comments.length" class="text-center text-gray-400 text-sm my-4">
       No more comments
     </p>
     <div class="flex justify-center" v-if="initalLoading">

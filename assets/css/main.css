@@ -1,76 +1,77 @@
 @import "tailwindcss";
+
 @plugin "daisyui" {
-    exclude: calendar;
-    logs: true;
-    themes:
-        light --default,
-        business --prefersdark,
-        cupcake;
+  exclude: calendar;
+  logs: true;
+  themes:
+    light --default,
+    business --prefersdark,
+    cupcake;
 }
 
 body {
-    font-family: system-ui, sans-serif;
-    line-height: 1.6;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
 }
 
 :root {
-    --cupcake-pink: #ffbad2;
-    --cupcake-blue: #b0e3ff;
-    --cupcake-yellow: #ffe9a2;
-    --cupcake-mint: #d1ffe3;
+  --cupcake-pink: #ffbad2;
+  --cupcake-blue: #b0e3ff;
+  --cupcake-yellow: #ffe9a2;
+  --cupcake-mint: #d1ffe3;
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 
-    &-track {
-        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        background-color: var(--cupcake-mint);
-    }
+  &-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: var(--cupcake-mint);
+  }
 
-    &-thumb {
-        border-radius: 10px;
-        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
-        background-color: var(--cupcake-pink);
-    }
+  &-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+    background-color: var(--cupcake-pink);
+  }
 }
 
 .md-style {
-    p {
-        padding: 6px 0;
-        word-wrap: break-word;
-    }
+  p {
+    padding: 6px 0;
+    word-wrap: break-word;
+  }
 
-    hr {
-        margin: 12px 0;
-        border-color: var(--cupcake-blue);
-        opacity: 0.5;
-    }
+  hr {
+    margin: 12px 0;
+    border-color: var(--cupcake-blue);
+    opacity: 0.5;
+  }
 
-    a {
-        color: #2f81f7;
-        text-decoration: none;
-        transition: all 0.2s ease;
-        &:hover {
-            color: #1d6ef5;
-            border-bottom: 1px solid #2f81f7;
-        }
-    }
+  a {
+    color: #2f81f7;
+    text-decoration: none;
+    transition: all 0.2s ease;
 
-    pre {
-        overflow-x: auto;
-        border-radius: 8px;
-        padding: 12px;
-        background-color: #f8f3ff;
-        border: 1px solid var(--cupcake-pink);
+    &:hover {
+      color: #1d6ef5;
+      border-bottom: 1px solid #2f81f7;
     }
+  }
 
-    code {
-        font-family: "Fira Code", monospace;
-        background-color: #f8f3ff;
-        padding: 0.2em 0.4em;
-        border-radius: 3px;
-        font-size: 0.9em;
-    }
+  pre {
+    overflow-x: auto;
+    border-radius: 8px;
+    padding: 12px;
+    background-color: #f8f3ff;
+    border: 1px solid var(--cupcake-pink);
+  }
+
+  code {
+    font-family: "Fira Code", monospace;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
 }
