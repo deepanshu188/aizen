@@ -24,7 +24,7 @@ const { error } = useImage({ src: image });
       <div class="avatar avatar-placeholder" v-else>
         <div class="bg-neutral text-neutral-content rounded-full w-8 h-8" :class="`w-${size}`">
           <span :class="{
-            'text-4xl': size !== 8,
+            'text-3xl': size !== 8,
             'text-md': size === 8,
           }">{{ capitalFirst(name) }}</span>
         </div>

@@ -1,8 +1,8 @@
 <template>
   <div class="dock dock-xs sm:hidden">
     <template v-for="item in navData" :key="item.name">
-      <button v-if="item.private ? user.jwt : true" :class="{ 'text-[#00dc82]': $route.path === item.link }"
-        @click="navigateTo(item.link)">
+      <button v-if="item.private ? user.jwt : true" :class="{ 'text-[#00dc82]': $route.path === item.link || ($route.path.startsWith(item.link) && item.link !== '/') }
+        " @click="navigateTo(item.link)">
         <div class="indicator">
           <span v-if="item?.indicator" class="indicator-item status status-info"></span>
           <Icon :name="item.icon" />
@@ -46,7 +46,7 @@ const navData = computed(() => [
   {
     name: "Communities",
     icon: "mynaui:at",
-    link: "/communities",
+    link: "/c",
     private: true,
   },
   {

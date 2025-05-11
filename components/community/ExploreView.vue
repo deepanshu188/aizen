@@ -98,7 +98,7 @@ watch(
         <community-card v-for="(c, index) in communities" :key="index" :c="c" @openModal="openModal"
           class="h-full"></community-card>
       </div>
-      <Loader v-if="loadingMore" />
+      <Loader v-if="loadingMore" class="my-6" />
     </div>
     <Offline v-else />
   </section>

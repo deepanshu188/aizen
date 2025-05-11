@@ -21,7 +21,7 @@ const sideBarLinks = [
   {
     name: "Communities",
     icon: "mynaui:at",
-    link: "/communities",
+    link: "/c",
     private: true,
   },
 ];
