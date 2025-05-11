@@ -8,12 +8,9 @@ const { c } = defineProps(["c"]);
     <div class="h-full flex items-center justify-between md:flex-col">
       <div class="flex flex-col w-fit max-sm:h-full max-sm:justify-between md:gap-y-2">
         <div>
-          <div class="flex items-center gap-2" role="button">
-            <Avatar :image="c.community.icon" :name="c.community.name" class="cursor-pointer" @click="
-              router.push(
-                `/c/${c.community.name}?id=${c.community.id}`,
-              )
-              " />
+          <div class="flex items-center gap-2" role="button"
+            @click="router.push(`/c/${c.community.name}?id=${c.community.id}`)">
+            <Avatar :image="c.community.icon" :name="c.community.name" class="cursor-pointer" />
             <p class="text-md">{{ c.community.name }}</p>
           </div>
         </div>
@@ -36,7 +33,7 @@ const { c } = defineProps(["c"]);
         <div @click="$emit('openModal', c)" role="button" class="md:hidden">
           <Icon name="mynaui:chevron-up-down" />
         </div>
-        <button class="btn md:h-full md:w-full bg-white text-black p-1 hover:bg-gray-200">
+        <button class="btn w-1/2 mx-auto bg-white text-black p-1 hover:bg-gray-200 max-sm:hidden">
           {{
             c.subscribed === "Subscribed"
               ? "Subscribed"
