@@ -1,11 +1,21 @@
 export const userDetails = async () => {
-  const client = useApi();
-  const res = await client.getSite();
-  return res;
+  try {
+    const client = useApi();
+    const res = await client.getSite();
+    return res;
+  }
+  catch (error) {
+    console.log(error);
+  }
 };
 
 export const getPersonInfo = async (options: Object) => {
-  const client = useApi();
-  const res = await client.getPersonDetails(options);
-  return res;
+  try {
+    const client = useApi();
+    const res = await client.getPersonDetails(options);
+    return res;
+  }
+  catch (error) {
+    console.log(error);
+  }
 };

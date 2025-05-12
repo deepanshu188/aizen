@@ -1,7 +1,12 @@
 export const fetchPosts = async (options: any) => {
-  const client = useApi();
-  const res = await client.getPosts(options);
-  return res;
+  try {
+    const client = useApi();
+    const res = await client.getPosts(options);
+    return res;
+  }
+  catch (error) {
+    console.log(error);
+  }
 };
 
 export const fetchPost = async (options: any) => {

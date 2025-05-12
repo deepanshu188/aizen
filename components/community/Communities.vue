@@ -1,19 +1,26 @@
 <script setup lang="ts">
+import { useOnline } from "@vueuse/core";
+const isOnline = useOnline();
 const data = useUserStore();
 const subscriptions = computed(() => data?.user?.my_user?.follows);
+
+const handleNavigation = (c: any) => {
+  if (!isOnline.value) return;
+  navigateTo(`c/${c.community.name}?id=${c.community.id}`);
+};
 </script>
 
 <template>
   <section class="m-2 p-2">
-    <h1 class="text-2xl mb-4">{{ subscriptions.length }} Communities</h1>
+    <h1 class="text-2xl mb-4">{{ subscriptions?.length }} Communities</h1>
     <ul v-if="subscriptions">
       <li v-for="c in subscriptions" :key="c.id" class="card h-12">
         <div
           class="flex gap-2 items-center cursor-pointer"
-          @click="navigateTo(`c/${c.community.name}?id=${c.community.id}`)"
+          @click="() => handleNavigation(c)"
         >
           <Avatar :name="c.community.title" :image="c.community.icon" />
-          <p>{{ c.community.title }}</p>
+          <p class="truncate">{{ c.community.title }}</p>
         </div>
       </li>
     </ul>

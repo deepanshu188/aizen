@@ -16,14 +16,24 @@ export const useUserStore = defineStore('user', () => {
 
   const fetchUserDetails = async () => {
     isLoading.value = true;
-    if (jwt.value) {
-      const res = await userDetails();
-      const person_id = res?.my_user?.local_user_view?.person.id;
-      const response = await getPersonInfo({ person_id });
-      user.value = res;
-      data.value = response;
+    try {
+      if (jwt.value) {
+        const res = await userDetails();
+        const person_id = res?.my_user?.local_user_view?.person.id;
+        if (!person_id) return;
+        const response = await getPersonInfo({ person_id });
+        if (res)
+          user.value = res;
+        if (response)
+          data.value = response;
+      }
     }
-    isLoading.value = false;
+    catch (error) {
+      console.log(error);
+    }
+    finally {
+      isLoading.value = false;
+    }
   }
 
   return {
