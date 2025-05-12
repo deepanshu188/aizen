@@ -38,6 +38,7 @@ body {
 }
 
 .md-style {
+  overflow-x: auto;
   p {
     padding: 6px 0;
     word-wrap: break-word;
