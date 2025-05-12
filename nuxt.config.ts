@@ -28,7 +28,6 @@ export default defineNuxtConfig({
       enabled: true,
     },
     manifest: Manifest as ManifestOptions,
-    registerType: "autoUpdate",
     workbox: {
       navigateFallback: "/index.html",
       globPatterns: [
@@ -36,7 +35,7 @@ export default defineNuxtConfig({
       ],
       runtimeCaching: [
         {
-          urlPattern: ({ url }) => url.pathname.startsWith('/_nuxt/') && !url.pathname.includes('node_modules'),
+          urlPattern: /^(?=.*_nuxt(?!\/(utils|services|node_modules)\/)).*$/,
           handler: 'StaleWhileRevalidate',
           options: {
             cacheName: 'nuxt-assets-cache',
@@ -62,6 +61,18 @@ export default defineNuxtConfig({
             },
             cacheableResponse: { statuses: [0, 200] }
           }
+        },
+        {
+          urlPattern: /^https:\/\/.*\/api\/v\d+\/site\?$/,
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheName: 'api-site-cache',
+            cacheableResponse: { statuses: [0, 200] }
+          }
+        },
+        {
+          urlPattern: /^https:\/\/.*\/api\/v\d+\/(?!site)/,
+          handler: 'NetworkOnly',
         }
       ]
     }
