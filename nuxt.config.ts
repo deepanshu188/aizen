@@ -37,7 +37,7 @@ export default defineNuxtConfig({
       runtimeCaching: [
         {
           urlPattern: /^(?=.*_nuxt(?!\/(utils|services|node_modules)\/)).*$/,
-          handler: 'CacheFirst',
+          handler: 'StaleWhileRevalidate',
           options: {
             cacheName: 'nuxt-assets-cache',
             cacheableResponse: { statuses: [0, 200] }
