@@ -71,10 +71,6 @@ export default defineNuxtConfig({
             cacheableResponse: { statuses: [0, 200] },
           }
         },
-        {
-          urlPattern: /^https:\/\/.*\/api\/v\d+\/(?!site)/,
-          handler: 'NetworkOnly',
-        }
       ]
     }
     ,
