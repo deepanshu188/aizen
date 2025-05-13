@@ -37,7 +37,7 @@ export default defineNuxtConfig({
       runtimeCaching: [
         {
           urlPattern: /^(?=.*_nuxt(?!\/(utils|services|node_modules)\/)).*$/,
-          handler: 'StaleWhileRevalidate',
+          handler: 'CacheFirst',
           options: {
             cacheName: 'nuxt-assets-cache',
             cacheableResponse: { statuses: [0, 200] }
@@ -71,6 +71,10 @@ export default defineNuxtConfig({
             cacheableResponse: { statuses: [0, 200] },
           }
         },
+        {
+          urlPattern: /^https:\/\/.*\/api\/v\d+\/(?!site)/,
+          handler: 'NetworkOnly',
+        }
       ]
     }
     ,
