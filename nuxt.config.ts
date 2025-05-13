@@ -20,7 +20,8 @@ export default defineNuxtConfig({
     "@nuxt/test-utils/module",
     "@nuxt/icon",
     '@nuxt/fonts',
-    '@vite-pwa/nuxt'
+    '@vite-pwa/nuxt',
+    'nuxt-svgo'
   ],
 
   pwa: {
@@ -36,7 +37,7 @@ export default defineNuxtConfig({
       runtimeCaching: [
         {
           urlPattern: /^(?=.*_nuxt(?!\/(utils|services|node_modules)\/)).*$/,
-          handler: 'StaleWhileRevalidate',
+          handler: 'CacheFirst',
           options: {
             cacheName: 'nuxt-assets-cache',
             cacheableResponse: { statuses: [0, 200] }
@@ -60,22 +61,16 @@ export default defineNuxtConfig({
               maxAgeSeconds: 60 * 60 * 24 * 30
             },
             cacheableResponse: { statuses: [0, 200] },
-            matchOptions: { ignoreSearch: true }
           }
         },
         {
-          urlPattern: /^https:\/\/.*\/api\/v\d+\/site\?$/,
+          urlPattern: /^https:\/\/.*\/api\/v\d+\/site\??$/,
           handler: 'StaleWhileRevalidate',
           options: {
             cacheName: 'api-site-cache',
             cacheableResponse: { statuses: [0, 200] },
-            matchOptions: { ignoreSearch: true }
           }
         },
-        {
-          urlPattern: /^https:\/\/.*\/api\/v\d+\/(?!site)/,
-          handler: 'NetworkOnly',
-        }
       ]
     }
     ,
@@ -85,9 +80,6 @@ export default defineNuxtConfig({
     plugins: [
       tailwindcss(),
     ],
-    server: {
-      allowedHosts: ['rneef-103-216-142-2.a.free.pinggy.link'],
-    }
   },
 
   image: {
