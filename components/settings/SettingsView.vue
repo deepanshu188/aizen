@@ -3,12 +3,12 @@ const category = [
   {
     name: "Appearances",
     link: "/settings/appearances",
-    icon: "pepicons-pencil:paint-pallet",
+    icon: "svgo-appearences",
   },
   {
     name: "Preferences",
     link: "#",
-    icon: "hugeicons:preference-vertical",
+    icon: "svgo-preferences",
     disabled: true,
   },
 ];
@@ -52,7 +52,7 @@ const handleLogout = () => {
           class="bg-base-200 my-4 p-3 rounded-md flex items-center gap-x-2"
           :class="{ 'cursor-not-allowed opacity-50': item.disabled }"
         >
-          <Icon v-if="item.icon" :name="item.icon" />
+          <component v-if="item.icon" :is="item.icon" class="text-xl" />
           {{ item.name }}
         </li>
       </NuxtLink>

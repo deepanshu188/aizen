@@ -36,6 +36,7 @@
     "dayjs": "^1.11.13",
     "lemmy-js-client": "0.20.0-alpha.18",
     "markdown-it": "^14.1.0",
+    "nuxt-svgo": "^4.1.2",
     "pinia": "^3.0.2",
     "vue3-toastify": "^0.2.8"
   }

@@ -15,7 +15,7 @@
             v-if="item?.indicator"
             class="indicator-item status status-info"
           ></span>
-          <Icon :name="item.icon" />
+          <component :is="item.icon" class="text-2xl" />
         </div>
       </button>
     </template>
@@ -28,7 +28,7 @@ const user: any = useUserStore();
 const navData = computed(() => [
   {
     name: "Home",
-    icon: "ci:house-01",
+    icon: "svgo-home",
     link: "/",
     private: false,
   },
@@ -36,32 +36,32 @@ const navData = computed(() => [
     ...(user.jwt
       ? {
           name: "Profile",
-          icon: "lucide:circle-user",
+          icon: "svgo-user",
           link: "/profile",
           private: true,
         }
       : {
           name: "Login",
-          icon: "iconamoon:profile-light",
+          icon: "svgo-userLight",
           link: "/login",
           private: false,
         }),
   },
   {
     name: "Explore",
-    icon: "mynaui:navigation-one",
+    icon: "svgo-explore",
     link: "/explore",
     private: false,
   },
   {
     name: "Communities",
-    icon: "mynaui:at",
+    icon: "svgo-communities",
     link: "/c",
     private: true,
   },
   {
     name: "Settings",
-    icon: "mynaui:fine-tune",
+    icon: "svgo-settings",
     link: "/settings",
     private: false,
     indicator: $pwa?.needRefresh,
