@@ -59,7 +59,8 @@ export default defineNuxtConfig({
               maxEntries: 100,
               maxAgeSeconds: 60 * 60 * 24 * 30
             },
-            cacheableResponse: { statuses: [0, 200] }
+            cacheableResponse: { statuses: [0, 200] },
+            matchOptions: { ignoreSearch: true }
           }
         },
         {
@@ -67,7 +68,8 @@ export default defineNuxtConfig({
           handler: 'StaleWhileRevalidate',
           options: {
             cacheName: 'api-site-cache',
-            cacheableResponse: { statuses: [0, 200] }
+            cacheableResponse: { statuses: [0, 200] },
+            matchOptions: { ignoreSearch: true }
           }
         },
         {
