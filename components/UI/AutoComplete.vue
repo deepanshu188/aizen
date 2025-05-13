@@ -1,5 +1,14 @@
 <template>
-  <input type="text" v-model="model" :list="id" class="input input-bordered w-full rounded-md" />
+  <label class="input">
+    <span class="label">https://</span>
+    <input
+      type="text"
+      v-model="model"
+      :list="id"
+      class="w-full"
+      placeholder="Instance URL"
+    />
+  </label>
   <datalist :id="id">
     <option v-for="item in data" :key="item?.id" :value="item?.text"></option>
   </datalist>
