@@ -5,7 +5,12 @@
 </template>
 
 <script setup lang="ts">
+const { selectedTheme } = useSettings();
+
 useHead({
+  htmlAttrs: {
+    "data-theme": selectedTheme,
+  },
   title: "Aizen",
   link: [
     {

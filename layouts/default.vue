@@ -11,12 +11,7 @@
 </template>
 
 <script setup lang="ts">
-const selectedTheme = useTheme();
-
 useHead({
-  htmlAttrs: {
-    "data-theme": selectedTheme,
-  },
   meta: [{ name: "description", content: "A web based lemmy client" }],
 });
 </script>
