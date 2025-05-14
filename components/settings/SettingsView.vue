@@ -7,9 +7,8 @@ const category = [
   },
   {
     name: "Preferences",
-    link: "#",
+    link: "/settings/preferences",
     icon: "svgo-preferences",
-    disabled: true,
   },
 ];
 
@@ -26,11 +25,7 @@ const handleLogout = () => {
     <template #content>
       <div class="p-3">
         <div class="flex flex-col items-center my-3 gap-y-3">
-          <Icon
-            name="teenyicons:logout-solid"
-            class="text-red-500"
-            :size="32"
-          />
+          <Icon name="teenyicons:logout-solid" class="text-red-500" :size="32" />
           <p class="text-xl font-bold">Confirm Logout</p>
           <p class="text-sm">Are you sure you want to Logout?</p>
         </div>
@@ -48,20 +43,15 @@ const handleLogout = () => {
   <ul>
     <template v-for="item in category" :key="item.name">
       <NuxtLink :to="item.link">
-        <li
-          class="bg-base-200 my-4 p-3 rounded-md flex items-center gap-x-2"
-          :class="{ 'cursor-not-allowed opacity-50': item.disabled }"
-        >
+        <li class="bg-base-200 my-4 p-3 rounded-md flex items-center gap-x-2"
+          :class="{ 'cursor-not-allowed opacity-50': item.disabled }">
           <component v-if="item.icon" :is="item.icon" class="text-xl" />
           {{ item.name }}
         </li>
       </NuxtLink>
     </template>
-    <li
-      v-if="user.jwt"
-      class="bg-red-500 my-4 p-2 rounded-md flex items-center gap-x-2 justify-center text-gray-300"
-      onclick="popup.showModal()"
-    >
+    <li v-if="user.jwt" class="bg-red-500 my-4 p-2 rounded-md flex items-center gap-x-2 justify-center text-gray-300"
+      onclick="popup.showModal()">
       <Icon name="hugeicons:logout-04" />
       Logout
     </li>
