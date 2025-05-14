@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import { COOKIE_MAX_AGE } from "~/constants";
 import { userLogin } from "../services/auth";
 const user = ref({ username_or_email: "", password: "" });
 const loading = ref(false);
 const instance = ref("lemmy.ml");
 
 const userData: Object = useCookie("userData", {
-  maxAge: 1000 * 60 * 60 * 24 * 90,
+  maxAge: COOKIE_MAX_AGE,
 });
 const { $toast } = useNuxtApp();
 
@@ -67,36 +68,16 @@ const login = async () => {
       <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
         <form class="card-body" @submit.prevent="login">
           <label class="label">Instance</label>
-          <AutoComplete
-            :data="serverOptions"
-            id="lemmyVerse"
-            v-model="instance"
-          />
+          <AutoComplete :data="serverOptions" id="lemmyVerse" v-model="instance" />
 
           <label class="label">Username</label>
-          <input
-            type="text"
-            class="input w-full"
-            placeholder="Username"
-            v-model="user.username_or_email"
-          />
+          <input type="text" class="input w-full" placeholder="Username" v-model="user.username_or_email" />
 
           <label class="label">Password</label>
-          <input
-            type="password"
-            class="input w-full"
-            placeholder="Password"
-            v-model="user.password"
-          />
+          <input type="password" class="input w-full" placeholder="Password" v-model="user.password" />
 
-          <button
-            class="btn btn-neutral mt-4 rounded-md"
-            :class="{ 'pointer-events-none opacity-80': loading }"
-          >
-            <span
-              v-if="loading"
-              class="loading loading-spinner loading-md"
-            ></span>
+          <button class="btn btn-neutral mt-4 rounded-md" :class="{ 'pointer-events-none opacity-80': loading }">
+            <span v-if="loading" class="loading loading-spinner loading-md"></span>
             <span v-else>Login</span>
           </button>
         </form>
