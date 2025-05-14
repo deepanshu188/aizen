@@ -6,9 +6,11 @@ const props = defineProps(["savedOnly", "filters"]);
 import { useOnline } from "@vueuse/core";
 const isOnline = useOnline();
 
+const { sortOption } = useSettings();
+
 const initialPayload = {
   type_: "All",
-  sort: "Active",
+  sort: sortOption,
   limit: 30,
   page: 1,
   community_id: query.id,
@@ -46,13 +48,8 @@ const updatePostData = (updatedPostValue: any, type: string) => {
 
 <template>
   <section class="flex flex-col items-center overflow-x-hidden mt-8">
-    <div
-      class="flex gap-2 flex-col-reverse md:flex-row justify-between items-center w-[98%]"
-    >
-      <select
-        class="select select-bordered max-w-xs md:ml-4 md:self-start"
-        v-model="options.sort"
-      >
+    <div class="flex gap-2 flex-col-reverse md:flex-row justify-between items-center w-[98%]">
+      <select class="select select-bordered max-w-xs md:ml-4 md:self-start" v-model="options.sort">
         <option v-for="(option, index) in sortOptions" :key="index">
           {{ option }}
         </option>
@@ -68,10 +65,7 @@ const updatePostData = (updatedPostValue: any, type: string) => {
           <p class="text-center text-xl">No posts found</p>
         </div>
       </template>
-      <div
-        class="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2"
-        v-if="initalLoading"
-      >
+      <div class="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2" v-if="initalLoading">
         <Loader />
       </div>
     </div>

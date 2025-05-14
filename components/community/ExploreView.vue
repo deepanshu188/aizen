@@ -4,6 +4,8 @@ import { listCommunities } from "~/services/community";
 import { useOnline } from "@vueuse/core";
 const isOnline = useOnline()
 
+const { sortOption, nsfw } = useSettings();
+
 interface Options {
   sort: string;
   page: number;
@@ -13,11 +15,11 @@ interface Options {
 }
 
 const initialPayload: Options = {
-  sort: "Active",
+  sort: sortOption,
   page: 1,
   limit: 15,
   type_: "All",
-  show_nsfw: false,
+  show_nsfw: nsfw,
 };
 
 const selectTab = (value: string) => {
@@ -69,18 +71,13 @@ watch(
     <community-popup :c="modalData"></community-popup>
   </Modal>
   <section>
-    <div class="flex gap-2 flex-col md:flex-row justify-between items-center w-[98%] mx-auto mt-8">
-      <div class="flex gap-4">
-        <label class="label cursor-pointer">
-          <span class="label-text mr-2">Nsfw</span>
-          <input type="checkbox" class="toggle toggle-sm" v-model="options.show_nsfw" />
-        </label>
-        <select class="select select-bordered select-sm w-full max-w-[180px]" v-model="options.sort">
-          <option v-for="(option, index) in sortOptions" :key="index">
-            {{ option }}
-          </option>
-        </select>
-      </div>
+    <div
+      class="flex gap-2 flex-col md:flex-row justify-between items-center w-[98%] mx-auto mt-8 max-sm:flex-col-reverse">
+      <select class="select select-bordered max-w-xs md:ml-4 md:self-start" v-model="options.sort">
+        <option v-for="(option, index) in sortOptions" :key="index">
+          {{ option }}
+        </option>
+      </select>
       <div class="md:w-auto">
         <Tabs2 :value="options.type_" @select-tab="selectTab" />
       </div>
