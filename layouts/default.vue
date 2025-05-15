@@ -2,7 +2,7 @@
   <section>
     <div class="flex">
       <Sidebar />
-      <div class="flex-grow w-full mb-10">
+      <div class="flex-grow w-full max-sm:mb-10 md:relative">
         <slot />
       </div>
     </div>

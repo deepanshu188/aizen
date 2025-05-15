@@ -14,7 +14,7 @@ export default function useSettings() {
   settings.value = {
     ...settings.value,
     theme: theme.value ?? 'system',
-    sortOption: settings.value.sortOption ?? sortOptions.at(0)
+    sortOption: settings.value?.sortOption ?? sortOptions.at(0)
   };
   const selectedTheme = computed(() =>
     theme.value === 'system' ? isDarkSystem : theme.value

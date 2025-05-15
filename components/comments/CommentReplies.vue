@@ -17,7 +17,7 @@ const initialPayload = {
 
 const {
   data: comments,
-  loading,
+  status,
   options,
 } = useInfiniteScroll({
   apiCall: getComments,
@@ -26,11 +26,11 @@ const {
   totalLength: 0,
 });
 
-const initalLoading = computed(() => !comments.value?.length && loading.value);
-
 const treeComments = computed(() => {
   return buildCommentTree(comments.value);
 });
+
+const loading = computed(() => status.value === "pending");
 </script>
 
 <template>
@@ -57,13 +57,19 @@ const treeComments = computed(() => {
         </li>
       </template>
     </ul>
-    <p v-if="!loading && !comments.length" class="text-center text-gray-400 my-4">
+    <p
+      v-if="!loading && !comments.length"
+      class="text-center text-gray-400 my-4"
+    >
       No Comments to see
     </p>
-    <p v-if="!loading && comments.length" class="text-center text-gray-400 text-sm my-4">
+    <p
+      v-if="!loading && comments.length"
+      class="text-center text-gray-400 text-sm my-4"
+    >
       No more comments
     </p>
-    <div class="flex justify-center" v-if="initalLoading">
+    <div class="flex justify-center" v-if="loading">
       <Loader />
     </div>
   </section>

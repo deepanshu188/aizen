@@ -1,8 +1,14 @@
-export default function useInfiniteScroll(configs: Object) {
+interface Configs {
+  initalPayload: Record<string, any>;
+  apiCall: Function;
+  totalLength: number;
+  listKey: string;
+}
+
+export default function useInfiniteScroll(configs: Configs) {
   const { initialPayload, apiCall, totalLength, listKey } = configs;
   const options = ref(initialPayload);
-  const loading = ref(false);
-  const data = ref(null);
+  const data = ref<unknown[] | null>(null);
   const action = ref('');
 
   const controller = new AbortController();
@@ -23,33 +29,29 @@ export default function useInfiniteScroll(configs: Object) {
 
     const bottomOfWindow = scrollTop + clientHeight >= scrollHeight - 10;
 
-    if (bottomOfWindow && (totalLength === undefined || data.value.length < totalLength)) {
+    if (bottomOfWindow && (totalLength === undefined || data.value && data.value.length < totalLength)) {
       options.value.page += 1;
       action.value = 'push';
     }
   };
 
-  const fetchData = async () => {
-    loading.value = true;
-    try {
-      const res = await apiCall(options.value);
-      if (!data.value) data.value = [];
-      action.value === 'push'
-        ? data.value.push(...res[listKey])
-        : (data.value = res[listKey]);
-    } finally {
-      loading.value = false;
-      action.value = '';
-    }
-  };
+  const route = useRoute();
 
-  watch(
-    options.value,
-    () => {
-      if (!loading.value) fetchData();
+  const { status } = useAsyncData(listKey + route.path, async () => await apiCall(options.value), {
+    deep: false,
+    watch: [options.value],
+    transform: (value) => {
+      try {
+        if (!data.value) data.value = [];
+        action.value === 'push'
+          ? data.value.push(...value[listKey])
+          : (data.value = value[listKey]);
+      } finally {
+        action.value = '';
+      }
+      return value;
     },
-    { immediate: true }
-  );
+  });
 
-  return { loading, data, options };
+  return { status, data, options };
 }
