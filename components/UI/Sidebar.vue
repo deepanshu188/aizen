@@ -27,7 +27,6 @@ const sideBarLinks = [
 ];
 
 const user: any = useUserStore();
-await user.fetchUserDetails();
 const userInfo = computed(() => user.data?.person_view?.person);
 </script>
 

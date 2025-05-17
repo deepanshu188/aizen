@@ -37,7 +37,7 @@ export default function useInfiniteScroll(configs: Configs) {
 
   const route = useRoute();
 
-  const { status } = useAsyncData(listKey + route.path, async () => await apiCall(options.value), {
+  const { status } = useLazyAsyncData(listKey + route.path, async () => await apiCall(options.value), {
     deep: false,
     watch: [options.value],
     transform: (value) => {
