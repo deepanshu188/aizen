@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import sortOptions from "~/content/sortOptions";
-import { fetchPosts } from "~/services/posts";
+import { fetchPosts } from "~/services/posts.services";
 const { query } = useRoute();
 const props = defineProps(["savedOnly", "filters"]);
 import { useOnline } from "@vueuse/core";

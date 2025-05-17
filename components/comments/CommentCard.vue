@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { favouritePost, vote } from "~/services/posts";
+import { favouritePost, vote } from "~/services/posts.services";
 const { c, comments } = defineProps(["c", "comments"]);
 
 const handleVote = async (payload: Object) => {

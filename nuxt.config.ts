@@ -36,21 +36,21 @@ export default defineNuxtConfig({
       ],
       runtimeCaching: [
         {
-          urlPattern: /^(?=.*_nuxt(?!\/(utils|services|node_modules)\/)).*$/,
+          urlPattern: /^(?=.*_nuxt(?!\/(utils|services|tests|node_modules)\/)).*$/,
           handler: 'CacheFirst',
           options: {
             cacheName: 'nuxt-assets-cache',
             cacheableResponse: { statuses: [0, 200] }
           }
         },
-        {
-          urlPattern: ({ request }) => request.mode === 'navigate',
-          handler: 'NetworkFirst',
-          options: {
-            cacheName: 'html-cache',
-            cacheableResponse: { statuses: [0, 200] }
-          }
-        },
+        // {
+        //   urlPattern: ({ request }) => request.mode === 'navigate',
+        //   handler: 'NetworkFirst',
+        //   options: {
+        //     cacheName: 'html-cache',
+        //     cacheableResponse: { statuses: [0, 200] }
+        //   }
+        // },
         {
           urlPattern: /^https:\/\/api\.iconify\.design/,
           handler: 'CacheFirst',
@@ -63,14 +63,14 @@ export default defineNuxtConfig({
             cacheableResponse: { statuses: [0, 200] },
           }
         },
-        {
-          urlPattern: /^https:\/\/.*\/api\/v\d+\/site\??$/,
-          handler: 'StaleWhileRevalidate',
-          options: {
-            cacheName: 'api-site-cache',
-            cacheableResponse: { statuses: [0, 200] },
-          }
-        },
+        // {
+        //   urlPattern: /^https:\/\/.*\/api\/v\d+\/site\??$/,
+        //   handler: 'StaleWhileRevalidate',
+        //   options: {
+        //     cacheName: 'api-site-cache',
+        //     cacheableResponse: { statuses: [0, 200] },
+        //   }
+        // },
       ]
     }
     ,

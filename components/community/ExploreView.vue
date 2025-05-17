@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import sortOptions from "~/content/sortOptions";
-import { listCommunities } from "~/services/community";
+import { listCommunities } from "~/services/community.services";
 import { useOnline } from "@vueuse/core";
 const isOnline = useOnline();
 
@@ -72,12 +72,8 @@ watch(
   </Modal>
   <section>
     <div
-      class="flex gap-2 flex-col md:flex-row justify-between items-center w-[98%] mx-auto mt-8 max-sm:flex-col-reverse"
-    >
-      <select
-        class="select select-bordered max-w-xs md:ml-4 md:self-start"
-        v-model="options.sort"
-      >
+      class="flex gap-2 flex-col md:flex-row justify-between items-center w-[98%] mx-auto mt-8 max-sm:flex-col-reverse">
+      <select class="select select-bordered max-w-xs md:ml-4 md:self-start" v-model="options.sort">
         <option v-for="(option, index) in sortOptions" :key="index">
           {{ option }}
         </option>
@@ -90,22 +86,15 @@ watch(
       <div v-if="initalLoading" class="flex justify-center py-12">
         <Loader />
       </div>
-      <div
-        v-else-if="communities?.length === 0"
-        class="text-center py-12 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-      >
+      <div v-else-if="communities?.length === 0"
+        class="text-center py-12 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <div class="text-4xl mb-2">🔍</div>
         <h3 class="text-xl font-semibold mb-2">No communities found</h3>
         <p class="text-gray-500">Try adjusting your filters</p>
       </div>
       <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <community-card
-          v-for="(c, index) in communities"
-          :key="index"
-          :c="c"
-          @openModal="openModal"
-          class="h-full"
-        ></community-card>
+        <community-card v-for="(c, index) in communities" :key="index" :c="c" @openModal="openModal"
+          class="h-full"></community-card>
       </div>
       <Loader v-if="loadingMore" class="my-6" />
     </div>

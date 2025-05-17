@@ -1,11 +1,10 @@
 <template>
   <NuxtLayout name="user-header">
-    <UserPosts :user="otherUser" />
+    <LazyUserPosts :user="otherUser" />
   </NuxtLayout>
 </template>
 
 <script setup lang="ts">
-import { useOtherUserStore } from "@/stores/otherUser";
 const otherUser: any = useOtherUserStore();
 
 useHead({

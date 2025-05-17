@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import sortOptions from "~/content/commentSortOptions.json";
-import { getComments } from "~/services/comments";
+import { getComments } from "~/services/comments.services";
 import { buildCommentTree } from "./comment";
 
 const { data } = defineProps({
@@ -53,20 +53,14 @@ const loading = computed(() => status.value === "pending");
     <ul>
       <template v-for="c in treeComments">
         <li class="bg-base-200 shadow-lg my-4 p-3 rounded-md">
-          <CommentCard :c="c" :comments="treeComments" />
+          <LazyCommentCard :c="c" :comments="treeComments" />
         </li>
       </template>
     </ul>
-    <p
-      v-if="!loading && !comments.length"
-      class="text-center text-gray-400 my-4"
-    >
+    <p v-if="!loading && !comments.length" class="text-center text-gray-400 my-4">
       No Comments to see
     </p>
-    <p
-      v-if="!loading && comments.length"
-      class="text-center text-gray-400 text-sm my-4"
-    >
+    <p v-if="!loading && comments.length" class="text-center text-gray-400 text-sm my-4">
       No more comments
     </p>
     <div class="flex justify-center" v-if="loading">

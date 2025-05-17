@@ -2,7 +2,7 @@
 import {
   fetchCommunity,
   followCommunity,
-} from '~/services/community';
+} from '~/services/community.services';
 
 const { params, query } = useRoute();
 const { $toast } = useNuxtApp();

@@ -12,7 +12,6 @@
 <script setup lang="ts">
 import { useOnline } from "@vueuse/core";
 const isOnline = useOnline();
-import { useUserStore } from "@/stores/user";
 const user = useUserStore();
 
 const userData = computed(() => user?.data?.person_view);

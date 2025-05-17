@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { addComment } from "~/services/comments";
+import { addComment } from "~/services/comments.services";
 const comment = ref("");
 const btnStyle =
   "w-8 h-8 rounded-md border border-neutral-700 font-bold text-sm flex justify-center items-center hover:bg-neutral-700";

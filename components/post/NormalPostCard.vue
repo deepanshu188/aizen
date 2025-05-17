@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { favouritePost, vote } from "~/services/posts";
+import { favouritePost, vote } from "~/services/posts.services";
 const emit = defineEmits(["updatePost"]);
 
 defineProps({

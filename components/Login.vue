@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { COOKIE_MAX_AGE } from "~/constants";
-import { userLogin } from "../services/auth";
+import { userLogin } from "../services/auth.services";
 const user = ref({ username_or_email: "", password: "" });
 const loading = ref(false);
 const instance = ref("lemmy.ml");

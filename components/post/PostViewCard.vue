@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { favouritePost, vote } from "~/services/posts";
+import { favouritePost, vote } from "~/services/posts.services";
 import { useImage } from "@vueuse/core";
 const { data } = defineProps(["data"]);
 

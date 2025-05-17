@@ -2,16 +2,9 @@
   <NuxtLayout name="settings" :breadcrumbData="breadcrumbData">
     <SettingsView />
   </NuxtLayout>
-  <span
-    v-if="registerSW.needRefresh.value"
-    class="flex items-center justify-center gap-2 text-sm text-gray-200 cursor-pointer"
-    @click="refreshApp"
-  >
-    <Icon
-      name="material-symbols-light:refresh"
-      :class="{ rotate: isRotating }"
-      @animationend="isRotating = false"
-    />
+  <span v-if="registerSW.needRefresh.value"
+    class="flex items-center justify-center gap-2 text-sm text-gray-200 cursor-pointer" @click="refreshApp">
+    <Icon name="material-symbols-light:refresh" :class="{ rotate: isRotating }" @animationend="isRotating = false" />
     Update
   </span>
 </template>

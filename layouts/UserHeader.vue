@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { getPersonInfo } from '../services/user';
+import { getPersonInfo } from '../services/user.services';
 
 const otherUser = useOtherUserStore();
 const { params } = useRoute();

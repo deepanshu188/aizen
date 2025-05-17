@@ -1,4 +1,4 @@
-import { userDetails, getPersonInfo } from "../services/user";
+import { userDetails, getPersonInfo } from "../services/user.services";
 
 export const useUserStore = defineStore('user', () => {
   const data = shallowRef({});
