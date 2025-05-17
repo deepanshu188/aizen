@@ -2,25 +2,25 @@
 const sideBarLinks = [
   {
     name: "Home",
-    icon: "ci:house-01",
+    icon: "svgo-home",
     link: "/",
     private: false,
   },
   {
     name: "Explore",
-    icon: "mynaui:navigation-one",
+    icon: "svgo-explore",
     link: "/explore",
     private: false,
   },
   {
     name: "Settings",
-    icon: "mynaui:fine-tune",
+    icon: "svgo-settings",
     link: "/settings",
     private: false,
   },
   {
     name: "Communities",
-    icon: "mynaui:at",
+    icon: "svgo-communities",
     link: "/c",
     private: true,
   },
@@ -49,7 +49,7 @@ const userInfo = computed(() => user.data?.person_view?.person);
     <li v-else>
       <NuxtLink to="/login" class="gap-x-4 max-sm:px-0 max-sm:py-1"
         :class="{ 'text-[#00dc82]': '/login' === $route.path }">
-        <Icon name="iconamoon:profile-light" />
+        <component is="svgo-userLight" class="text-2xl" />
         <p class="sm:flex hidden">Login</p>
       </NuxtLink>
     </li>
@@ -57,7 +57,7 @@ const userInfo = computed(() => user.data?.person_view?.person);
     <template v-for="item in sideBarLinks" :key="item.name">
       <li v-if="item.private ? user.jwt : true" class="my-1" :class="{ 'text-[#00dc82]': item.link === $route.path }">
         <NuxtLink :to="item.link" class="gap-x-4 max-sm:px-0 max-sm:py-1">
-          <Icon :name="item.icon" />
+          <component :is="item.icon" class="text-2xl" />
           <p class="sm:flex hidden">{{ item.name }}</p>
         </NuxtLink>
       </li>
@@ -65,7 +65,7 @@ const userInfo = computed(() => user.data?.person_view?.person);
 
     <li v-if="user.jwt" class="my-1">
       <div @click="user.logoutUser" class="gap-x-4 max-sm:px-0 max-sm:py-1">
-        <Icon name="mynaui:power" />
+        <component is="svgo-logout" class="text-xl" />
         <p class="sm:flex hidden">Logout</p>
       </div>
     </li>

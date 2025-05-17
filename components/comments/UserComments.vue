@@ -15,7 +15,7 @@ const comments = props.comments ?? user?.data?.comments;
             <p>{{ creator.display_name }}</p>
             <Avatar :image="creator.avatar" :name="creator.display_name ?? creator.name" />
           </div>
-          <p>{{ comment.content }}</p>
+          <p class="my-2 md-style">{{ comment.content }}</p>
           <Interactions :counts="counts" :saved="saved" />
         </div>
       </div>

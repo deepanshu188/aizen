@@ -1,11 +1,9 @@
 <script setup>
-const props = defineProps(['user']);
-
-const user = props.user ?? useUserStore();
+defineProps(['posts']);
 </script>
 
 <template>
   <section>
-    <NormalPostCard :data="user.data.posts" />
+    <NormalPostCard :data="posts ?? useUserStore()?.data?.posts" />
   </section>
 </template>

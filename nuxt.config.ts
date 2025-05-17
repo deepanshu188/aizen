@@ -43,34 +43,6 @@ export default defineNuxtConfig({
             cacheableResponse: { statuses: [0, 200] }
           }
         },
-        // {
-        //   urlPattern: ({ request }) => request.mode === 'navigate',
-        //   handler: 'NetworkFirst',
-        //   options: {
-        //     cacheName: 'html-cache',
-        //     cacheableResponse: { statuses: [0, 200] }
-        //   }
-        // },
-        {
-          urlPattern: /^https:\/\/api\.iconify\.design/,
-          handler: 'CacheFirst',
-          options: {
-            cacheName: 'iconify-cache',
-            expiration: {
-              maxEntries: 100,
-              maxAgeSeconds: 60 * 60 * 24 * 30
-            },
-            cacheableResponse: { statuses: [0, 200] },
-          }
-        },
-        // {
-        //   urlPattern: /^https:\/\/.*\/api\/v\d+\/site\??$/,
-        //   handler: 'StaleWhileRevalidate',
-        //   options: {
-        //     cacheName: 'api-site-cache',
-        //     cacheableResponse: { statuses: [0, 200] },
-        //   }
-        // },
       ]
     }
     ,

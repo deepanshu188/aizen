@@ -5,8 +5,11 @@
 </template>
 
 <script setup lang="ts">
-const otherUser: any = useOtherUserStore();
-const comments = computed(() => otherUser.data.comments);
+const { params } = useRoute();
+const person_id = params.slug;
+
+const { data } = useNuxtData(`id-${person_id}`)
+const comments = computed(() => data.value?.comments);
 
 useHead({
   title: "Aizen - User Comments",

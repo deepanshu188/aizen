@@ -52,7 +52,7 @@ const handleLogout = () => {
     </template>
     <li v-if="user.jwt" class="bg-red-500 my-4 p-2 rounded-md flex items-center gap-x-2 justify-center text-gray-300"
       onclick="popup.showModal()">
-      <Icon name="hugeicons:logout-04" />
+      <component is="svgo-logout" class="text-xl" />
       Logout
     </li>
   </ul>
