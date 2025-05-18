@@ -1,9 +1,7 @@
 <template>
-  <section v-if="userData" class="mb-10 mx-4 md:mx-8">
-    <UserCard :user="userData" :loading="status === 'pending'" />
-    <Tabs :tabs="tabs" />
+  <UserLayoutUI :user-data="userData" :tabs="tabs">
     <slot />
-  </section>
+  </UserLayoutUI>
 </template>
 
 <script setup lang="ts">

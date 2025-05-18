@@ -1,12 +1,7 @@
 <template>
-  <section v-if="userData">
-    <UserCard :user="userData" />
-    <template v-if="isOnline">
-      <Tabs :tabs="tabs" />
-      <slot />
-    </template>
-    <Offline v-else />
-  </section>
+  <UserLayoutUI :user-data="userData" :tabs="tabs">
+    <slot />
+  </UserLayoutUI>
 </template>
 
 <script setup lang="ts">
