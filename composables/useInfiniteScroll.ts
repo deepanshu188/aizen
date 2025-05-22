@@ -10,6 +10,7 @@ export default function useInfiniteScroll(configs: Configs) {
   const options = ref(initialPayload);
   const data = ref<unknown[] | null>(null);
   const action = ref('');
+  const nuxtApp = useNuxtApp();
 
   const controller = new AbortController();
   const { signal } = controller;
@@ -40,6 +41,7 @@ export default function useInfiniteScroll(configs: Configs) {
   const { status } = useLazyAsyncData(listKey + route.path, async () => await apiCall(options.value), {
     deep: false,
     watch: [options.value],
+    getCachedData: (key) => nuxtApp.payload.data[key] || nuxtApp.static.data[key],
     transform: (value) => {
       try {
         if (!data.value) data.value = [];

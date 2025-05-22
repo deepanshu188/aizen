@@ -1,6 +1,7 @@
 import { userDetails, getPersonInfo } from "../services/user.services";
 
 export const useUserStore = defineStore('user', () => {
+  const nuxtApp = useNuxtApp();
   const user = shallowRef({});
   const userData = useCookie<any>("userData");
   const jwt = computed(() => userData.value?.jwt);
@@ -31,6 +32,7 @@ export const useUserStore = defineStore('user', () => {
 
   const { status, data } = useLazyAsyncData("user", async () => await fetchUserDetails(), {
     deep: false,
+    getCachedData: (key) => nuxtApp.payload.data[key] || nuxtApp.static.data[key],
   });
 
   return {

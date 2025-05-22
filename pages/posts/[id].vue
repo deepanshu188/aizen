@@ -7,9 +7,11 @@
 
 <script setup>
 import { fetchPost } from "~/services/posts.services";
+const nuxtApp = useNuxtApp();
 
 const { params } = useRoute();
 const { data: post, status } = await useLazyAsyncData(() => fetchPost({ id: params.id }), {
   pick: ["post_view"],
+  getCachedData: (key) => nuxtApp.payload.data[key] || nuxtApp.static.data[key],
 });
 </script>
