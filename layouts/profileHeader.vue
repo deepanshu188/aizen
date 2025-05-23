@@ -5,11 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import { useOnline } from "@vueuse/core";
-const isOnline = useOnline();
-const user = useUserStore();
-
-const userData = computed(() => user?.data?.person_view);
+const { data } = useLoginUser();
+const userData = computed(() => data.value?.user_data?.person_view);
 
 const tabs = [
   { name: "Posts", link: "/profile" },

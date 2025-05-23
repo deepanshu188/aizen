@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { useOnline } from "@vueuse/core";
 const isOnline = useOnline();
-const data = useUserStore();
-const subscriptions = computed(() => data?.user?.my_user?.follows);
+const { data } = useLoginUser();
+const subscriptions = computed(
+  () => data.value?.instance_data?.my_user?.follows,
+);
 
 const handleNavigation = (c: any) => {
   if (!isOnline.value) return;

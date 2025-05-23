@@ -16,12 +16,11 @@ export default defineNuxtConfig({
 
   modules: [
     "@nuxt/image",
-    "@pinia/nuxt",
     "@nuxt/test-utils/module",
     "@nuxt/icon",
-    '@nuxt/fonts',
-    '@vite-pwa/nuxt',
-    'nuxt-svgo'
+    "@nuxt/fonts",
+    "@vite-pwa/nuxt",
+    "nuxt-svgo",
   ],
 
   pwa: {
@@ -32,26 +31,24 @@ export default defineNuxtConfig({
     workbox: {
       navigateFallback: "/index.html",
       globPatterns: [
-        "**/*.{js,css,html,png,jpg,jpeg,svg,webp,ttf,ico,webmanifest}"
+        "**/*.{js,css,html,png,jpg,jpeg,svg,webp,ttf,ico,webmanifest}",
       ],
       runtimeCaching: [
         {
-          urlPattern: /^(?=.*_nuxt(?!\/(utils|services|tests|node_modules)\/)).*$/,
-          handler: 'CacheFirst',
+          urlPattern:
+            /^(?=.*_nuxt(?!\/(utils|services|tests|node_modules)\/)).*$/,
+          handler: "CacheFirst",
           options: {
-            cacheName: 'nuxt-assets-cache',
-            cacheableResponse: { statuses: [0, 200] }
-          }
+            cacheName: "nuxt-assets-cache",
+            cacheableResponse: { statuses: [0, 200] },
+          },
         },
-      ]
-    }
-    ,
+      ],
+    },
   },
 
   vite: {
-    plugins: [
-      tailwindcss(),
-    ],
+    plugins: [tailwindcss()],
   },
 
   image: {

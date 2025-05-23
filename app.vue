@@ -6,6 +6,12 @@
 
 <script setup lang="ts">
 const { selectedTheme } = useSettings();
+const { fetchUserData } = useLoginUser();
+const userData = useCookie("userData");
+
+if (userData.value) {
+  fetchUserData();
+}
 
 useHead({
   htmlAttrs: {

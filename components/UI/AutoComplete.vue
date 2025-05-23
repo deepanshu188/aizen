@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 type Props = {
-  data: { id: number; text: string }[];
+  data: { id: number; text: string }[] | null;
   id: string;
 };
 

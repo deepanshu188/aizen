@@ -2,7 +2,7 @@
   <div class="dock dock-xs sm:hidden">
     <template v-for="item in navData" :key="item.name">
       <button
-        v-if="item.private ? user.jwt : true"
+        v-if="item.private ? user : true"
         :class="{
           'text-[#00dc82]':
             $route.path === item.link ||
@@ -24,7 +24,8 @@
 
 <script setup lang="ts">
 const { $pwa } = useNuxtApp();
-const user: any = useUserStore();
+const { data: user } = useLoginUser();
+
 const navData = computed(() => [
   {
     name: "Home",
@@ -33,7 +34,7 @@ const navData = computed(() => [
     private: false,
   },
   {
-    ...(user.jwt
+    ...(user.value
       ? {
           name: "Profile",
           icon: "svgo-user",

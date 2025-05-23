@@ -3,29 +3,19 @@ export interface iData {
   comment: { path: string; id: number };
 }
 
-export interface iUser {
-  data: iData;
-  user: Object;
-  setPersonInfo: Function;
-  setUserDetails: Function;
-  dataLoading: boolean;
-  userLoading: boolean;
-}
-
-
 export function buildCommentTree(comments: any[]) {
   if (!comments) return [];
 
   const commentMap: Record<string, any> = {};
-  comments.forEach(item => {
+  comments.forEach((item) => {
     item.comment.children = [];
     commentMap[item.comment.id] = item;
   });
 
   const tree: any[] = [];
 
-  comments.forEach(item => {
-    const pathParts = item.comment.path.split('.');
+  comments.forEach((item) => {
+    const pathParts = item.comment.path.split(".");
     if (pathParts.length === 2) {
       tree.push(item);
     } else {
