@@ -26,6 +26,10 @@ export default defineNuxtConfig({
   pwa: {
     devOptions: {
       enabled: true,
+      // In dev, precache glob patterns can't match files on disk (assets are
+      // served by Vite), which triggers workbox's "glob patterns doesn't match
+      // any files" warning. The plugin writes a placeholder file instead.
+      suppressWarnings: true,
     },
     manifest: Manifest as ManifestOptions,
     workbox: {
