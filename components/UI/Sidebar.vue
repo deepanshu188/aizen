@@ -28,6 +28,9 @@ const sideBarLinks = [
 
 const { data, logoutUser } = useLoginUser();
 const userInfo = computed(() => data.value?.user_data?.person_view?.person);
+
+const route = useRoute();
+const isActiveLink = (link: string) => isActivePath(route.path, link);
 </script>
 
 <template>
@@ -47,7 +50,7 @@ const userInfo = computed(() => data.value?.user_data?.person_view?.person);
       <NuxtLink
         to="/profile"
         class="gap-x-4 max-sm:px-0 max-sm:py-1"
-        :class="{ 'text-[#00dc82]': '/profile' === $route.path }"
+        :class="{ 'text-[#00dc82]': isActiveLink('/profile') }"
       >
         <Avatar
           :name="userInfo?.display_name"
@@ -61,7 +64,7 @@ const userInfo = computed(() => data.value?.user_data?.person_view?.person);
       <NuxtLink
         to="/login"
         class="gap-x-4 max-sm:px-0 max-sm:py-1"
-        :class="{ 'text-[#00dc82]': '/login' === $route.path }"
+        :class="{ 'text-[#00dc82]': isActiveLink('/login') }"
       >
         <component is="svgo-userLight" class="text-2xl" />
         <p class="sm:flex hidden">Login</p>
@@ -72,7 +75,7 @@ const userInfo = computed(() => data.value?.user_data?.person_view?.person);
       <li
         v-if="item.private ? userInfo : true"
         class="my-1"
-        :class="{ 'text-[#00dc82]': item.link === $route.path }"
+        :class="{ 'text-[#00dc82]': isActiveLink(item.link) }"
       >
         <NuxtLink :to="item.link" class="gap-x-4 max-sm:px-0 max-sm:py-1">
           <component :is="item.icon" class="text-2xl" />

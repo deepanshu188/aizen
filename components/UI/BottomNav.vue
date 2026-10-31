@@ -3,11 +3,7 @@
     <template v-for="item in navData" :key="item.name">
       <button
         v-if="item.private ? user : true"
-        :class="{
-          'text-[#00dc82]':
-            $route.path === item.link ||
-            ($route.path.startsWith(item.link) && item.link !== '/'),
-        }"
+        :class="{ 'text-[#00dc82]': isActivePath($route.path, item.link) }"
         @click="navigateTo(item.link)"
       >
         <div class="indicator">

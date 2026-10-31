@@ -1,5 +1,12 @@
 <script setup lang="ts">
-const category = [
+type Category = {
+  name: string;
+  link: string;
+  icon: string;
+  disabled?: boolean;
+};
+
+const category: Category[] = [
   {
     name: "Appearances",
     link: "/settings/appearances",
@@ -16,7 +23,7 @@ const { data: user, logoutUser } = useLoginUser();
 
 const handleLogout = () => {
   logoutUser();
-  document.querySelector("#popup")?.close();
+  (document.querySelector("#popup") as HTMLDialogElement | null)?.close();
 };
 </script>
 
