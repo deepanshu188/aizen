@@ -9,6 +9,11 @@ command = "pnpm run generate"
 # Nuxt 4 requires Node 22.22+/24.15+. Older Netlify sites stay pinned to
 # Node 18, which crashes before .output/public is generated.
 NODE_VERSION = "24"
+# Netlify's environment makes Nitro auto-select the `netlify-static` preset,
+# which writes to `dist` instead of `.output/public` (and adds a catch-all 404
+# `_redirects` rule that would shadow the SPA fallback below). Force the
+# standard static preset so the publish directory matches.
+NITRO_PRESET = "static"
 
 [[redirects]]
 from = "/*"
