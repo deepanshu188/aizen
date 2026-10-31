@@ -5,6 +5,11 @@
 publish = ".output/public"
 command = "pnpm run generate"
 
+[build.environment]
+# Nuxt 4 requires Node 22.22+/24.15+. Older Netlify sites stay pinned to
+# Node 18, which crashes before .output/public is generated.
+NODE_VERSION = "24"
+
 [[redirects]]
 from = "/*"
 to = "/index.html"
