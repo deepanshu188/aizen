@@ -2,7 +2,7 @@
   remote_images = [".*"]
 
 [build]
-publish = "dist"
+publish = ".output/public"
 command = "pnpm run generate"
 
 [[redirects]]
@@ -14,6 +14,12 @@ status = 200
 for = "/manifest.webmanifest"
 [headers.values]
 Content-Type = "application/manifest+json"
+Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+for = "/sw.js"
+[headers.values]
+Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
 for = "/_nuxt/*"

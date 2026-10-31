@@ -18,10 +18,16 @@ useHead({
     "data-theme": selectedTheme,
   },
   title: "Aizen",
+  meta: [{ name: "theme-color", content: "#000000" }],
   link: [
     {
       rel: "manifest",
       href: "/manifest.webmanifest",
+    },
+    {
+      rel: "apple-touch-icon",
+      sizes: "180x180",
+      href: "/icons/apple-touch-icon.png",
     },
   ],
 });

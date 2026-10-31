@@ -1,14 +1,10 @@
 import tailwindcss from "@tailwindcss/vite";
 import type { ManifestOptions } from "vite-plugin-pwa";
-import Manifest from "./public/manifest.json";
+import Manifest from "./manifest.json";
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
-
-  nitro: {
-    ignore: ["/*"],
-  },
 
   icon: {
     size: "22px",
@@ -25,28 +21,20 @@ export default defineNuxtConfig({
 
   pwa: {
     devOptions: {
+      // Required in dev: the module only serves /manifest.webmanifest when this
+      // is enabled. Precache warnings are suppressed because Vite serves assets
+      // from memory, so glob patterns can't match files on disk.
       enabled: true,
-      // In dev, precache glob patterns can't match files on disk (assets are
-      // served by Vite), which triggers workbox's "glob patterns doesn't match
-      // any files" warning. The plugin writes a placeholder file instead.
       suppressWarnings: true,
     },
     manifest: Manifest as ManifestOptions,
     workbox: {
-      navigateFallback: "/index.html",
+      // @vite-pwa/nuxt rewrites the precached index.html entry to "/", so the
+      // navigation fallback must point there too. "/index.html" is not in the
+      // precache manifest and makes Workbox throw a non-precached-url error.
+      navigateFallback: "/",
       globPatterns: [
-        "**/*.{js,css,html,png,jpg,jpeg,svg,webp,ttf,ico,webmanifest}",
-      ],
-      runtimeCaching: [
-        {
-          urlPattern:
-            /^(?=.*_nuxt(?!\/(utils|services|tests|node_modules)\/)).*$/,
-          handler: "CacheFirst",
-          options: {
-            cacheName: "nuxt-assets-cache",
-            cacheableResponse: { statuses: [0, 200] },
-          },
-        },
+        "**/*.{js,css,html,png,jpg,jpeg,svg,webp,ttf,woff,woff2,ico}",
       ],
     },
   },
