@@ -14,6 +14,21 @@ body {
   line-height: 1.6;
 }
 
+/* Soften daisyUI's default 2px offset focus outline on inputs */
+.input {
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+
+  &:focus,
+  &:focus-within {
+    outline: none;
+    border-color: var(--input-color);
+    box-shadow: 0 0 0 3px
+      color-mix(in oklab, var(--input-color) 15%, transparent);
+  }
+}
+
 :root {
   --cupcake-pink: #ffbad2;
   --cupcake-blue: #b0e3ff;
