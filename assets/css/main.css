@@ -14,8 +14,9 @@ body {
   line-height: 1.6;
 }
 
-/* Soften daisyUI's default 2px offset focus outline on inputs */
-.input {
+/* Soften daisyUI's default 2px offset focus outline on form fields */
+.input,
+.select {
   transition:
     border-color 150ms ease,
     box-shadow 150ms ease;
