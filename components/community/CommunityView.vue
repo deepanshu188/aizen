@@ -2,12 +2,14 @@
 import { fetchCommunity, followCommunity } from "~/services/community.services";
 
 const { params, query } = useRoute();
-const { $toast } = useNuxtApp();
+const nuxtApp = useNuxtApp();
+const { $toast } = nuxtApp;
 
 const { data } = useLoginUser();
 const userData = computed(() => data.value?.user_data?.person_view);
 
-const { data: c } = await useAsyncData(
+const { data: c, status } = useLazyAsyncData(
+  `community_details_${params.community}_${query.id}`,
   () =>
     fetchCommunity({
       name: params.community,
@@ -15,6 +17,7 @@ const { data: c } = await useAsyncData(
     }),
   {
     pick: ["community_view", "moderators"],
+    getCachedData: (key) => nuxtApp.payload.data[key],
   },
 );
 
@@ -41,7 +44,13 @@ const handleSubscribe = async (community_id: number, isSubscribed: boolean) => {
     ></community-popup>
   </Modal>
   <section>
-    <div v-if="c" class="card bg-base-100 shadow-xl md:m-4 m-2">
+    <div v-if="status === 'idle' || status === 'pending'" class="flex justify-center m-4">
+      <Loader />
+    </div>
+    <p v-else-if="status === 'error'" class="m-4 text-center text-neutral-400">
+      Couldn't load this community.
+    </p>
+    <div v-else-if="c" class="card bg-base-100 shadow-xl md:m-4 m-2">
       <div class="card-body items-center">
         <p class="card-title">{{ c.community_view.community.title }}</p>
         <span onclick="popup.showModal()" role="button">
